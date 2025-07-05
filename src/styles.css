@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("assets/css/main.css");
+
+.is-invalid {
+  border-color: #dc3545;
+}
+
+.invalid-feedback {
+  font-size: 0.875rem;
+  color: #dc3545;
+}

@@ -1,0 +1,117 @@
+<div class="container-fluid my-4">
+            <div class="row">
+                <div class="col-7">
+                    <div class="card">
+                        <div class="card-header bg-secondary">
+                            <div class="row">
+                                <div class="col-6 text-white">
+                                    <strong>Employee Portal</strong> 
+                                </div>
+                                <div class="col-6 text-end">
+                                    <button class="btn btn-warning">Add New</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Employee ID</th>
+                                        <th>Name</th>
+                                        <th>Contact No</th>
+                                        <th>Email</th>
+                                        <th>Department</th>
+                                        <th>Role</th>
+                                        <th>Gender</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data rows go here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-5 " if>
+                    <div class="card">
+                        <div class="card-header bg-secondary">
+                            <div class="row">
+                                <div class="col-6 text-white">
+                                    <strong>New Employee</strong> 
+                                </div>
+                                <div class="col-6 text-end">
+                                    <button class="btn btn-primary">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form class="mb-4">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="employeeName" class="form-label">Employee Name</label>
+                                        <input type="text" class="form-control" id="employeeName" placeholder="Enter employee name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="contactNo" class="form-label">Contact No</label>
+                                        <input type="text" class="form-control" id="contactNo" placeholder="Enter contact number">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="emailId" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="emailId" placeholder="Enter email">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <select id="gender" class="form-select">
+                                            <option selected>Select gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                      
+                                    <div class="col-md-6">
+                                        <label for="parentDeptId" class="form-label">Department</label>
+                                        <select id="parentDeptId" name="parentDept" class="form-select" [(ngModel)]="parentDeptId" (change)="onParentDeptChange()">                                            @for (item of parentDeptList; track $index) {
+                                                <option value="{{item.departmentId}}">{{item.departmentName}}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="childDeptId" class="form-label">Sub - Department</label>
+                                        <select id="childDeptId" name="childDept" class="form-select">
+                                            <option value="">-- Select --</option>
+                                            @for (childItem of childDeptListById; track $index) {
+                                                <option value="{{childItem.childDeptId}}">{{childItem.departmentName}}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" placeholder="Enter password">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="role" class="form-label">Role</label>
+                                        <input type="text" class="form-control" id="role" placeholder="Enter role">
+                                    </div>
+                                </div>
+                               
+                                <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+           
+
+          
+    </div>
