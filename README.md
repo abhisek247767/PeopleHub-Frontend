@@ -10,6 +10,12 @@
 > 💼 **PeopleHub** is a modern, scalable Angular-based front-end application that connects people, projects, and productivity. It is designed with modular components, clean architecture, and responsive design.
 
 ---
+## 🔗 Backend Repository
+
+> The backend for this project is available here:  
+👉 [PeopleHub-Backend (Node.js)](https://github.com/abhisek247767/PeopleHub-Backend)
+
+---
 
 ## 🔧 Project Setup
 
