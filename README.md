@@ -41,3 +41,6 @@ ng serve
 
 # 4. Open in browser
 http://localhost:4200/
+```
+congratulations you have done the frontennd set up .
+Now go to backend repo for set up backend repository [PeopleHub-Backend (Node.js)](https://github.com/abhisek247767/PeopleHub-Backend)
