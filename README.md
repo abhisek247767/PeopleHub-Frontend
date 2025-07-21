@@ -7,7 +7,6 @@
   <img src="https://img.shields.io/badge/Responsive-Design-brightgreen?style=for-the-badge&logo=responsive-design" />
 </p>
 
-
 ---
 ## 🔗 Backend Repository
 
@@ -42,5 +41,6 @@ ng serve
 # 4. Open in browser
 http://localhost:4200/
 ```
-congratulations you have done the frontennd set up .
+congratulations you have done the frontennd set up . 
+### Please follow me and star the repo for my motivation (Mandatory😃)
 Now go to backend repo for set up backend repository [PeopleHub-Backend (Node.js)](https://github.com/abhisek247767/PeopleHub-Backend)
