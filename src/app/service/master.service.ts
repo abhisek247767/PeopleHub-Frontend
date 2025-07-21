@@ -2,21 +2,24 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IApiResponse } from '../model/interface/master';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MasterService {
 
-  apiUrl: string = 'https://projectapi.gerasim.in/api/EmployeeManagement';
+    private apiUrl = `${environment.apiUrl}`;
+  
   constructor(private http: HttpClient) { }
 
   getAllDept(): Observable<IApiResponse> {
-    return this.http.get<IApiResponse>(`${this.apiUrl}/GetParentDepartment`);
+    return this.http.get<IApiResponse>(`${this.apiUrl}/departments`);
   }
 
   getAllChildDeptBy(deptId : number): Observable<IApiResponse> {
-    return this.http.get<IApiResponse>(`${this.apiUrl}/GetChildDepartmentByParentId?deptId=${deptId}`);
+    return this.http.get<IApiResponse>(
+    `${this.apiUrl}/subDepartments?deptId=${deptId}`,
+  );
   }
-
 }
