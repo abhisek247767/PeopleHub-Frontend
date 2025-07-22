@@ -1,20 +1,15 @@
 <div class="container-fluid my-4">
-  <div class="row">
-    <div class="col-7">
-      <div class="card">
-        <div class="card-header bg-secondary">
-          <div class="row">
-            <div class="col-6 text-white">
-              <strong>Employee Portal</strong>
-            </div>
-            <div class="col-6 text-end">
-              <button class="btn btn-warning">Add New</button>
-            </div>
-          </div>
+  <div class="row g-4">
+    <!-- 🧾 Employee Table Section -->
+    <div class="col-lg-7 col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+          <strong>Employee Portal</strong>
+          <button class="btn btn-warning btn-sm" (click)="toggleForm()">Add New</button>
         </div>
-        <div class="card-body">
-          <table class="table table-bordered">
-            <thead>
+        <div class="card-body table-responsive">
+          <table class="table table-bordered align-middle text-center">
+            <thead class="table-light">
               <tr>
                 <th>Employee ID</th>
                 <th>Name</th>
@@ -27,70 +22,54 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Data rows go here -->
+              <!-- Loop and display employee list -->
+              <!-- Example: 
+              <tr *ngFor="let emp of employeeList">
+                <td>{{ emp.id }}</td>
+                <td>{{ emp.name }}</td>
+                <td>{{ emp.contact }}</td>
+                ...
+              </tr>
+              -->
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <div class="col-5" if>
-      <div class="card">
-        <div class="card-header bg-secondary">
-          <div class="row">
-            <div class="col-6 text-white">
-              <strong>New Employee</strong>
-            </div>
-            <div class="col-6 text-end">
-              <button class="btn btn-primary">Close</button>
-            </div>
-          </div>
+    <!-- 👤 New Employee Form Section -->
+    <div class="col-lg-5 col-md-12" *ngIf="isFormVisiable">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+          <strong>New Employee</strong>
+          <button class="btn btn-primary btn-sm" (click)="closeForm()">Close</button>
         </div>
         <div class="card-body">
           <form class="mb-4">
-            <div class="row">
+            <div class="row g-3">
               <div class="col-md-6">
-                <label for="employeeName" class="form-label"
-                  >Employee Name</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="employeeName"
-                  placeholder="Enter employee name"
-                />
+                <label for="employeeName" class="form-label">Employee Name</label>
+                <input type="text" class="form-control" id="employeeName" placeholder="Enter employee name" />
               </div>
               <div class="col-md-6">
                 <label for="contactNo" class="form-label">Contact No</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="contactNo"
-                  placeholder="Enter contact number"
-                />
+                <input type="text" class="form-control" id="contactNo" placeholder="Enter contact number" />
               </div>
-            </div>
-            <div class="row">
+
               <div class="col-md-6">
                 <label for="emailId" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="emailId"
-                  placeholder="Enter email"
-                />
+                <input type="email" class="form-control" id="emailId" placeholder="Enter email" />
               </div>
               <div class="col-md-6">
                 <label for="gender" class="form-label">Gender</label>
                 <select id="gender" class="form-select">
-                  <option selected>Select gender</option>
+                  <option selected disabled>Select gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
-            </div>
-            <div class="row">
+
               <div class="col-md-6">
                 <label for="parentDeptId" class="form-label">Department</label>
                 <select
@@ -100,50 +79,33 @@
                   [(ngModel)]="parentDeptId"
                   (change)="onParentDeptChange()"
                 >
-                  @for (item of parentDeptList; track $index) {
-                  <option value="{{ item.departmentId }}">
+                  <option *ngFor="let item of parentDeptList; let i = index" [value]="item.departmentId">
                     {{ item.departmentName }}
                   </option>
-                  }
                 </select>
               </div>
 
               <div class="col-md-6">
-                <label for="childDeptId" class="form-label"
-                  >Sub - Department</label
-                >
+                <label for="childDeptId" class="form-label">Sub - Department</label>
                 <select id="childDeptId" name="childDept" class="form-select">
                   <option value="">-- Select --</option>
-                  @for (childItem of childDeptListById; track $index) {
-                  <option value="{{ childItem.childDeptId }}">
+                  <option *ngFor="let childItem of childDeptListById; let i = index" [value]="childItem.childDeptId">
                     {{ childItem.departmentName }}
                   </option>
-                  }
                 </select>
               </div>
-            </div>
-            <div class="row">
+
               <div class="col-md-6">
                 <label for="password" class="form-label">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  placeholder="Enter password"
-                />
+                <input type="password" class="form-control" id="password" placeholder="Enter password" />
               </div>
               <div class="col-md-6">
                 <label for="role" class="form-label">Role</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="role"
-                  placeholder="Enter role"
-                />
+                <input type="text" class="form-control" id="role" placeholder="Enter role" />
               </div>
             </div>
 
-            <button type="submit" class="btn btn-warning mt-3">Submit</button>
+            <button type="submit" class="btn btn-warning mt-4">Submit</button>
           </form>
         </div>
       </div>
