@@ -31,6 +31,10 @@ export class LayoutComponent {
       this.errorMessage = 'No user data';
     }
   }
+  goToSettings() {
+  this.router.navigate(['/setting']);
+}
+
 
   logout() {
     console.log('click on logut');

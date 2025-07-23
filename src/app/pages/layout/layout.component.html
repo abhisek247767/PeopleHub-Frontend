@@ -1,42 +1,75 @@
-  <!-- Navbar with Warning Color Theme -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-    <div class="container-fluid">
-      <!-- Logo -->
-      <a class="navbar-brand" routerLink="/dashboard">
-        <img src="https://via.placeholder.com/50" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-        LOGO 
-      </a>
-      <!-- Toggle button for mobile view -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Navbar Links -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active text-dark" aria-current="page" routerLink="/dashboard">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" routerLink="/employee">Employee</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" routerLink="/projects">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" routerLink="/project-employee">Project Employee</a>
-          </li>
-        </ul>
-        <!-- Right-aligned section: User name and Log off button -->
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item d-flex align-items-center">
-            <span class="navbar-text me-2 text-dark">Welcome, {{ userName }}</span>
-            <button class="btn btn-warning btn-sm" type="button" (click)="logout()">Logout</button>
-          </li>
-        </ul>
-      </div>
+<!-- Navbar with Warning Color Theme -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand" routerLink="/dashboard">
+      <img
+        src="https://via.placeholder.com/50"
+        alt="Logo"
+        width="30"
+        height="30"
+        class="d-inline-block align-text-top"
+      />
+      LOGO
+    </a>
+    <!-- Toggle button for mobile view -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active text-dark"
+            aria-current="page"
+            routerLink="/dashboard"
+            >Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" routerLink="/employee">Employee</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" routerLink="/projects">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" routerLink="/project-employee"
+            >Project Employee</a
+          >
+        </li>
+      </ul>
+      <!-- Right-aligned section: User name and Log off button -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item d-flex align-items-center">
+          <span
+            class="navbar-text me-2 text-dark"
+            style="cursor: pointer"
+            (click)="goToSettings()"
+          >
+            Welcome, {{ userName }}
+          </span>
+          <button
+            class="btn btn-warning btn-sm"
+            type="button"
+            (click)="logout()"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
     </div>
-  </nav>
-
-  <div class="container">
-    <router-outlet></router-outlet>
   </div>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
