@@ -11,6 +11,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.component';
 import { AdminLayoutComponent } from './pages/admin/admin-layout/admin-layout.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { SettingComponent } from './settings/settings.component';
 
 export const routes: Routes = [
    // {path: 'admin', component: AdminLayoutComponent},
@@ -41,6 +42,8 @@ export const routes: Routes = [
             {path:'project-employee',component:ProjectEmployeeComponent }
         ]
     },
+      { path: 'setting', component: SettingComponent },
+
     { path: '**', component: NotFoundComponent}
    
 ];

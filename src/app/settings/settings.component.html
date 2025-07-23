@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <h4>User Settings</h4>
+  <form (ngSubmit)="updateUser()">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        [(ngModel)]="userData.username"
+        name="username"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        [(ngModel)]="userData.email"
+        name="email"
+        readonly
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        [(ngModel)]="userData.password"
+        name="password"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-warning">Update</button>
+  </form>
+</div>
