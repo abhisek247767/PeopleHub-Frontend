@@ -5,6 +5,9 @@ import { MasterService } from './../../service/master.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
+
+
 @Component({
   selector: 'app-employee',
   imports: [FormsModule,Select2Module,CommonModule],
@@ -12,17 +15,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './employee.component.css'
 })
 export class EmployeeComponent implements OnInit {
-
+   
 
   isFormVisiable: boolean = false;
+
   masterService = inject(MasterService)
   parentDeptList: IParentDept[] = []
   childDeptListById: IChildDept[] = []
   parentDeptId: number = 0;
 
-  ngOnInit(): void {
-    this.getParentDept()
-  }
+ 
+  
 
 
   getParentDept() {
@@ -46,5 +49,19 @@ export class EmployeeComponent implements OnInit {
       }
     )
   }
+  toggleForm() {
+    this.isFormVisiable = !this.isFormVisiable;
+  }
 
+  closeForm() {
+    console.log("close clicked");
+    this.isFormVisiable = false;
+
+ 
+
+  }
+    ngOnInit(): void {
+    // You can optionally reset here too if needed
+    this.isFormVisiable = false;
+}
 }
