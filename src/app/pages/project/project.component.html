@@ -1,1 +1,107 @@
-<p>project works!</p>
+<div class="container-fluid my-4">
+  <div class="row">
+    <!-- Project Table -->
+    <div class="col-7">
+      <div class="card">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between">
+          <strong>Project Portal</strong>
+          <button class="btn btn-warning">Add New</button>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Project Name</th>
+                <th>Delivery Manager</th>
+                <th>Team Lead</th>
+                <th>Developers</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Use *ngFor here to render project rows -->
+              <!-- Example row -->
+              <tr>
+                <td>Sample Project</td>
+                <td>Manager A</td>
+                <td>Lead B</td>
+                <td>Dev1, Dev2</td>
+                <td>
+                  <button class="btn btn-sm btn-info">Edit</button>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add/Edit Project Form -->
+    <div class="col-5">
+      <div class="card">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between">
+          <strong>New Project</strong>
+          <button class="btn btn-primary">Close</button>
+        </div>
+        <div class="card-body">
+          <form (submit)="submitProject()" #projectForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label">Project Name</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="IProject.name"
+                name="projectName"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Delivery Manager</label>
+              <select
+                class="form-select"
+                [(ngModel)]="IProject.deliveryManagerId"
+                name="deliveryManagerId"
+                required
+              >
+                <option *ngFor="let emp of employees" [value]="emp.id">
+                  {{ emp.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Team Lead</label>
+              <select
+                class="form-select"
+                [(ngModel)]="IProject.teamLeadId"
+                name="teamLeadId"
+              >
+                <option *ngFor="let emp of employees" [value]="emp.id">
+                  {{ emp.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Developers</label>
+              <!-- <select
+                class="form-select"
+                [(ngModel)]="IProject.developerIds"
+                name="developerIds"
+                multiple
+              >
+                <option *ngFor="let emp of employees" [value]="emp.id">
+                  {{ emp.name }}
+                </option>
+              </select> -->
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
