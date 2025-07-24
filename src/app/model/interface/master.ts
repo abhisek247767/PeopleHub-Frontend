@@ -5,14 +5,34 @@ export interface IApiResponse {
 }
 
 export interface IParentDept {
+name: any;
+_id: any;
     departmentId: number;
     departmentName: string;
     departmentLogo: string;
 }
 
 export interface IChildDept {
+_id: any;
+name: any;
     childDeptId: number;
     parentDeptId: number;
     departmentName: string;
+}
+
+export interface IEmployee {
+id: any;
+  _id: string;
+  name: string;
+  role: string;
+  email: string;
+}
+
+export interface IProject {
+  name: string;
+  deliveryManager: string;
+  firstManager: string;
+  teamLead: string;
+  developers: string[];
 }
 
