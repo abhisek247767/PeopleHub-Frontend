@@ -14,6 +14,7 @@ _id: any;
 
 export interface IChildDept {
 _id: any;
+name: any;
     childDeptId: number;
     parentDeptId: number;
     departmentName: string;
