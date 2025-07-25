@@ -1,6 +1,186 @@
 .form-control {
     border: 1px solid #94650d;
+    border-radius: 0.5rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.form-control:focus {
+    border-color: #f0bc74;
+    box-shadow: 0 0 0 0.2rem rgba(240, 188, 116, 0.25);
+}
+
 .form-select {
     border: 1px solid #94650d;
+    border-radius: 0.5rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-select:focus {
+    border-color: #f0bc74;
+    box-shadow: 0 0 0 0.2rem rgba(240, 188, 116, 0.25);
+}
+
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.card-header {
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    border-color: #dee2e6;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+}
+
+.btn-warning {
+    background-color: #f0bc74;
+    border-color: #f0bc74;
+    color: #ffffff;
+}
+
+.btn-warning:hover {
+    background-color: #e9a556;
+    border-color: #e9a556;
+    color: #ffffff;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .col-lg-5 {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .card-header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .table th,
+    .table td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Custom scrollbar for better UX */
+.table-responsive {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 #f7fafc;
+    border-radius: 0.5rem;
+}
+
+.table-responsive::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f7fafc;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/* Smooth animations */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Form enhancements */
+.form-control::placeholder,
+.form-select option:first-child {
+    color: #9ca3af;
+}
+
+/* Button group spacing */
+.btn-sm.me-1 {
+    margin-right: 0.25rem !important;
+}
+
+/* Loading states and hover effects */
+.btn {
+    transition: all 0.15s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* Table row hover effects */
+.table tbody tr:hover {
+    background-color: rgba(240, 188, 116, 0.1);
+    transition: background-color 0.15s ease-in-out;
 }
