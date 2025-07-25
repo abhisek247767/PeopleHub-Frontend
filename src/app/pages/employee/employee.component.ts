@@ -1,75 +1,100 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { Select2Module } from 'ng-select2-component';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { IApiResponse, IChildDept, IParentDept } from '../../model/interface/master';
 import { MasterService } from './../../service/master.service';
 import { EmployeeService } from '../../employee.service';
+
 @Component({
   selector: 'app-employee',
-  imports: [ Select2Module, CommonModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
   templateUrl: './employee.component.html',
-  styleUrl: './employee.component.css'
+  styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-
-  isFormVisiable: boolean = false;
-  parentDeptList: IParentDept[] = [];
-  childDeptListById: IChildDept[] = [];
+  isFormVisible: boolean = false;
   employeeForm!: FormGroup;
-  parentDeptId: number = 0;
+  employees: any[] = [];
+  isLoading: boolean = false;
 
   masterService = inject(MasterService);
   employeeService = inject(EmployeeService);
   fb = inject(FormBuilder);
+  toastr = inject(ToastrService);
 
   ngOnInit(): void {
+    this.initializeForm();
+    this.loadEmployees();
+  }
+
+  initializeForm(): void {
     this.employeeForm = this.fb.group({
-      employeeName: ['', Validators.required],
-      contactNo: ['', Validators.required],
+      employeeName: ['', [Validators.required, Validators.minLength(3)]],
+      contactNo: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
       email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
-      parentDeptId: ['', Validators.required],
-      childDeptId: ['', Validators.required],
-      password: ['', Validators.required],
-      role: ['', Validators.required],
+      department: ['', Validators.required],
+      subDepartment: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['', Validators.required]
     });
-
-    this.isFormVisiable = false;
-  }
-  
-
-  onParentDeptChange(){
-    this.masterService.getAllChildDeptBy(this.parentDeptId).subscribe(
-      (res: IApiResponse) => {
-        this.childDeptListById = res.data;
-      },
-      (error) => {
-        console.error('Error fetching child departments:', error);
-      }
-    )
-  }
-  toggleForm() {
-    this.isFormVisiable = !this.isFormVisiable;
   }
 
-  closeForm() {
-    this.isFormVisiable = false;
-  }
-  onSubmit(): void {
-
-
-    const payload = this.employeeForm.value;
-
-    this.employeeService.addEmployee(payload).subscribe({
-      next: (res) => {
-        console.log('Employee Added', res);
-        // reset form or show success message
+  loadEmployees(): void {
+    this.isLoading = true;
+    this.employeeService.getEmployees().subscribe({
+      next: (res: any) => {
+        this.employees = res.employees || [];
+        this.isLoading = false;
       },
       error: (err) => {
-        console.error('Error adding employee', err);
-      },
+        this.toastr.error('Failed to load employees', 'Error');
+        this.isLoading = false;
+      }
     });
-}
+  }
+
+  toggleForm(): void {
+    this.isFormVisible = !this.isFormVisible;
+    if (!this.isFormVisible) {
+      this.employeeForm.reset();
+    }
+  }
+
+  onSubmit(): void {
+    if (this.employeeForm.invalid) {
+      this.markFormGroupTouched(this.employeeForm);
+      this.toastr.warning('Please fill all required fields correctly', 'Validation Error');
+      return;
+    }
+
+    this.isLoading = true;
+    this.employeeService.addEmployee(this.employeeForm.value).subscribe({
+      next: (res) => {
+        this.toastr.success('Employee added successfully', 'Success');
+        this.employeeForm.reset();
+        this.isFormVisible = false;
+        this.loadEmployees();
+      },
+      error: (err) => {
+        this.toastr.error(err.error.message || 'Failed to add employee', 'Error');
+        this.isLoading = false;
+      }
+    });
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
+
+  get f() { return this.employeeForm.controls; }
 }
