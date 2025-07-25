@@ -1,15 +1,15 @@
 <div class="container-fluid my-4">
-  <div class="row">
-    <!-- Project Table -->
-    <div class="col-7">
-      <div class="card">
-        <div class="card-header bg-secondary text-white d-flex justify-content-between">
+  <div class="row g-4">
+    <!-- Project Table Section -->
+    <div class="col-lg-7 col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
           <strong>Project Portal</strong>
-          <button class="btn btn-primary">Add New</button>
+          <button class="btn btn-warning btn-sm" (click)="toggleForm()">Add New</button>
         </div>
-        <div class="card-body">
-          <table class="table table-bordered">
-            <thead>
+        <div class="card-body table-responsive">
+          <table class="table table-bordered align-middle text-center">
+            <thead class="table-light">
               <tr>
                 <th>Project Name</th>
                 <th>Delivery Manager</th>
@@ -27,7 +27,7 @@
                 <td>Lead B</td>
                 <td>Dev1, Dev2</td>
                 <td>
-                  <button class="btn btn-sm btn-info">Edit</button>
+                  <button class="btn btn-sm btn-info me-1">Edit</button>
                   <button class="btn btn-sm btn-danger">Delete</button>
                 </td>
               </tr>
@@ -37,68 +37,78 @@
       </div>
     </div>
 
-    <!-- Add/Edit Project Form -->
-    <div class="col-5">
-      <div class="card">
-        <div class="card-header bg-secondary text-white d-flex justify-content-between">
+    <!-- New Project Form Section -->
+    <div class="col-lg-5 col-md-12" *ngIf="isFormVisible">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
           <strong>New Project</strong>
-          <button class="btn btn-primary">Close</button>
+          <button class="btn btn-warning btn-sm" (click)="closeForm()">Close</button>
         </div>
         <div class="card-body">
-          <form (submit)="submitProject()" #projectForm="ngForm">
-            <div class="mb-3">
-              <label class="form-label">Project Name</label>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="IProject.name"
-                name="projectName"
-                required
-              />
+          <form class="mb-4" (submit)="submitProject()" #projectForm="ngForm">
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="projectName" class="form-label">Project Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="projectName"
+                  [(ngModel)]="IProject.name"
+                  name="projectName"
+                  placeholder="Enter project name"
+                  required
+                />
+              </div>
+
+              <div class="col-12">
+                <label for="deliveryManager" class="form-label">Delivery Manager</label>
+                <select
+                  class="form-select"
+                  id="deliveryManager"
+                  [(ngModel)]="IProject.deliveryManagerId"
+                  name="deliveryManagerId"
+                  required
+                >
+                  <option selected disabled>Select delivery manager</option>
+                  <option *ngFor="let emp of employees" [value]="emp.id">
+                    {{ emp.name }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label for="teamLead" class="form-label">Team Lead</label>
+                <select
+                  class="form-select"
+                  id="teamLead"
+                  [(ngModel)]="IProject.teamLeadId"
+                  name="teamLeadId"
+                >
+                  <option selected disabled>Select team lead</option>
+                  <option *ngFor="let emp of employees" [value]="emp.id">
+                    {{ emp.name }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label for="developers" class="form-label">Developers</label>
+                <select
+                  class="form-select"
+                  id="developers"
+                  [(ngModel)]="IProject.developerIds"
+                  name="developerIds"
+                  multiple
+                >
+                  <option *ngFor="let emp of employees" [value]="emp.id">
+                    {{ emp.name }}
+                  </option>
+                </select>
+                <div class="form-text">Hold Ctrl/Cmd to select multiple developers</div>
+              </div>
             </div>
 
-            <div class="mb-3">
-              <label class="form-label">Delivery Manager</label>
-              <select
-                class="form-select"
-                [(ngModel)]="IProject.deliveryManagerId"
-                name="deliveryManagerId"
-                required
-              >
-                <option *ngFor="let emp of employees" [value]="emp.id">
-                  {{ emp.name }}
-                </option>
-              </select>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Team Lead</label>
-              <select
-                class="form-select"
-                [(ngModel)]="IProject.teamLeadId"
-                name="teamLeadId"
-              >
-                <option *ngFor="let emp of employees" [value]="emp.id">
-                  {{ emp.name }}
-                </option>
-              </select>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Developers</label>
-              <!-- <select
-                class="form-select"
-                [(ngModel)]="IProject.developerIds"
-                name="developerIds"
-                multiple
-              >
-                <option *ngFor="let emp of employees" [value]="emp.id">
-                  {{ emp.name }}
-                </option>
-              </select> -->
-            </div>
-
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-warning mt-4">Submit</button>
           </form>
         </div>
       </div>
