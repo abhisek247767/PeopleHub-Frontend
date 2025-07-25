@@ -42,5 +42,6 @@ ng serve
 http://localhost:4200/
 ```
 congratulations you have done the frontennd set up . 
+#### NOTE : When you raise pr raise in origin/development 
 ### Please follow me and star the repo for my motivation (Mandatory😃)
 Now go to backend repo for set up backend repository [PeopleHub-Backend (Node.js)](https://github.com/abhisek247767/PeopleHub-Backend)
