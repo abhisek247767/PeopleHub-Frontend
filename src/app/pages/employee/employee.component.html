@@ -1,11 +1,11 @@
 <div class="container-fluid my-4">
   <div class="row g-4">
-    <!-- 🧾 Employee Table Section -->
+    <!-- Employee Table Section -->
     <div class="col-lg-7 col-md-12">
       <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
           <strong>Employee Portal</strong>
-          <button class="btn btn-primary btn-sm" (click)="toggleForm()">Add New</button>
+          <button class="btn btn-warning btn-sm" (click)="toggleForm()">Add New</button>
         </div>
         <div class="card-body table-responsive">
           <table class="table table-bordered align-middle text-center">
@@ -29,6 +29,10 @@
                 <td>{{ emp.name }}</td>
                 <td>{{ emp.contact }}</td>
                 ...
+                <td>
+                  <button class="btn btn-sm btn-info me-1">Edit</button>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
               </tr>
               -->
             </tbody>
@@ -37,77 +41,77 @@
       </div>
     </div>
 
-    <!-- 👤 New Employee Form Section -->
+    <!-- New Employee Form Section -->
     <div class="col-lg-5 col-md-12" *ngIf="isFormVisiable">
       <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
           <strong>New Employee</strong>
-          <button class="btn btn-primary btn-sm" (click)="closeForm()">Close</button>
+          <button class="btn btn-warning btn-sm" (click)="closeForm()">Close</button>
         </div>
         <div class="card-body">
-<form class="mb-4" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
-  <div class="row g-3">
-    <div class="col-md-6">
-      <label for="employeeName" class="form-label">Employee Name</label>
+          <form class="mb-4" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="employeeName" class="form-label">Employee Name</label>
                 <input type="text" class="form-control" id="employeeName" placeholder="Enter employee name" />
-    </div>
-    <div class="col-md-6">
-      <label for="contactNo" class="form-label">Contact No</label>
+              </div>
+              <div class="col-md-6">
+                <label for="contactNo" class="form-label">Contact No</label>
                 <input type="text" class="form-control" id="contactNo" placeholder="Enter contact number" />
-    </div>
+              </div>
 
-    <div class="col-md-6">
-      <label for="emailId" class="form-label">Email</label>
+              <div class="col-md-6">
+                <label for="emailId" class="form-label">Email</label>
                 <input type="email" class="form-control" id="emailId" placeholder="Enter email" />
-    </div>
-    <div class="col-md-6">
-      <label for="gender" class="form-label">Gender</label>
+              </div>
+              <div class="col-md-6">
+                <label for="gender" class="form-label">Gender</label>
                 <select id="gender" class="form-select">
                   <option selected disabled>Select gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
 
-    <div class="col-md-6">
-      <label for="parentDeptId" class="form-label">Department</label>
-      <select
-  id="parentDeptId"
+              <div class="col-md-6">
+                <label for="parentDeptId" class="form-label">Department</label>
+                <select
+                  id="parentDeptId"
                   name="parentDept"
-  class="form-select"
+                  class="form-select"
                   [(ngModel)]="parentDeptId"
                   (change)="onParentDeptChange()"
->
+                >
+                  <option selected disabled>Select department</option>
                   <option *ngFor="let item of parentDeptList; let i = index" [value]="item.departmentId">
-    {{ item.departmentName }}
-  </option>
-</select>
-    </div>
+                    {{ item.departmentName }}
+                  </option>
+                </select>
+              </div>
 
-    <div class="col-md-6">
-      <label for="childDeptId" class="form-label">Sub - Department</label>
+              <div class="col-md-6">
+                <label for="childDeptId" class="form-label">Sub - Department</label>
                 <select id="childDeptId" name="childDept" class="form-select">
-        <option value="">-- Select --</option>
+                  <option value="">-- Select --</option>
                   <option *ngFor="let childItem of childDeptListById; let i = index" [value]="childItem.childDeptId">
-          {{ childItem.departmentName }}
-        </option>
-      </select>
-    </div>
+                    {{ childItem.departmentName }}
+                  </option>
+                </select>
+              </div>
 
-    <div class="col-md-6">
-      <label for="password" class="form-label">Password</label>
+              <div class="col-md-6">
+                <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Enter password" />
-    </div>
-    <div class="col-md-6">
-      <label for="role" class="form-label">Role</label>
+              </div>
+              <div class="col-md-6">
+                <label for="role" class="form-label">Role</label>
                 <input type="text" class="form-control" id="role" placeholder="Enter role" />
-    </div>
-  </div>
+              </div>
+            </div>
 
-  <button type="submit" class="btn btn-warning mt-4">Submit</button>
-</form>
-
+            <button type="submit" class="btn btn-warning mt-4">Submit</button>
+          </form>
         </div>
       </div>
     </div>
