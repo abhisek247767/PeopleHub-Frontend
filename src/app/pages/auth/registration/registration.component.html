@@ -1,98 +1,104 @@
-<div class="parent">
-  <div class="container login-container">
-    <div class="card login-card shadow p-4" style="width: 30rem;">
-      <h3 class="text-center mb-4">Registration</h3>
-      <form [formGroup]="useForm" (ngSubmit)="onRegister()">
+<div class="row justify-content-center form-bg-image">
+  <div class="col-12 d-flex align-items-center justify-content-center">
+    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+      <div class="text-center text-md-center mb-4 mt-md-0">
+        <h1 class="mb-0 h3">Create an Account</h1>
         <div *ngIf="errorMessage" class="text-danger fw-bold p-2 text-center">
           {{ errorMessage }}
         </div>
-        <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            formControlName="username"
-            placeholder="Enter your username"
-          />
-          <div
-            *ngIf="useForm.controls['username'].touched && useForm.controls['username'].invalid"
-            class="text-danger"
-          >
-            <div *ngIf="useForm.controls['username'].errors?.['required']">
-              Username is required
-            </div>
-            <div *ngIf="useForm.controls['username'].errors?.['minlength']">
-              Username must be at least 3 characters
+        <div *ngIf="successMessage" class="text-success fw-bold p-2 text-center">
+          {{ successMessage }}
+        </div>
+      </div>
+      <form class="mt-2" [formGroup]="useForm" (ngSubmit)="onRegister()">
+        <div class="form-group mb-4">
+          <label for="username">Username</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+              </svg>
+            </span>
+            <input type="text" class="form-control" id="username" formControlName="username"
+                   [ngClass]="{'is-invalid': useForm.controls['username'].touched && useForm.controls['username'].invalid}"
+                   placeholder="Enter your username" required>
+            <div *ngIf="useForm.controls['username'].touched && useForm.controls['username'].invalid" class="invalid-feedback">
+              <div *ngIf="useForm.controls['username'].errors?.['required']">Username is required.</div>
+              <div *ngIf="useForm.controls['username'].errors?.['minlength']">Username must be at least 3 characters.</div>
             </div>
           </div>
         </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            formControlName="email"
-            placeholder="Enter your email"
-          />
-          <div
-            *ngIf="useForm.controls['email'].touched && useForm.controls['email'].invalid"
-            class="text-danger"
-          >
-            <div *ngIf="useForm.controls['email'].errors?.['required']">
-              Email is required
-            </div>
-            <div *ngIf="useForm.controls['email'].errors?.['email']">
-              Please enter a valid email address
+        <div class="form-group mb-4">
+          <label for="email">Your Email</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+              </svg>
+            </span>
+            <input type="email" class="form-control" id="email" formControlName="email"
+                   [ngClass]="{'is-invalid': useForm.controls['email'].touched && useForm.controls['email'].invalid}"
+                   placeholder="example@company.com" required>
+            <div *ngIf="useForm.controls['email'].touched && useForm.controls['email'].invalid" class="invalid-feedback">
+              <div *ngIf="useForm.controls['email'].errors?.['required']">Email is required.</div>
+              <div *ngIf="useForm.controls['email'].errors?.['email']">Please enter a valid email address.</div>
+              <div *ngIf="useForm.controls['email'].errors?.['pattern']">Please enter a valid email format.</div>
             </div>
           </div>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            [type]="isConfirmPasswordVisible ? 'text' : 'password'"
-            class="form-control"
-            id="password"
-            formControlName="password"
-            placeholder="Enter your password"
-          />
-          
-          <div
-            *ngIf="useForm.controls['password'].touched && useForm.controls['password'].invalid"
-            class="text-danger"
-          >
-            <div *ngIf="useForm.controls['password'].errors?.['required']">
-              Password is required
-            </div>
-            <div *ngIf="useForm.controls['password'].errors?.['minlength']">
-              Password must be at least 6 characters
-            </div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="confirmPassword" class="form-label">Confirm Password</label>
-          <input
-            [type]="isConfirmPasswordVisible ? 'text' : 'password'"
-            class="form-control"
-            id="confirmPassword"
-            formControlName="confirmPassword"
-            placeholder="Confirm your password"
-          />
-          <div *ngIf="useForm.controls['confirmPassword'].touched && useForm.controls['confirmPassword'].invalid" class="text-danger">
-            <div *ngIf="useForm.controls['confirmPassword'].errors?.['required']">
-              Confirm password is required
-            </div>
-            <div *ngIf="useForm.controls['confirmPassword'].errors?.['passwordsMismatch']">
-              Passwords do not match
+        <div class="form-group mb-4">
+          <label for="password">Password</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+              </svg>
+            </span>
+            <input [type]="isPasswordVisible ? 'text' : 'password'" class="form-control" id="password" formControlName="password"
+                   [ngClass]="{'is-invalid': useForm.controls['password'].touched && useForm.controls['password'].invalid}"
+                   placeholder="Enter your password" required>
+            <span class="input-group-text">
+              <button type="button" class="btn btn-outline-primary" (click)="togglePasswordVisibility()">
+                <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+              </button>
+            </span>
+            <div *ngIf="useForm.controls['password'].touched && useForm.controls['password'].invalid" class="invalid-feedback">
+              <div *ngIf="useForm.controls['password'].errors?.['required']">Password is required.</div>
+              <div *ngIf="useForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters.</div>
+              <div *ngIf="useForm.controls['password'].errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</div>
             </div>
           </div>
         </div>
-        <div class="d-grid gap-2">
-          <button type="submit" [disabled]="useForm.invalid" class="btn btn-primary">Register</button>
+        <div class="form-group mb-4">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+              </svg>
+            </span>
+            <input [type]="isConfirmPasswordVisible ? 'text' : 'password'" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+                   [ngClass]="{'is-invalid': useForm.controls['confirmPassword'].touched && useForm.controls['confirmPassword'].invalid}"
+                   placeholder="Confirm your password" required>
+            <span class="input-group-text">
+              <button type="button" class="btn btn-outline-primary" (click)="toggleConfirmPasswordVisibility()">
+                <i class="fa" [ngClass]="isConfirmPasswordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+              </button>
+            </span>
+            <div *ngIf="useForm.controls['confirmPassword'].touched && useForm.controls['confirmPassword'].invalid" class="invalid-feedback">
+              <div *ngIf="useForm.controls['confirmPassword'].errors?.['required']">Confirm password is required.</div>
+              <div *ngIf="useForm.errors?.['passwordsMismatch']">Passwords do not match.</div>
+            </div>
+          </div>
+        </div>
+        <div class="d-grid">
+          <button type="submit" [disabled]="useForm.invalid" class="btn btn-gray-800">Register</button>
         </div>
       </form>
-      <a class="nav-link mt-2" routerLink="/login">Have an account? Login</a>
+      <div class="d-flex justify-content-center align-items-center mt-4">
+        <span class="fw-normal">Already have an account? <a routerLink="/login" class="fw-bold">Login</a></span>
+      </div>
     </div>
   </div>
 </div>

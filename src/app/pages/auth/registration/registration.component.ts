@@ -7,15 +7,16 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registration',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './registration.component.html',
-  styleUrl: './registration.component.css'
+  styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-
   isPasswordVisible: boolean = false;
   isConfirmPasswordVisible: boolean = false;
   errorMessage: string = '';
+  successMessage: string = '';
 
   constructor(
     private authService: AuthService,
@@ -24,13 +25,18 @@ export class RegistrationComponent {
   ) {}
 
   useForm: FormGroup = new FormGroup({
-    "username": new FormControl('', [Validators.required, Validators.minLength(3)]),
-    "email": new FormControl('', [
-      Validators.required, Validators.email,
+    username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
       Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     ]),
-    "password": new FormControl('', [Validators.required, Validators.minLength(6)]),
-    "confirmPassword": new FormControl('', [Validators.required])
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
+    ]),
+    confirmPassword: new FormControl('', [Validators.required])
   }, { validators: this.passwordsMatchValidator() });
 
   passwordsMatchValidator(): (control: AbstractControl) => ValidationErrors | null {
@@ -39,10 +45,7 @@ export class RegistrationComponent {
       const password = formGroup.get('password')?.value;
       const confirmPassword = formGroup.get('confirmPassword')?.value;
 
-      if (password !== confirmPassword) {
-        return { passwordsMismatch: true };
-      }
-      return null;
+      return password === confirmPassword ? null : { passwordsMismatch: true };
     };
   }
 
@@ -60,47 +63,30 @@ export class RegistrationComponent {
 
       this.authService.registration(username, email, password, confirmPassword).subscribe({
         next: (response) => {
-          this.toastr.success(`${response.message}`, 'Success');
-          this.router.navigateByUrl("login");
+          this.successMessage = response.message;
+          this.toastr.success(response.message, 'Success');
+          this.router.navigateByUrl('/verify-email');
         },
         error: (error) => {
-          console.log('Full error object:', error); // For debugging
-
-          // Handle different error response formats
-          if (error?.error?.errors) {
-            // If errors is an array (Mongoose ValidationError)
-            if (Array.isArray(error.error.errors)) {
-              this.errorMessage = error.error.errors.join(', ');
-            }
-            // If errors has a message property (custom error format)
-            else if (error.error.errors.message) {
-              this.errorMessage = error.error.errors.message;
-            }
-            // If errors is a string
-            else if (typeof error.error.errors === 'string') {
-              this.errorMessage = error.error.errors;
-            }
-            else {
-              this.errorMessage = 'Registration failed. Please check your input.';
-            }
+          console.log('Full error object:', error);
+          if (error.status === 409 && error.error?.needsVerification) {
+            this.errorMessage = 'User already exists but is not verified. Please verify your email.';
+            this.toastr.warning(this.errorMessage, 'Verification Required');
+            // Store email in sessionStorage to prefill verification form
+            sessionStorage.setItem('unverifiedEmail', email);
+            this.router.navigateByUrl('/verify-email');
+          } else {
+            this.errorMessage = error.error?.message ||
+                              (error.error?.errors ? error.error.errors.join(', ') :
+                              'Registration failed. Please check your input.');
+            this.toastr.error(this.errorMessage, 'Error');
           }
-          // Handle direct message from backend
-          else if (error?.error?.message) {
-            this.errorMessage = error.error.message;
-          }
-          // Handle HTTP error status messages
-          else if (error?.message) {
-            this.errorMessage = error.message;
-          }
-          // Fallback error message
-          else {
-            this.errorMessage = 'Registration failed. Please try again.';
-          }
-        },
+        }
       });
     } else {
-      console.log('Form is invalid');
       this.useForm.markAllAsTouched();
+      this.errorMessage = 'Please fill in all required fields correctly.';
+      this.toastr.error(this.errorMessage, 'Error');
     }
   }
 }
