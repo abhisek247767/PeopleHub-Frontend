@@ -20,7 +20,7 @@ _id: any;
 }
 
 export interface IEmployee {
-  id: string;
+  _id: string;
   name: string;
   role: string;
   email: string;
