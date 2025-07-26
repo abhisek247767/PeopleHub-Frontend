@@ -1,0 +1,62 @@
+<div class="row justify-content-center form-bg-image">
+  <div class="col-12 d-flex align-items-center justify-content-center">
+    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+      <div class="text-center text-md-center mb-4 mt-md-0">
+        <h1 class="mb-0 h3">Verify Your Email</h1>
+        <p>Please enter the verification code sent to your email.</p>
+        <div *ngIf="errorMessage" class="text-danger fw-bold p-2 text-center">
+          {{ errorMessage }}
+        </div>
+        <div *ngIf="successMessage" class="text-success fw-bold p-2 text-center">
+          {{ successMessage }}
+        </div>
+      </div>
+      <form class="mt-2" [formGroup]="verifyForm" (ngSubmit)="onVerify()">
+        <div class="form-group mb-4">
+          <label for="email">Your Email</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+              </svg>
+            </span>
+            <input type="email" class="form-control" id="email" formControlName="email"
+                   [ngClass]="{'is-invalid': verifyForm.controls['email'].touched && verifyForm.controls['email'].invalid}"
+                   placeholder="example@company.com" autofocus required>
+            <div *ngIf="verifyForm.controls['email'].touched && verifyForm.controls['email'].invalid" class="invalid-feedback">
+              <div *ngIf="verifyForm.controls['email'].errors?.['required']">Email is required.</div>
+              <div *ngIf="verifyForm.controls['email'].errors?.['email']">Please enter a valid email address.</div>
+              <div *ngIf="verifyForm.controls['email'].errors?.['pattern']">Please enter a valid email format.</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="verificationCode">Verification Code</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+              </svg>
+            </span>
+            <input type="text" class="form-control" id="verificationCode" formControlName="verificationCode"
+                   [ngClass]="{'is-invalid': verifyForm.controls['verificationCode'].touched && verifyForm.controls['verificationCode'].invalid}"
+                   placeholder="Enter verification code" required>
+            <div *ngIf="verifyForm.controls['verificationCode'].touched && verifyForm.controls['verificationCode'].invalid" class="invalid-feedback">
+              <div *ngIf="verifyForm.controls['verificationCode'].errors?.['required']">Verification code is required.</div>
+            </div>
+          </div>
+        </div>
+        <div class="d-grid mb-3">
+          <button type="submit" [disabled]="verifyForm.invalid" class="btn btn-gray-800">Verify Email</button>
+        </div>
+        <div class="text-center">
+          <a href="#" (click)="onResendCode()" class="small">Resend verification code</a>
+        </div>
+      </form>
+      <div class="d-flex justify-content-center align-items-center mt-4">
+        <span class="fw-normal">Already have an account? <a routerLink="/login" class="fw-bold">Login</a></span>
+      </div>
+    </div>
+  </div>
+</div>
