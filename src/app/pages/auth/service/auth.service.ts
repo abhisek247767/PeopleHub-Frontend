@@ -9,57 +9,49 @@ import { ILoginResponse, IRegisterationResponse } from '../model/interface/auth'
 })
 export class AuthService {
 
-  private apiUrl = `${environment.apiUrl}`;
+  private apiUrl = `${environment.apiUrl}`;  // Ensure this is 'http://127.0.0.1:3000'
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   isAuthenticated(): boolean {
-    return !!sessionStorage.getItem('user'); 
+    return !!sessionStorage.getItem('user'); // You may enhance this later to check session validity
   }
 
   registration(username: string, email: string, password: string, confirmPassword: string): Observable<IRegisterationResponse> {
-    return this.http.post<IRegisterationResponse>(`${this.apiUrl}/signup`, {username, email, password, confirmPassword}, {
+    return this.http.post<IRegisterationResponse>(`${this.apiUrl}/signup`, {
+      username, email, password, confirmPassword
+    }, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }),
-      withCredentials: true,
-    }).pipe(
-      tap((response: IRegisterationResponse) => {
-        console.log(response.message);
-      })
-    )
+      withCredentials: true // Important: allows cookies (session) to be sent
+    });
   }
 
   login(email: string, password: string): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>(`${this.apiUrl}/login`, { email, password }, {
+    return this.http.post<ILoginResponse>(`${this.apiUrl}/login`, {
+      email, password
+    }, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }),
-      withCredentials: true,
-      
+      withCredentials: true
     }).pipe(
       tap((response: ILoginResponse) => {
-        if (response.token) {
-          sessionStorage.setItem('authToken', response.token);
-        }
+        // Only store user if needed; do NOT store token if you're using session-based auth
+        sessionStorage.setItem('user', JSON.stringify(response.user));
       })
     );
   }
-  
 
   logout(): Observable<any> {
-    const authToken = sessionStorage.getItem('authToken');
-    if (!authToken) {
-        console.warn('No auth token found, logging out without token.');
-    }
     return this.http.post<any>(`${this.apiUrl}/logout`, {}, {
-        headers: new HttpHeaders({
-          'Authorization': `Bearer ${authToken}`
-        }),
-        withCredentials: true, 
-    });
+      withCredentials: true // Required to clear the session cookie on the server
+    }).pipe(
+      tap(() => {
+        sessionStorage.removeItem('user');
+      })
+    );
   }
-  
-
 
 }
