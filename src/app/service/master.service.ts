@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 export class MasterService {
 
     private apiUrl = `${environment.apiUrl}`;
-  
+
   constructor(private http: HttpClient) { }
 
   getAllDept(): Observable<IApiResponse> {
@@ -19,7 +19,7 @@ export class MasterService {
 
   getAllChildDeptBy(deptId : number): Observable<IApiResponse> {
     return this.http.get<IApiResponse>(
-    `${this.apiUrl}/subDepartments?deptId=${deptId}`,
+    `${this.apiUrl}/subDepartment?deptId=${deptId}`,
   );
   }
 }
