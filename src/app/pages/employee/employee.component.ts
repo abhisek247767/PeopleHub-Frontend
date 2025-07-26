@@ -21,10 +21,6 @@ export class EmployeeComponent implements OnInit {
   employees: any[] = [];
   isLoading: boolean = false;
 
-  parentDepartments: IParentDept[] = [];
-  childDepartments: IChildDept[] = [];
-  selectedParentDeptId: number | null = null;
-
   masterService = inject(MasterService);
   employeeService = inject(EmployeeService);
   fb = inject(FormBuilder);
@@ -33,7 +29,6 @@ export class EmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.initializeForm();
     this.loadEmployees();
-    this.loadParentDepartments();
   }
 
   initializeForm(): void {
@@ -43,7 +38,7 @@ export class EmployeeComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
       department: ['', Validators.required],
-      subDepartment: ['', Validators.required], // This will now store the 'departmentName' from IChildDept
+      subDepartment: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       role: ['', Validators.required]
     });
@@ -63,57 +58,10 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  loadParentDepartments(): void {
-    this.masterService.getAllDept().subscribe({
-      next: (res: IApiResponse) => {
-        if (res.result && res.data) {
-          this.parentDepartments = res.data;
-        } else {
-          this.toastr.error('Failed to load departments', 'Error');
-        }
-      },
-      error: (err) => {
-        this.toastr.error('Failed to load departments', 'Error');
-      }
-    });
-  }
-
-  onParentDepartmentChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const selectedDeptName = selectElement.value;
-
-    const selectedDept = this.parentDepartments.find(dept => dept.departmentName === selectedDeptName);
-
-    if (selectedDept) {
-      this.selectedParentDeptId = selectedDept.departmentId;
-      this.employeeForm.get('subDepartment')?.setValue('');
-      this.childDepartments = [];
-
-      this.masterService.getAllChildDeptBy(this.selectedParentDeptId).subscribe({
-        next: (res: IApiResponse) => {
-          if (res.result && res.data) {
-            this.childDepartments = res.data;
-          } else {
-            this.toastr.error('Failed to load sub-departments', 'Error');
-          }
-        },
-        error: (err) => {
-          this.toastr.error('Failed to load sub-departments', 'Error');
-        }
-      });
-    } else {
-      this.selectedParentDeptId = null;
-      this.employeeForm.get('subDepartment')?.setValue('');
-      this.childDepartments = [];
-    }
-  }
-
   toggleForm(): void {
     this.isFormVisible = !this.isFormVisible;
     if (!this.isFormVisible) {
       this.employeeForm.reset();
-      this.selectedParentDeptId = null;
-      this.childDepartments = [];
     }
   }
 
@@ -130,8 +78,6 @@ export class EmployeeComponent implements OnInit {
         this.toastr.success('Employee added successfully', 'Success');
         this.employeeForm.reset();
         this.isFormVisible = false;
-        this.selectedParentDeptId = null;
-        this.childDepartments = [];
         this.loadEmployees();
       },
       error: (err) => {

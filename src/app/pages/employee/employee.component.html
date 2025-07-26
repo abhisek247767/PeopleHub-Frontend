@@ -1,450 +1,176 @@
-<div class="container-fluid py-4">
-  <div class="row g-4">
-    <!-- Employee Table Section - Dynamic width based on form visibility -->
-    <div class="col-12" [ngClass]="{ 'col-xl-8 col-lg-7': isFormVisible }">
-      <div class="card shadow-sm p-4 my-4">
-        <!-- Added padding and margin here -->
-        <!-- Grey Header -->
-        <div
-          class="card-header bg-light text-dark d-flex justify-content-between align-items-center py-3"
-        >
-          <div>
-            <h4 class="mb-0 fw-bold">
-              <i class="fas fa-users"></i> Employee Portal
-            </h4>
-          </div>
-          <!-- White Button -->
-          <button
-            class="btn btn-white text-dark border btn-lg shadow-sm"
-            (click)="toggleForm()"
-            [disabled]="isLoading"
-          >
-            <i
-              class="fas me-2"
-              [ngClass]="isFormVisible ? 'fa-times' : 'fa-plus'"
-            ></i>
-            {{ isFormVisible ? "Close Form" : "Add New Employee" }}
+<div class="container-fluid py-3">
+  <div class="row g-3">
+    <!-- Employee Table Section -->
+    <div class="col-12 col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center py-2">
+          <h5 class="mb-0">Employee Portal</h5>
+          <button class="btn btn-primary btn-sm" (click)="toggleForm()" [disabled]="isLoading">
+            <i class="fas fa-plus me-1"></i> Add New
           </button>
         </div>
 
-        <div class="card-body p-0">
-          <!-- Loading State -->
-          <div
-            *ngIf="isLoading && employees.length === 0"
-            class="text-center py-5"
-          >
-            <div
-              class="spinner-border text-primary mb-3"
-              role="status"
-              style="width: 3rem; height: 3rem"
-            >
+        <div class="card-body">
+          <div *ngIf="isLoading && employees.length === 0" class="text-center py-4">
+            <div class="spinner-border text-primary" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
-            <h5 class="text-muted">Loading employees...</h5>
-            <p class="text-muted mb-0">Please wait while we fetch the data</p>
+            <p class="mt-2 mb-0">Loading employees...</p>
           </div>
 
-          <!-- Empty State -->
-          <div
-            *ngIf="!isLoading && employees.length === 0"
-            class="text-center py-5"
-          >
-            <div class="mb-4">
-              <i class="fas fa-users fa-4x text-muted opacity-50"></i>
-            </div>
-            <h4 class="text-muted mb-3">No employees found</h4>
-            <p class="text-muted mb-4">
-              Start building your team by adding your first employee!
-            </p>
-            <button
-              class="btn btn-primary btn-lg"
-              (click)="toggleForm()"
-              *ngIf="!isFormVisible"
-            >
-              <i class="fas fa-plus me-2"></i>Add First Employee
-            </button>
+          <div *ngIf="!isLoading && employees.length === 0" class="text-center py-4">
+            <i class="fas fa-users fa-2x text-muted mb-2"></i>
+            <p class="mb-0">No employees found. Add your first employee!</p>
           </div>
 
-          <!-- Employee Table -->
           <div *ngIf="employees.length > 0" class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-              <thead class="theme-header">
+            <table class="table table-hover align-middle">
+              <thead class="table-light">
                 <tr>
-                  <th class="px-4 py-3" style="width: 8%">
-                    <i class="fas fa-hashtag me-1"></i>ID
-                  </th>
-                  <th class="px-4 py-3" style="width: 18%">
-                    <i class="fas fa-user me-1"></i>Name
-                  </th>
-                  <th class="px-4 py-3" style="width: 13%">
-                    <i class="fas fa-phone me-1"></i>Contact
-                  </th>
-                  <th class="px-4 py-3" style="width: 20%">
-                    <i class="fas fa-envelope me-1"></i>Email
-                  </th>
-                  <th class="px-4 py-3" style="width: 18%">
-                    <i class="fas fa-building me-1"></i>Department
-                  </th>
-                  <th class="px-4 py-3" style="width: 12%">
-                    <i class="fas fa-user-tag me-1"></i>Role
-                  </th>
-                  <th class="px-4 py-3 text-center" style="width: 11%">
-                    <i class="fas fa-cogs me-1"></i>Actions
-                  </th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>Email</th>
+                  <th>Department</th>
+                  <th>Role</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let emp of employees; let i = index"
-                  class="border-bottom"
-                >
-                  <td class="px-4 py-3">
-                    <span class="badge bg-secondary rounded-pill">
-                      {{ emp._id | slice : 0 : 6 }}
-                    </span>
+                <tr *ngFor="let emp of employees">
+                  <td>{{ emp._id | slice:0:6 }}</td>
+                  <td>{{ emp.employeeName }}</td>
+                  <td>{{ emp.contactNo }}</td>
+                  <td>{{ emp.email }}</td>
+                  <td>
+                    <span class="badge bg-primary">{{ emp.department }}</span>
+                    <span *ngIf="emp.subDepartment" class="badge bg-info ms-1">{{ emp.subDepartment }}</span>
                   </td>
-                  <td class="px-4 py-3">
-                    <div class="d-flex align-items-center">
-                      <div
-                        class="avatar-sm bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
-                      >
-                        <i class="fas fa-user text-white"></i>
-                      </div>
-                      <div>
-                        <div class="fw-semibold">{{ emp.employeeName }}</div>
-                      </div>
-                    </div>
+                  <td>
+                   <span>
+  {{ emp.role | titlecase }}
+</span>
                   </td>
-                  <td class="px-4 py-3">
-                    <span class="text-muted">
-                      <i class="fas fa-phone-alt me-1"></i>{{ emp.contactNo }}
-                    </span>
-                  </td>
-                  <td class="px-4 py-3">
-                    <span class="text-primary" style="word-break: break-all">
-                      {{ emp.email }}
-                    </span>
-                  </td>
-                  <td class="px-4 py-3">
-                    <div class="d-flex flex-wrap gap-1">
-                      <span class="badge bg-primary rounded-pill">{{
-                        emp.department
-                      }}</span>
-                      <span
-                        *ngIf="emp.subDepartment"
-                        class="badge bg-info rounded-pill"
-                        >{{ emp.subDepartment }}</span
-                      >
-                    </div>
-                  </td>
-                  <td class="px-4 py-3">
-                    <span class="badge bg-success rounded-pill px-3 py-2">{{
-                      emp.role | titlecase
-                    }}</span>
-                  </td>
-                  <td class="px-4 py-3 text-center">
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-sm btn-outline-primary">
-                        <i class="fas fa-edit"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger">
-                        <i class="fas fa-trash"></i>
-                      </button>
-                    </div>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary me-1">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger">
+                      <i class="fas fa-trash"></i>
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
-          </div>
-
-          <!-- Table Footer with Employee Count -->
-          <div
-            *ngIf="employees.length > 0"
-            class="card-footer bg-light border-top-0"
-          >
-            <div class="d-flex justify-content-between align-items-center">
-              <small class="text-muted">
-                <i class="fas fa-info-circle me-1"></i>
-                Total Employees: <strong>{{ employees.length }}</strong>
-              </small>
-            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Employee Form Section -->
-    <div class="col-12 col-xl-4 col-lg-5" *ngIf="isFormVisible">
-      <div class="card shadow-lg border-0 sticky-top" style="top: 20px">
-        <div class="card-header bg-secondary text-white py-3">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <h5 class="mb-0 fw-bold">
-                <i class="fas fa-user-plus me-2"></i>Add New Employee
-              </h5>
-              <small class="opacity-75">Fill in the details below</small>
-            </div>
-            <button
-              class="btn btn-sm btn-light rounded-circle p-2"
-              (click)="toggleForm()"
-            >
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
+    <div class="col-12 col-lg-4" *ngIf="isFormVisible">
+      <div class="card shadow-sm sticky-top" style="top: 20px;">
+        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center py-2">
+          <h5 class="mb-0">New Employee</h5>
+          <button class="btn btn-sm btn-light" (click)="toggleForm()">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
 
-        <div class="card-body p-4">
+        <div class="card-body">
           <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
-            <!-- Full Name -->
-            <div class="mb-4">
-              <label for="employeeName" class="form-label fw-semibold">
-                <i class="fas fa-user me-1 text-primary"></i>Full Name
-              </label>
-              <input
-                type="text"
-                class="form-control form-control-lg"
-                id="employeeName"
-                formControlName="employeeName"
-                placeholder="Enter full name"
-                [ngClass]="{
-                  'is-invalid':
-                    f['employeeName'].touched && f['employeeName'].errors
-                }"
-              />
-              <div
-                *ngIf="f['employeeName'].touched && f['employeeName'].errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f['employeeName'].errors?.['required']">
-                  Name is required
+            <div class="mb-3">
+              <label for="employeeName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="employeeName" formControlName="employeeName"
+                [ngClass]="{ 'is-invalid': f['employeeName'].touched && f['employeeName'].errors }">
+              <div *ngIf="f['employeeName'].touched && f['employeeName'].errors" class="invalid-feedback">
+                <div *ngIf="f['employeeName'].errors?.['required']">Name is required</div>
+                <div *ngIf="f['employeeName'].errors?.['minlength']">Minimum 3 characters required</div>
+              </div>
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-md-6">
+                <label for="contactNo" class="form-label">Contact Number</label>
+                <input type="tel" class="form-control" id="contactNo" formControlName="contactNo"
+                  [ngClass]="{ 'is-invalid': f['contactNo'].touched && f['contactNo'].errors }">
+                <div *ngIf="f['contactNo'].touched && f['contactNo'].errors" class="invalid-feedback">
+                  <div *ngIf="f['contactNo'].errors?.['required']">Contact number is required</div>
+                  <div *ngIf="f['contactNo'].errors?.['pattern']">Enter a valid phone number</div>
                 </div>
-                <div *ngIf="f['employeeName'].errors?.['minlength']">
-                  Minimum 3 characters required
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" formControlName="email"
+                  [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].errors }">
+                <div *ngIf="f['email'].touched && f['email'].errors" class="invalid-feedback">
+                  <div *ngIf="f['email'].errors?.['required']">Email is required</div>
+                  <div *ngIf="f['email'].errors?.['email']">Enter a valid email address</div>
                 </div>
               </div>
             </div>
 
-            <!-- Contact and Email Row -->
-            <div class="row g-3 mb-4">
+            <div class="row g-2 mb-3">
               <div class="col-md-6">
-                <label for="contactNo" class="form-label fw-semibold">
-                  <i class="fas fa-phone me-1 text-primary"></i>Contact
-                </label>
-                <input
-                  type="tel"
-                  class="form-control"
-                  id="contactNo"
-                  formControlName="contactNo"
-                  placeholder="Phone number"
-                  [ngClass]="{
-                    'is-invalid':
-                      f['contactNo'].touched && f['contactNo'].errors
-                  }"
-                />
-                <div
-                  *ngIf="f['contactNo'].touched && f['contactNo'].errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f['contactNo'].errors?.['required']">
-                    Contact number is required
-                  </div>
-                  <div *ngIf="f['contactNo'].errors?.['pattern']">
-                    Enter a valid phone number
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label for="email" class="form-label fw-semibold">
-                  <i class="fas fa-envelope me-1 text-primary"></i>Email
-                </label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  formControlName="email"
-                  placeholder="email@example.com"
-                  [ngClass]="{
-                    'is-invalid': f['email'].touched && f['email'].errors
-                  }"
-                />
-                <div
-                  *ngIf="f['email'].touched && f['email'].errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f['email'].errors?.['required']">
-                    Email is required
-                  </div>
-                  <div *ngIf="f['email'].errors?.['email']">
-                    Enter a valid email address
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Gender and Role Row -->
-            <div class="row g-3 mb-4">
-              <div class="col-md-6">
-                <label for="gender" class="form-label fw-semibold">
-                  <i class="fas fa-venus-mars me-1 text-primary"></i>Gender
-                </label>
-                <select
-                  class="form-select"
-                  id="gender"
-                  formControlName="gender"
-                  [ngClass]="{
-                    'is-invalid': f['gender'].touched && f['gender'].errors
-                  }"
-                >
-                  <option value="" disabled selected>Choose...</option>
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" id="gender" formControlName="gender"
+                  [ngClass]="{ 'is-invalid': f['gender'].touched && f['gender'].errors }">
+                  <option value="" disabled selected>Select gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                   <option value="Other">Other</option>
                 </select>
-                <div
-                  *ngIf="f['gender'].touched && f['gender'].errors"
-                  class="invalid-feedback"
-                >
+                <div *ngIf="f['gender'].touched && f['gender'].errors" class="invalid-feedback">
                   Gender is required
                 </div>
               </div>
               <div class="col-md-6">
-                <label for="role" class="form-label fw-semibold">
-                  <i class="fas fa-user-tag me-1 text-primary"></i>Role
-                </label>
-                <select
-                  class="form-select"
-                  id="role"
-                  formControlName="role"
-                  [ngClass]="{
-                    'is-invalid': f['role'].touched && f['role'].errors
-                  }"
-                >
-                  <option value="" disabled selected>Choose...</option>
+                <label for="role" class="form-label">Role</label>
+                <select class="form-select" id="role" formControlName="role"
+                  [ngClass]="{ 'is-invalid': f['role'].touched && f['role'].errors }">
+                  <option value="" disabled selected>Select role</option>
                   <option value="admin">Admin</option>
                   <option value="user">User</option>
                   <option value="employee">Employee</option>
                   <option value="superadmin">SuperAdmin</option>
                 </select>
-                <div
-                  *ngIf="f['role'].touched && f['role'].errors"
-                  class="invalid-feedback"
-                >
+                <div *ngIf="f['role'].touched && f['role'].errors" class="invalid-feedback">
                   Role is required
                 </div>
               </div>
             </div>
 
-            <!-- Department -->
-            <div class="mb-4">
-              <label for="department" class="form-label fw-semibold">
-                <i class="fas fa-building me-1 text-primary"></i>Department
-              </label>
-              <select
-                class="form-select"
-                id="department"
-                formControlName="department"
-                [ngClass]="{
-                  'is-invalid':
-                    f['department'].touched && f['department'].errors
-                }"
-                (change)="onParentDepartmentChange($event)"
-              >
-                <option value="" disabled selected>Select department</option>
-                <option
-                  *ngFor="let dept of parentDepartments"
-                  [value]="dept.departmentName"
-                >
-                  {{ dept.departmentName }}
-                </option>
-              </select>
-              <div
-                *ngIf="f['department'].touched && f['department'].errors"
-                class="invalid-feedback"
-              >
+            <div class="mb-3">
+              <label for="department" class="form-label">Department</label>
+              <input type="text" class="form-control" id="department" formControlName="department"
+                [ngClass]="{ 'is-invalid': f['department'].touched && f['department'].errors }">
+              <div *ngIf="f['department'].touched && f['department'].errors" class="invalid-feedback">
                 Department is required
               </div>
             </div>
 
-            <!-- Sub-Department -->
-            <div class="mb-4">
-              <label for="subDepartment" class="form-label fw-semibold">
-                <i class="fas fa-sitemap me-1 text-primary"></i>Sub-Department
-              </label>
-              <select
-                class="form-select"
-                id="subDepartment"
-                formControlName="subDepartment"
-                [ngClass]="{
-                  'is-invalid':
-                    f['subDepartment'].touched && f['subDepartment'].errors
-                }"
-                [disabled]="
-                  !selectedParentDeptId || childDepartments.length === 0
-                "
-              >
-                <option value="" disabled selected>
-                  Select sub-department
-                </option>
-                <option
-                  *ngFor="let subDept of childDepartments"
-                  [value]="subDept.departmentName"
-                >
-                  {{ subDept.departmentName }}
-                </option>
-              </select>
-              <div class="text-muted small mt-1" *ngIf="!selectedParentDeptId">
-                <i class="fas fa-info-circle me-1"></i>Select a department first
-              </div>
-              <div
-                *ngIf="f['subDepartment'].touched && f['subDepartment'].errors"
-                class="invalid-feedback"
-              >
+            <div class="mb-3">
+              <label for="subDepartment" class="form-label">Sub-Department</label>
+              <input type="text" class="form-control" id="subDepartment" formControlName="subDepartment"
+                [ngClass]="{ 'is-invalid': f['subDepartment'].touched && f['subDepartment'].errors }">
+              <div *ngIf="f['subDepartment'].touched && f['subDepartment'].errors" class="invalid-feedback">
                 Sub-department is required
               </div>
             </div>
 
-            <!-- Password -->
             <div class="mb-4">
-              <label for="password" class="form-label fw-semibold">
-                <i class="fas fa-lock me-1 text-primary"></i>Password
-              </label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                formControlName="password"
-                placeholder="Enter secure password"
-                [ngClass]="{
-                  'is-invalid': f['password'].touched && f['password'].errors
-                }"
-              />
-              <div
-                *ngIf="f['password'].touched && f['password'].errors"
-                class="invalid-feedback"
-              >
-                <div *ngIf="f['password'].errors?.['required']">
-                  Password is required
-                </div>
-                <div *ngIf="f['password'].errors?.['minlength']">
-                  Minimum 6 characters required
-                </div>
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" formControlName="password"
+                [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].errors }">
+              <div *ngIf="f['password'].touched && f['password'].errors" class="invalid-feedback">
+                <div *ngIf="f['password'].errors?.['required']">Password is required</div>
+                <div *ngIf="f['password'].errors?.['minlength']">Minimum 6 characters required</div>
               </div>
             </div>
 
-            <!-- Submit Button -->
-            <button
-              type="submit"
-              class="btn btn-primary btn-lg w-100 shadow-sm"
-              [disabled]="isLoading"
-            >
-              <span
-                *ngIf="isLoading"
-                class="spinner-border spinner-border-sm me-2"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              <i *ngIf="!isLoading" class="fas fa-user-plus me-2"></i>
-              {{ isLoading ? "Adding Employee..." : "Add Employee" }}
+            <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+              {{ isLoading ? 'Adding...' : 'Add Employee' }}
             </button>
           </form>
         </div>

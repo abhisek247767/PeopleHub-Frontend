@@ -14,13 +14,15 @@ _id: any;
 
 export interface IChildDept {
 _id: any;
+name: any;
     childDeptId: number;
     parentDeptId: number;
     departmentName: string;
 }
 
 export interface IEmployee {
-  id: string;
+id: any;
+  _id: string;
   name: string;
   role: string;
   email: string;
