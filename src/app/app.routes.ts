@@ -45,10 +45,10 @@ export const routes: Routes = [
             {path:'dashboard',component:DashboardComponent},
             {path:'employee',component:EmployeeComponent},
             {path:'projects',component:ProjectComponent},
-            {path:'project-employee',component:ProjectEmployeeComponent }
+            {path:'project-employee',component:ProjectEmployeeComponent },
+            {path: 'setting', component: SettingComponent }
         ]
     },
-      { path: 'setting', component: SettingComponent },
 
     { path: '**', component: NotFoundComponent}
 
