@@ -9,12 +9,12 @@ import { ILoginResponse, IRegisterationResponse } from '../model/interface/auth'
 })
 export class AuthService {
 
-  private apiUrl = `${environment.apiUrl}`;  // Ensure this is 'http://127.0.0.1:3000'
+  private apiUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) {}
 
   isAuthenticated(): boolean {
-    return !!sessionStorage.getItem('user'); // You may enhance this later to check session validity
+    return !!sessionStorage.getItem('user');
   }
 
   registration(username: string, email: string, password: string, confirmPassword: string): Observable<IRegisterationResponse> {
@@ -24,7 +24,25 @@ export class AuthService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
-      withCredentials: true // Important: allows cookies (session) to be sent
+      withCredentials: true
+    }).pipe(
+      tap((response: IRegisterationResponse) => {
+        console.log(response.message);
+      })
+    );
+  }
+
+  verifyEmail(email: string, verificationCode: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/verify`, { email, verificationCode }, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true,
+    });
+  }
+
+  resendVerificationCode(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/resend-verification`, { email }, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true,
     });
   }
 
@@ -32,26 +50,38 @@ export class AuthService {
     return this.http.post<ILoginResponse>(`${this.apiUrl}/login`, {
       email, password
     }, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true
     }).pipe(
       tap((response: ILoginResponse) => {
-        // Only store user if needed; do NOT store token if you're using session-based auth
         sessionStorage.setItem('user', JSON.stringify(response.user));
       })
     );
   }
 
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/forgot-password`, { email }, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true,
+    });
+  }
+
+  resetPassword(email: string, resetCode: string, newPassword: string, confirmPassword: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/reset-password`, {
+      email, resetCode, newPassword, confirmPassword
+    }, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true,
+    });
+  }
+
   logout(): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/logout`, {}, {
-      withCredentials: true // Required to clear the session cookie on the server
+      withCredentials: true
     }).pipe(
       tap(() => {
         sessionStorage.removeItem('user');
       })
     );
   }
-
 }
