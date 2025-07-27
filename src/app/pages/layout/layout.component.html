@@ -48,24 +48,47 @@
         </li>
       </ul>
       <!-- Right-aligned section: User name and Log off button -->
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item d-flex align-items-center">
-          <span
-            class="navbar-text me-2 text-dark"
-            style="cursor: pointer"
-            (click)="goToSettings()"
-          >
-            Welcome, {{ userName }}
-          </span>
-          <button
-            class="btn btn-primary btn-sm"
-            type="button"
-            (click)="logout()"
-          >
-            Logout
-          </button>
-        </li>
-      </ul>
+      <!-- Right-aligned section: User name, Theme Toggle and Logout button -->
+<ul class="navbar-nav ms-auto">
+  <!-- Theme Toggle -->
+  <li class="nav-item d-flex align-items-center me-3">
+    <button
+      class="btn btn-link text-decoration-none"
+      (click)="toggleTheme()"
+      [attr.title]="currentTheme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'"
+    >
+     <i
+  class="bi"
+  [ngClass]="{
+    'bi-moon-fill text-dark': currentTheme === 'light',
+    'bi-sun-fill ': currentTheme === 'dark'
+  }"
+  style="font-size: 1.5rem;"
+></i>
+
+    </button>
+  </li>
+
+  <!-- Username and Logout -->
+  <li class="nav-item d-flex align-items-center">
+    <span
+      class="navbar-text me-2 text-dark"
+      [ngClass]="{ 'text-light': currentTheme === 'dark' }"
+      style="cursor: pointer"
+      (click)="goToSettings()"
+    >
+      Welcome, {{ userName }}
+    </span>
+    <button
+      class="btn btn-primary btn-sm"
+      type="button"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </li>
+</ul>
+
     </div>
   </div>
 </nav>

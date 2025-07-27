@@ -1,0 +1,9 @@
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode .navbar {
+  background-color: #343a40 !important;
+}
+
