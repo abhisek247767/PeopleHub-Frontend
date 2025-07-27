@@ -8,7 +8,6 @@ import { ILoginResponse, IRegisterationResponse } from '../model/interface/auth'
   providedIn: 'root'
 })
 export class AuthService {
-
   private apiUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) {}
@@ -76,8 +75,15 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
+    const authToken = sessionStorage.getItem('authToken');
+    if (!authToken) {
+        console.warn('No auth token found, logging out without token.');
+    }
     return this.http.post<any>(`${this.apiUrl}/logout`, {}, {
-      withCredentials: true
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${authToken}`
+        }),
+        withCredentials: true,
     }).pipe(
       tap(() => {
         sessionStorage.removeItem('user');
