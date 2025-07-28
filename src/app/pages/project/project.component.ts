@@ -15,7 +15,8 @@ import { CommonModule } from '@angular/common';
 export class ProjectComponent implements OnInit {
   projectForm!: FormGroup;
   employees: IEmployee[] = [];
-IProject: any;
+  IProject: any;
+  showForm = false;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
@@ -41,8 +42,15 @@ IProject: any;
   submitProject() {
     const projectData: IProject = this.projectForm.value;
     this.http.post(`${environment.apiUrl}/projects`, projectData).subscribe({
-      next: () => alert('Project created successfully'),
+      next: () => {
+        alert('Project created successfully');
+        this.closeForm();
+      },
       error: (err) => console.error('Failed to create project', err),
     });
+  }
+
+  closeForm() {
+    this.showForm = false;
   }
 }
