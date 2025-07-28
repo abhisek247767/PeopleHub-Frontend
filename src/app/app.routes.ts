@@ -17,7 +17,6 @@ import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.com
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 export const routes: Routes = [
-   // {path: 'admin', component: AdminLayoutComponent},
    {
         path: 'admin-dashboard',
         component: AdminLayoutComponent,
@@ -49,7 +48,7 @@ export const routes: Routes = [
             {path: 'setting', component: SettingComponent }
         ]
     },
-
-    { path: '**', component: NotFoundComponent}
+    { path: 'setting', component: SettingComponent },
+    { path: '**', component: NotFoundComponent }
 
 ];
