@@ -16,11 +16,8 @@ export class AuthService {
     return !!sessionStorage.getItem('user');
   }
 
-  registration(username: string, email: string, password: string, confirmPassword: string): Observable<IRegisterationResponse> {
-    return this.http.post<IRegisterationResponse>(`${this.apiUrl}/signup`, { username, email, password, confirmPassword }, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
+  registration(formData: FormData): Observable<IRegisterationResponse> {
+    return this.http.post<IRegisterationResponse>(`${this.apiUrl}/signup`, formData, {
       withCredentials: true,
     }).pipe(
       tap((response: IRegisterationResponse) => {

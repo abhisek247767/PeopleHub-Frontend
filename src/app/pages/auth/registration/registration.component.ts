@@ -17,6 +17,7 @@ export class RegistrationComponent {
   isConfirmPasswordVisible: boolean = false;
   errorMessage: string = '';
   successMessage: string = '';
+  profilePictureFile: File | null = null;
 
   constructor(
     private authService: AuthService,
@@ -57,11 +58,23 @@ export class RegistrationComponent {
     this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
   }
 
+  onProfilePictureChange(event: any): void {
+    const file = event.target.files[0];
+    this.profilePictureFile = file ? file : null;
+  }
+
   onRegister(): void {
     if (this.useForm.valid) {
       const { username, email, password, confirmPassword } = this.useForm.value;
-
-      this.authService.registration(username, email, password, confirmPassword).subscribe({
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('email', email);
+      formData.append('password', password);
+      formData.append('confirmPassword', confirmPassword);
+      if (this.profilePictureFile) {
+        formData.append('profilePicture', this.profilePictureFile);
+      }
+      this.authService.registration(formData).subscribe({
         next: (response) => {
           this.successMessage = response.message;
           this.toastr.success(response.message, 'Success');
