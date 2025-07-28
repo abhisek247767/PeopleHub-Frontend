@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../auth/service/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, CommonModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
 })
@@ -14,6 +15,8 @@ export class LayoutComponent {
   userName: string | null = null;
   //router = inject(Router);
   errorMessage: string = '';
+  isDarkMode: boolean = false;
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -21,20 +24,39 @@ export class LayoutComponent {
   ) {}
 
   ngOnInit(): void {
+    // User info logic
     const storedUserData = sessionStorage.getItem('user');
-
     if (storedUserData) {
       this.userDetails = JSON.parse(storedUserData);
-      // console.log(this.userDetails.username);
       this.userName = this.userDetails ? this.userDetails.username : null;
     } else {
       this.errorMessage = 'No user data';
     }
+    // Theme logic
+    const theme = localStorage.getItem('theme');
+    this.isDarkMode = theme === 'dark';
+    console.log('ngOnInit: theme from localStorage =', theme, ', isDarkMode =', this.isDarkMode);
+    this.applyTheme();
   }
-  goToSettings() {
-  this.router.navigate(['/setting']);
-}
 
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+    console.log('toggleDarkMode: isDarkMode =', this.isDarkMode);
+    this.applyTheme();
+  }
+
+  applyTheme() {
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
+
+  goToSettings() {
+    this.router.navigate(['/setting']);
+  }
 
   logout() {
     console.log('click on logut');

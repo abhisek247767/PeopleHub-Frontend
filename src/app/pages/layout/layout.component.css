@@ -1,0 +1,67 @@
+/* Mode toggle button styles */
+.mode-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background: transparent;
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 1.5rem;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+}
+.mode-toggle-btn:hover {
+  border-color: #888;
+  background: #f0f0f0;
+}
+.mode-toggle-btn:active {
+  background: #e0e0e0;
+}
+.mode-toggle-btn .mode-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #222;
+}
+.mode-toggle-btn .moon-icon {
+  color: #222;
+}
+.mode-toggle-btn .sun-icon {
+  color: #FFD600;
+}
+
+/* Dark mode adaptation for toggle and navbar */
+.dark-theme .mode-toggle-btn {
+  border-color: #FFD600;
+  background: #23232e;
+  color: #FFD600;
+}
+.dark-theme .mode-toggle-btn:hover {
+  background: #2c2f3a;
+  border-color: #fff;
+}
+.dark-theme .navbar {
+  background: #181824 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.dark-theme .navbar .nav-link,
+.dark-theme .navbar .navbar-text {
+  color: #fff !important;
+}
+.dark-theme .navbar .nav-link.active {
+  color: #FFD600 !important;
+}
+.dark-theme .mode-toggle-btn .mode-icon {
+  color: #FFD600;
+}
+.dark-theme .mode-toggle-btn .moon-icon {
+  color: #fff;
+}
+.dark-theme .mode-toggle-btn .sun-icon {
+  color: #FFD600;
+}

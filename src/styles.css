@@ -11,112 +11,112 @@
 }
 
 /* Base Dark Mode */
-.dark-mode {
+.dark-theme {
   background-color: #1e1e2f; /* Slightly bluish dark */
   color: #ffffff !important;
 }
 
 /* Navbar */
-.dark-mode .navbar {
+.dark-theme .navbar {
   background-color: #2c2f3a !important;
 }
 
-.dark-mode .nav-link {
+.dark-theme .nav-link {
   color: #ffffff !important;
 }
 
-.dark-mode .nav-link:hover {
+.dark-theme .nav-link:hover {
   color: #ffffff !important;
 }
 
 /* Buttons */
-.dark-mode .btn-primary {
+.dark-theme .btn-primary {
   background-color: #4a4e69;
   border-color: #4a4e69;
   color: #fff;
 }
 
-.dark-mode .btn-primary:hover {
+.dark-theme .btn-primary:hover {
   background-color: #5e6280;
   border-color: #5e6280;
 }
 
 /* Forms and Inputs */
-.dark-mode input,
-.dark-mode select,
-.dark-mode textarea {
+.dark-theme input,
+.dark-theme select,
+.dark-theme textarea {
   background-color: #3f3f53;
   color: #ffffff;
   border: 1px solid #555;
 }
 
-.dark-mode input::placeholder,
-.dark-mode textarea::placeholder {
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder {
   color: #aaaaaa;
 }
 
 /* Cards */
-.dark-mode .card {
+.dark-theme .card {
   background-color: #3b3b53;
   color: #ffffff;
   border: 1px solid #444;
 }
 
 /* Table */
-.dark-mode table {
+.dark-theme table {
   color: #ffffff;
   background-color: #47475f;
 }
 
-.dark-mode th,
-.dark-mode td {
+.dark-theme th,
+.dark-theme td {
   border-color: #444;
 }
 
 /* Tooltip / Help Text */
-.dark-mode .invalid-feedback {
+.dark-theme .invalid-feedback {
   color: #ff8080;
 }
 
 /* Scrollbar (optional) */
-.dark-mode ::-webkit-scrollbar {
+.dark-theme ::-webkit-scrollbar {
   width: 8px;
 }
 
-.dark-mode ::-webkit-scrollbar-thumb {
+.dark-theme ::-webkit-scrollbar-thumb {
   background-color: #555;
   border-radius: 4px;
 }
 
-.dark-mode ::-webkit-scrollbar-thumb:hover {
+.dark-theme ::-webkit-scrollbar-thumb:hover {
   background-color: #777;
 }
 
 /* Bootstrap text classes override */
-.dark-mode .text-dark {
+.dark-theme .text-dark {
   color: #ffffff !important;
 }
 
-.dark-mode .navbar-text {
+.dark-theme .navbar-text {
   color: #ffffff !important;
 }
 
 /* Label, Paragraphs, Headings */
-.dark-mode label,
-.dark-mode p,
-.dark-mode h1,
-.dark-mode h2,
-.dark-mode h3,
-.dark-mode h4,
-.dark-mode h5,
-.dark-mode h6,
-.dark-mode span,
-.dark-mode strong,
-.dark-mode small {
+.dark-theme label,
+.dark-theme p,
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme h4,
+.dark-theme h5,
+.dark-theme h6,
+.dark-theme span,
+.dark-theme strong,
+.dark-theme small {
   color: #ffffff !important;
 }
 
 /* Dark mode yellow sun icon */
-body.dark-mode .bi-sun-fill {
+body.dark-theme .bi-sun-fill {
   color: #ffc107 !important; /* Bootstrap's warning/yellow */
 }

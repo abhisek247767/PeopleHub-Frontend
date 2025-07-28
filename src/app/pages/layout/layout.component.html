@@ -4,7 +4,7 @@
     <!-- Logo -->
     <a class="navbar-brand" routerLink="/dashboard">
       <img
-        src="https://via.placeholder.com/50"
+        src="assets/img/brand/light.svg"
         alt="Logo"
         width="30"
         height="30"
@@ -50,6 +50,37 @@
       <!-- Right-aligned section: User name and Log off button -->
       <ul class="navbar-nav ms-auto">
         <li class="nav-item d-flex align-items-center">
+          <!-- Dark/Light Mode Toggle -->
+          <button
+            class="mode-toggle-btn me-3"
+            type="button"
+            [attr.aria-label]="isDarkMode ? 'Enable Light Mode' : 'Enable Dark Mode'"
+            [attr.title]="isDarkMode ? 'Enable Light Mode' : 'Enable Dark Mode'"
+            (click)="toggleDarkMode()"
+          >
+            <span *ngIf="!isDarkMode" class="mode-icon moon-icon">
+              <!-- SVG Moon Icon -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 12.79A9 9 0 0111.21 3a7 7 0 100 14 9 9 0 009.79-4.21z" stroke="#222" stroke-width="2" fill="#222"/>
+              </svg>
+            </span>
+            <span *ngIf="isDarkMode" class="mode-icon sun-icon">
+              <!-- SVG Sun Icon -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="5" fill="#FFD600"/>
+                <g stroke="#FFD600" stroke-width="2">
+                  <line x1="12" y1="1" x2="12" y2="4"/>
+                  <line x1="12" y1="20" x2="12" y2="23"/>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                  <line x1="1" y1="12" x2="4" y2="12"/>
+                  <line x1="20" y1="12" x2="23" y2="12"/>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </g>
+              </svg>
+            </span>
+          </button>
           <span
             class="navbar-text me-2 text-dark"
             style="cursor: pointer"
