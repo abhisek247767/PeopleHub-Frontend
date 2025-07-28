@@ -1,19 +1,27 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common'; // ✅ Required for ngIf, ngClass, etc.
 import { AuthService } from '../auth/service/auth.service';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, RouterLink],
+  standalone: true, // ✅ Ensure it's a standalone component
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink
+  ],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css',
+  styleUrls: ['./layout.component.css'], // ✅ Corrected typo: styleUrl → styleUrls
 })
 export class LayoutComponent {
   private userDetails: any;
   userName: string | null = null;
-  //router = inject(Router);
   errorMessage: string = '';
+
+  currentTheme: string = 'light'; // Dark/Light Theme
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -21,23 +29,43 @@ export class LayoutComponent {
   ) {}
 
   ngOnInit(): void {
-    const storedUserData = sessionStorage.getItem('user');
+    // Theme setup
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    this.currentTheme = savedTheme;
+    document.body.classList.toggle('dark-mode', savedTheme === 'dark');
 
+    // User setup
+    const storedUserData = sessionStorage.getItem('user');
     if (storedUserData) {
       this.userDetails = JSON.parse(storedUserData);
-      // console.log(this.userDetails.username);
-      this.userName = this.userDetails ? this.userDetails.username : null;
+      this.userName = this.userDetails?.username ?? null;
     } else {
       this.errorMessage = 'No user data';
     }
   }
-  goToSettings() {
-  this.router.navigate(['/setting']);
+
+  // Toggle Dark/Light Mode
+  toggleTheme(): void {
+  this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+  localStorage.setItem('theme', this.currentTheme);
+
+  // Toggle the dark-mode class on the body
+  if (this.currentTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
 }
 
 
+  // Navigate to Settings
+  goToSettings() {
+    this.router.navigate(['/setting']);
+  }
+
+  // Logout logic
   logout() {
-    console.log('click on logut');
+    console.log('click on logout');
     this.authService.logout().subscribe({
       next: () => {
         sessionStorage.removeItem('authToken');
