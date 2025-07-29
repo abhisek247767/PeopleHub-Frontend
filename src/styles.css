@@ -11,112 +11,120 @@
 }
 
 /* Base Dark Mode */
-.dark-theme {
+.dark-mode {
   background-color: #1e1e2f; /* Slightly bluish dark */
-  color: #ffffff !important;
+  color: #e0e0e0; /* Light grey for readability */
 }
 
 /* Navbar */
-.dark-theme .navbar {
+.dark-mode .navbar {
   background-color: #2c2f3a !important;
 }
 
-.dark-theme .nav-link {
-  color: #ffffff !important;
+.dark-mode .nav-link {
+  color: #e0e0e0 !important;
 }
 
-.dark-theme .nav-link:hover {
+.dark-mode .nav-link:hover {
   color: #ffffff !important;
 }
 
 /* Buttons */
-.dark-theme .btn-primary {
+.dark-mode .btn-primary {
   background-color: #4a4e69;
   border-color: #4a4e69;
   color: #fff;
 }
 
-.dark-theme .btn-primary:hover {
+.dark-mode .btn-primary:hover {
   background-color: #5e6280;
   border-color: #5e6280;
 }
 
 /* Forms and Inputs */
-.dark-theme input,
-.dark-theme select,
-.dark-theme textarea {
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea {
   background-color: #3f3f53;
   color: #ffffff;
   border: 1px solid #555;
 }
 
-.dark-theme input::placeholder,
-.dark-theme textarea::placeholder {
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
   color: #aaaaaa;
 }
 
 /* Cards */
-.dark-theme .card {
+.dark-mode .card {
   background-color: #3b3b53;
-  color: #ffffff;
+  color: #e0e0e0;
   border: 1px solid #444;
 }
 
 /* Table */
-.dark-theme table {
-  color: #ffffff;
+.dark-mode table {
+  color: #e0e0e0;
   background-color: #47475f;
 }
 
-.dark-theme th,
-.dark-theme td {
+.dark-mode th,
+.dark-mode td {
   border-color: #444;
 }
 
 /* Tooltip / Help Text */
-.dark-theme .invalid-feedback {
+.dark-mode .invalid-feedback {
   color: #ff8080;
 }
 
 /* Scrollbar (optional) */
-.dark-theme ::-webkit-scrollbar {
+.dark-mode ::-webkit-scrollbar {
   width: 8px;
 }
 
-.dark-theme ::-webkit-scrollbar-thumb {
+.dark-mode ::-webkit-scrollbar-thumb {
   background-color: #555;
   border-radius: 4px;
 }
 
-.dark-theme ::-webkit-scrollbar-thumb:hover {
+.dark-mode ::-webkit-scrollbar-thumb:hover {
   background-color: #777;
 }
-
-/* Bootstrap text classes override */
-.dark-theme .text-dark {
+/* DARK MODE: Make all text white */
+.dark-mode {
   color: #ffffff !important;
 }
 
-.dark-theme .navbar-text {
+/* Target specific Bootstrap text classes */
+.dark-mode .text-dark {
+  color: #ffffff !important;
+}
+
+.dark-mode .navbar-text {
+  color: #ffffff !important;
+}
+
+.dark-mode .nav-link {
   color: #ffffff !important;
 }
 
 /* Label, Paragraphs, Headings */
-.dark-theme label,
-.dark-theme p,
-.dark-theme h1,
-.dark-theme h2,
-.dark-theme h3,
-.dark-theme h4,
-.dark-theme h5,
-.dark-theme h6,
-.dark-theme span,
-.dark-theme strong,
-.dark-theme small {
+.dark-mode label,
+.dark-mode p,
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6,
+.dark-mode span,
+.dark-mode strong,
+.dark-mode small {
   color: #ffffff !important;
 }
-
 /* Dark mode yellow sun icon */
-body.dark-theme .bi-sun-fill {
+body.dark-mode .bi-sun-fill {
   color: #ffc107 !important; /* Bootstrap's warning/yellow */
 }
+

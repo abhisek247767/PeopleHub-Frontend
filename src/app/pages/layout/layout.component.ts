@@ -1,21 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { AuthService } from '../auth/service/auth.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../auth/service/auth.service';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, RouterLink, CommonModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink
+  ],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css',
+  styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent {
   private userDetails: any;
   userName: string | null = null;
-  //router = inject(Router);
   errorMessage: string = '';
-  isDarkMode: boolean = false;
+  currentTheme: string = 'light'; // Dark/Light Theme
 
   constructor(
     private http: HttpClient,
@@ -24,33 +28,29 @@ export class LayoutComponent {
   ) {}
 
   ngOnInit(): void {
-    // User info logic
+    // Theme setup
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    this.currentTheme = savedTheme;
+    document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+
+    // User setup
     const storedUserData = sessionStorage.getItem('user');
     if (storedUserData) {
       this.userDetails = JSON.parse(storedUserData);
-      this.userName = this.userDetails ? this.userDetails.username : null;
+      this.userName = this.userDetails?.username ?? null;
     } else {
       this.errorMessage = 'No user data';
     }
-    // Theme logic
-    const theme = localStorage.getItem('theme');
-    this.isDarkMode = theme === 'dark';
-    console.log('ngOnInit: theme from localStorage =', theme, ', isDarkMode =', this.isDarkMode);
-    this.applyTheme();
   }
 
-  toggleDarkMode() {
-    this.isDarkMode = !this.isDarkMode;
-    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
-    console.log('toggleDarkMode: isDarkMode =', this.isDarkMode);
-    this.applyTheme();
-  }
-
-  applyTheme() {
-    if (this.isDarkMode) {
-      document.body.classList.add('dark-theme');
+  // Toggle Dark/Light Mode
+  toggleTheme(): void {
+    this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', this.currentTheme);
+    if (this.currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
     } else {
-      document.body.classList.remove('dark-theme');
+      document.body.classList.remove('dark-mode');
     }
   }
 
@@ -58,8 +58,9 @@ export class LayoutComponent {
     this.router.navigate(['/setting']);
   }
 
+  // Logout logic
   logout() {
-    console.log('click on logut');
+    console.log('click on logout');
     this.authService.logout().subscribe({
       next: () => {
         sessionStorage.removeItem('authToken');

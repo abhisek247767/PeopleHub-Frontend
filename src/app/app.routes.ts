@@ -12,9 +12,9 @@ import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.compon
 import { AdminLayoutComponent } from './pages/admin/admin-layout/admin-layout.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { SettingComponent } from './settings/settings.component';
-// import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
-// import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
-// import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 export const routes: Routes = [
    {
@@ -31,20 +31,20 @@ export const routes: Routes = [
         children:[
             {path: 'login',component: LoginComponent},
             {path: 'registration', component: RegistrationComponent},
-            // {path: 'forgot-password', component: ForgotPasswordComponent},
-            // {path: 'verify-email', component: VerifyEmailComponent},
-            // {path: 'reset-password', component: ResetPasswordComponent},
+            {path: 'forgot-password', component: ForgotPasswordComponent},
+            {path: 'verify-email', component: VerifyEmailComponent},
+            {path: 'reset-password', component: ResetPasswordComponent},
         ]
     },
     {
         path:'',
         component:LayoutComponent,
-        canActivate: [authGuard],
         children:[
             {path:'dashboard',component:DashboardComponent},
             {path:'employee',component:EmployeeComponent},
             {path:'projects',component:ProjectComponent},
-            {path:'project-employee',component:ProjectEmployeeComponent }
+            {path:'project-employee',component:ProjectEmployeeComponent },
+            {path: 'setting', component: SettingComponent }
         ]
     },
     { path: 'setting', component: SettingComponent },
