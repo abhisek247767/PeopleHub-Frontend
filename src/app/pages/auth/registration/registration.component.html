@@ -98,8 +98,13 @@
             </div>
           </div>
         </div>
-        <div class="d-grid">
-          <button type="submit" [disabled]="useForm.invalid" class="btn btn-gray-800">Register</button>
+        <div class="d-grid mb-4">
+          <button type="submit" [disabled]="useForm.invalid" class="btn btn-primary btn-lg py-3 fw-semibold"
+                  [ngClass]="{'disabled': useForm.invalid}">
+            <span *ngIf="!useForm.pending">Create Account</span>
+            <span *ngIf="useForm.pending" class="spinner-border spinner-border-sm me-2" role="status"></span>
+            <span *ngIf="useForm.pending">Creating Account...</span>
+          </button>
         </div>
       </form>
       <div class="d-flex justify-content-center align-items-center mt-4">
