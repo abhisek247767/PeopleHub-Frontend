@@ -1,67 +1,80 @@
-<div class="row justify-content-center form-bg-image">
-  <div class="col-12 d-flex align-items-center justify-content-center">
-    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-      <div class="text-center text-md-center mb-4 mt-md-0">
-        <h1 class="mb-0 h3">Login into HRMS</h1>
-        <div *ngIf="errorMessage" class="text-danger fw-bold p-2 text-center">
-          {{ errorMessage }}
+<div class="login-container d-flex align-items-center justify-content-center">
+  <div class="login-card">
+    <div class="bg-white shadow-lg border-0 rounded-lg p-5 w-100" style="max-width: 500px; min-width: 400px;">
+      <div class="text-center mb-5">
+        <div class="mb-3">
+          <svg class="icon icon-xl text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h1 class="h3 mb-2 fw-bold text-gray-900">Welcome Back</h1>
+        <p class="text-gray-600 mb-0">Sign in to your HRMS account</p>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3 mb-0">
+          <i class="fas fa-exclamation-triangle me-2"></i>{{ errorMessage }}
         </div>
       </div>
-      <form class="mt-2" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <div class="form-group mb-4">
-          <label for="email">Your Email</label>
+          <label for="email" class="form-label fw-semibold text-gray-800 mb-2">Email Address</label>
           <div class="input-group">
-            <span class="input-group-text">
-              <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <span class="input-group-text border-0 bg-gray-50">
+              <svg class="icon icon-xs text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
               </svg>
             </span>
-            <input type="email" class="form-control" id="email" formControlName="email"
+            <input type="email" class="form-control border-start-0 border-end-0 bg-gray-50 py-3" id="email" formControlName="email"
                    [ngClass]="{'is-invalid': loginForm.controls['email'].touched && loginForm.controls['email'].invalid}"
-                   placeholder="example@company.com" autofocus required>
-            <div *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid" class="invalid-feedback">
-              <div *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</div>
-              <div *ngIf="loginForm.controls['email'].errors?.['email']">Please enter a valid email address.</div>
-              <div *ngIf="loginForm.controls['email'].errors?.['pattern']">Please enter a valid email format.</div>
-            </div>
+                   placeholder="Enter your email address" autofocus required>
+          </div>
+          <div *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid" class="invalid-feedback d-block mt-2">
+            <div *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</div>
+            <div *ngIf="loginForm.controls['email'].errors?.['email']">Please enter a valid email address.</div>
+            <div *ngIf="loginForm.controls['email'].errors?.['pattern']">Please enter a valid email format.</div>
           </div>
         </div>
         <div class="form-group mb-4">
-          <label for="password">Your Password</label>
+          <label for="password" class="form-label fw-semibold text-gray-800 mb-2">Password</label>
           <div class="input-group">
-            <span class="input-group-text">
-              <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <span class="input-group-text border-0 bg-gray-50">
+              <svg class="icon icon-xs text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
               </svg>
             </span>
-            <input [type]="passwordVisible ? 'text' : 'password'" class="form-control" id="password" formControlName="password"
+            <input [type]="passwordVisible ? 'text' : 'password'" class="form-control border-start-0 bg-gray-50 py-3" id="password" formControlName="password"
                    [ngClass]="{'is-invalid': loginForm.controls['password'].touched && loginForm.controls['password'].invalid}"
-                   placeholder="Password" required>
-            <span class="input-group-text">
-              <button type="button" class="btn btn-outline-primary" (click)="togglePasswordVisibility()">
-                <i class="fa" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                   placeholder="Enter your password" required>
+            <span class="input-group-text border-0 bg-gray-50">
+              <button type="button" class="btn btn-link p-0 text-decoration-none" (click)="togglePasswordVisibility()">
+                <i class="fa text-gray-500" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
               </button>
             </span>
-            <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid" class="invalid-feedback">
-              <div *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</div>
-              <div *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters long.</div>
-            </div>
+          </div>
+          <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid" class="invalid-feedback d-block mt-2">
+            <div *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</div>
+            <div *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters long.</div>
           </div>
         </div>
-        <div class="d-flex justify-content-between align-items-top mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="remember">
-            <label class="form-check-label mb-0" for="remember">Remember me</label>
+            <label class="form-check-label text-gray-600" for="remember">Remember me</label>
           </div>
-          <div><a routerLink="/forgot-password" class="small text-right">Forgot password?</a></div>
+          <div><a routerLink="/forgot-password" class="text-primary text-decoration-none fw-semibold">Forgot password?</a></div>
         </div>
-        <div class="d-grid">
-          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-gray-800">Sign in</button>
+        <div class="d-grid mb-4">
+          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary btn-lg py-3 fw-semibold"
+                  [ngClass]="{'disabled': loginForm.invalid}">
+            <span *ngIf="!loginForm.pending">Sign In</span>
+            <span *ngIf="loginForm.pending" class="spinner-border spinner-border-sm me-2" role="status"></span>
+            <span *ngIf="loginForm.pending">Signing In...</span>
+          </button>
         </div>
       </form>
-      <div class="d-flex justify-content-center align-items-center mt-4">
-        <span class="fw正常">Not registered? <a routerLink="/registration" class="fw-bold">Create account</a></span>
+      <div class="text-center">
+        <span class="text-gray-600">Don't have an account?
+          <a routerLink="/registration" class="text-primary text-decoration-none fw-semibold">Create one</a>
+        </span>
       </div>
     </div>
   </div>
