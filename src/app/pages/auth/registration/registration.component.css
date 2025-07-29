@@ -1,26 +1,125 @@
-.parent {
-    height: 100%;
+.login-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
 }
 
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+    opacity: 0.3;
 }
 
 .login-card {
-    animation: fadeIn 0.8s ease-in-out;
+    position: relative;
+    z-index: 1;
+    animation: slideInUp 0.6s ease-out;
 }
 
-    
-@keyframes fadeIn {
+.login-card .bg-white {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.icon-xl {
+    width: 3rem;
+    height: 3rem;
+}
+
+.form-control {
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.input-group-text {
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus + .input-group-text,
+.form-control:focus ~ .input-group-text {
+    border-color: #667eea;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
+}
+
+@keyframes slideInUp {
     0% {
-        transform: scale(0.9);
+        transform: translateY(30px);
         opacity: 0;
     }
     100% {
-        transform: scale(1);
+        transform: translateY(0);
         opacity: 1;
+    }
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    border: none;
+    color: white;
+    border-radius: 0.5rem;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+    border: none;
+    color: white;
+    border-radius: 0.5rem;
+}
+
+/* Custom checkbox styling */
+.form-check-input:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+/* Links styling */
+a {
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #5a67d8 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .login-card .bg-white {
+        margin: 1rem;
+        min-width: auto !important;
     }
 }
