@@ -1,13 +1,19 @@
-<div class="row justify-content-center form-bg-image">
-  <div class="col-12 d-flex align-items-center justify-content-center">
-    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-      <div class="text-center text-md-center mb-4 mt-md-0">
-        <h1 class="mb-0 h3">Create an Account</h1>
-        <div *ngIf="errorMessage" class="text-danger fw-bold p-2 text-center">
-          {{ errorMessage }}
+<div class="login-container d-flex align-items-center justify-content-center">
+  <div class="login-card">
+    <div class="bg-white shadow-lg border-0 rounded-lg p-5 w-100" style="max-width: 500px; min-width: 400px;">
+      <div class="text-center mb-5">
+        <div class="mb-3">
+          <svg class="icon icon-xl text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
+          </svg>
         </div>
-        <div *ngIf="successMessage" class="text-success fw-bold p-2 text-center">
-          {{ successMessage }}
+        <h1 class="h3 mb-2 fw-bold text-gray-900">Create Account</h1>
+        <p class="text-gray-600 mb-0">Join our PeopleHub platform today</p>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3 mb-0">
+          <i class="fas fa-exclamation-triangle me-2"></i>{{ errorMessage }}
+        </div>
+        <div *ngIf="successMessage" class="alert alert-success mt-3 mb-0">
+          <i class="fas fa-check-circle me-2"></i>{{ successMessage }}
         </div>
       </div>
       <form class="mt-2" [formGroup]="useForm" (ngSubmit)="onRegister()">
@@ -92,12 +98,19 @@
             </div>
           </div>
         </div>
-        <div class="d-grid">
-          <button type="submit" [disabled]="useForm.invalid" class="btn btn-gray-800">Register</button>
+        <div class="d-grid mb-4">
+          <button type="submit" [disabled]="useForm.invalid" class="btn btn-primary btn-lg py-3 fw-semibold"
+                  [ngClass]="{'disabled': useForm.invalid}">
+            <span *ngIf="!useForm.pending">Create Account</span>
+            <span *ngIf="useForm.pending" class="spinner-border spinner-border-sm me-2" role="status"></span>
+            <span *ngIf="useForm.pending">Creating Account...</span>
+          </button>
         </div>
       </form>
-      <div class="d-flex justify-content-center align-items-center mt-4">
-        <span class="fw-normal">Already have an account? <a routerLink="/login" class="fw-bold">Login</a></span>
+      <div class="text-center">
+        <span class="text-gray-600">Already have an account?
+          <a routerLink="/login" class="text-primary text-decoration-none fw-semibold">Sign in</a>
+        </span>
       </div>
     </div>
   </div>
