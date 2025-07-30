@@ -1,25 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common'; // ✅ Required for ngIf, ngClass, etc.
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth/service/auth.service';
 
 @Component({
   selector: 'app-layout',
-  standalone: true, // ✅ Ensure it's a standalone component
+  standalone: true,
   imports: [
     CommonModule,
     RouterOutlet,
     RouterLink
   ],
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css'], // ✅ Corrected typo: styleUrl → styleUrls
+  styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent {
   private userDetails: any;
   userName: string | null = null;
   errorMessage: string = '';
-
   currentTheme: string = 'light'; // Dark/Light Theme
   get logoPath(): string {
     return this.currentTheme === 'dark'
@@ -51,19 +50,15 @@ export class LayoutComponent {
 
   // Toggle Dark/Light Mode
   toggleTheme(): void {
-  this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-  localStorage.setItem('theme', this.currentTheme);
-
-  // Toggle the dark-mode class on the body
-  if (this.currentTheme === 'dark') {
-    document.body.classList.add('dark-mode');
-  } else {
-    document.body.classList.remove('dark-mode');
+    this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', this.currentTheme);
+    if (this.currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
   }
-}
 
-
-  // Navigate to Settings
   goToSettings() {
     this.router.navigate(['/setting']);
   }
