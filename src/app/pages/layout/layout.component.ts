@@ -21,6 +21,11 @@ export class LayoutComponent {
   errorMessage: string = '';
 
   currentTheme: string = 'light'; // Dark/Light Theme
+  get logoPath(): string {
+    return this.currentTheme === 'dark'
+      ? 'assets/img/WhatsApp Image 2025-07-30 at 6.41.50 PM.jpeg'
+      : 'assets/img/Untitled_design.png';
+  }
 
   constructor(
     private http: HttpClient,
