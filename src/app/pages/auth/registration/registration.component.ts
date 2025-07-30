@@ -17,7 +17,6 @@ export class RegistrationComponent {
   isConfirmPasswordVisible: boolean = false;
   errorMessage: string = '';
   successMessage: string = '';
-  profilePictureFile: File | null = null;
 
   constructor(
     private authService: AuthService,
@@ -58,23 +57,11 @@ export class RegistrationComponent {
     this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
   }
 
-  onProfilePictureChange(event: any): void {
-    const file = event.target.files[0];
-    this.profilePictureFile = file ? file : null;
-  }
 
   onRegister(): void {
     if (this.useForm.valid) {
-      const { username, email, password, confirmPassword } = this.useForm.value;
-      const formData = new FormData();
-      formData.append('username', username);
-      formData.append('email', email);
-      formData.append('password', password);
-      formData.append('confirmPassword', confirmPassword);
-      if (this.profilePictureFile) {
-        formData.append('profilePicture', this.profilePictureFile);
-      }
-      this.authService.registration(formData).subscribe({
+      const userData = this.useForm.value;
+      this.authService.registration(userData).subscribe({
         next: (response) => {
           this.successMessage = response.message;
           this.toastr.success(response.message, 'Success');
@@ -86,7 +73,7 @@ export class RegistrationComponent {
             this.errorMessage = 'User already exists but is not verified. Please verify your email.';
             this.toastr.warning(this.errorMessage, 'Verification Required');
             // Store email in sessionStorage to prefill verification form
-            sessionStorage.setItem('unverifiedEmail', email);
+            sessionStorage.setItem('unverifiedEmail', userData.email);
             this.router.navigateByUrl('/verify-email');
           } else {
             this.errorMessage = error.error?.message ||
