@@ -1,41 +1,90 @@
-<div class="container mt-4">
-  <h4>User Settings</h4>
-  <form (ngSubmit)="updateUser()">
-    <div class="mb-3">
-      <label for="username" class="form-label">Username</label>
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        [(ngModel)]="userData.username"
-        name="username"
-        required
-      />
+<div class="container-fluid px-3 px-md-4 mt-4">
+  <div class="text-center mb-4">
+    <h4 class="mb-3">User Settings</h4>
+    <!-- Profile Picture Section - Centered below title -->
+    <div class="d-flex justify-content-center mb-4">
+      <div class="profile-picture-container">
+        <div *ngIf="userData.profilePictureUrl; else noProfilePic">
+          <img
+            [src]="userData.profilePictureUrl"
+            alt="Profile Picture"
+            class="rounded-circle profile-img"
+          />
+        </div>
+        <ng-template #noProfilePic>
+          <div class="rounded-circle profile-img placeholder-img d-flex align-items-center justify-content-center">
+            <i class="fas fa-user fa-2x text-muted"></i>
+          </div>
+        </ng-template>
+      </div>
     </div>
+  </div>
 
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        [(ngModel)]="userData.email"
-        name="email"
-        readonly
-      />
+  <div class="row justify-content-center">
+    <!-- Form Section -->
+    <div class="col-12 col-lg-8 col-xl-6">
+      <form (ngSubmit)="updateUser()" class="needs-validation" novalidate>
+        <div class="row g-3">
+          <!-- Username -->
+          <div class="col-12 col-md-6">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              [(ngModel)]="userData.username"
+              name="username"
+              required
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="col-12 col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              [(ngModel)]="userData.email"
+              name="email"
+              readonly
+            />
+          </div>
+
+          <!-- Password -->
+          <div class="col-12 col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              [(ngModel)]="userData.password"
+              name="password"
+              placeholder="Enter new password"
+            />
+          </div>
+
+          <!-- Profile Picture Upload -->
+          <div class="col-12 col-md-6">
+            <label for="profilePicture" class="form-label">Profile Picture</label>
+            <input
+              type="file"
+              class="form-control"
+              id="profilePicture"
+              (change)="onProfilePictureChange($event)"
+            />
+          </div>
+
+          <!-- Update Button -->
+          <div class="col-12">
+            <div class="d-grid d-md-block text-center">
+              <button type="submit" class="btn btn-warning px-4 py-2">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        [(ngModel)]="userData.password"
-        name="password"
-      />
-    </div>
-
-    <button type="submit" class="btn btn-warning">Update</button>
-  </form>
+  </div>
 </div>

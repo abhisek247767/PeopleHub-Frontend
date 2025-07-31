@@ -4,6 +4,13 @@ import { environment } from '../../../environments/environment';
 import { Observable, tap } from 'rxjs';
 import { ILoginResponse, IRegisterationResponse } from '../model/interface/auth';
 
+interface RegistrationData {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,11 +23,8 @@ export class AuthService {
     return !!sessionStorage.getItem('user');
   }
 
-  registration(username: string, email: string, password: string, confirmPassword: string): Observable<IRegisterationResponse> {
-    return this.http.post<IRegisterationResponse>(`${this.apiUrl}/signup`, { username, email, password, confirmPassword }, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
+  registration(data: RegistrationData): Observable<IRegisterationResponse> {
+    return this.http.post<IRegisterationResponse>(`${this.apiUrl}/signup`, data, {
       withCredentials: true,
     }).pipe(
       tap((response: IRegisterationResponse) => {
