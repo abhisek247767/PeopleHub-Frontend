@@ -66,6 +66,15 @@ Want to explore the backend part of this project? Checkout:
 </p>
 
 ---
+
+### ✅ Prerequisites
+
+- [Node.js](https://nodejs.org/) (v16 or higher recommended)
+- [Angular CLI](https://angular.io/cli) (v16+)
+- [Git](https://git-scm.com/)
+
+---
+
 ## ⚙️ Setup Process
 
 ```bash
@@ -78,18 +87,22 @@ cd PeopleHub-Frontend
 # 3. Install dependencies
 npm install
 
-# 4. Run the development server
+# 4. If Angular CLI is not installed in your system
+npm install -g @angular/cli
+
+# 5. Run the development server
 ng serve
 
-# 5. Open in browser
+# 6. Open in browser
 http://localhost:4200/
 ```
-
+---
 <p align="center">
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
 
-📈 Contribution Stats
+## 📈 Contribution Stats
+
 🏆 Top Contributors
 <table align="center">
 <tr>
@@ -147,11 +160,12 @@ http://localhost:4200/
 </table>
 
 ⚠️ Latest Issues Open
-No new Issue is open currently.
+Dashboard Navbar Appears Too Minimal – Suggest UI Enhancements.
 
 ✅ Latest Issues Closed
-All Issues are closed currently.
+Integration of backend security features with frontend.
 
+---
 <p align="center">
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
@@ -162,11 +176,11 @@ All Issues are closed currently.
 <img src="https://avatars.githubusercontent.com/u/69287212?v=4" width="50" style="border-radius:50%;">
 </a>
 </section>
-
+---
 <p align="center">
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
-
+---
 🤝 Contributors
 <div style="display: flex; flex-wrap: wrap; gap: 5px;">
 <a href="https://github.com/abhisek247767" target="_blank">
@@ -194,3 +208,5 @@ All Issues are closed currently.
 <img src="https://avatars.githubusercontent.com/u/121193249?v=4" width="50" style="border-radius:50%;" alt="KanishkChhajed"/>
 </a>
 </div>
+---
+>😃 Please follow me and star the repo for my motivation
