@@ -2,15 +2,18 @@
 <h1 align="center"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=30&pause=1000&color=2B88D8&width=435&lines=PeopleHub-Frontend"alt="Typing SVG" ></h1>
 
 <!-- Github status Badges -->
- ## 📊 Stats
- <div style="background-color:white; border-radius: 5px;border-color: beige; display:flex; flex-wrap: wrap; padding: 2px;">
+<details open>
+<summary><h2>📊 Stats</h2></summary>
     <!-- Watch -->
-    ![Github Repo Watcher](https://img.shields.io/github/watchers/abhisek247767/PeopleHub-Frontend)
+  
+  ![Github Repo Watcher](https://img.shields.io/github/watchers/abhisek247767/PeopleHub-Frontend)
     <!-- Fork -->
-    ![Github Reop fork](https://img.shields.io/github/forks/abhisek247767/PeopleHub-Frontend)
+  
+  ![Github Reop fork](https://img.shields.io/github/forks/abhisek247767/PeopleHub-Frontend)
      <!-- Star -->
-    ![GitHub Repo stars](https://img.shields.io/github/stars/abhisek247767/PeopleHub-Frontend)
- </div>
+  
+  ![GitHub Repo stars](https://img.shields.io/github/stars/abhisek247767/PeopleHub-Frontend)
+</details>
 
  <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
@@ -21,7 +24,9 @@
   <summary><h2>📖 About Project</h2></summary>
   This project is a comprehensive Employee Management Portal with secure login authentication.This repositry content frontend part of this project.
   Want to explore backend part of this project checkout:
-! [PeopleHub-Backend (Node.js)](https://github.com/abhisek247767/PeopleHub-Backend)
+<br>
+
+![PeopleHub-Backend (Node.js)](https://github.com/abhisek247767/PeopleHub-Backend)
 </details>
 
 <p align="center">
@@ -29,7 +34,8 @@
 </p>
  
 <!-- TechStack Badges -->
-## 🛠️Tools and FramWorks
+<details open>
+<summary><h2>🛠️Tools and FramWorks</h2></summary>
 <div style="display: inline-block; margin: 5px;">
 
   <img src="https://img.shields.io/badge/JavaScript-BC37A1?style=for-the-badge&logo=javascript&logoColor=white" alt="JavaScript" style="margin-right:5px;margin-bottom:5px;"/>
@@ -69,40 +75,52 @@
   <img src="https://img.shields.io/badge/jasmine-core-C8799D?style=for-the-badge&logo=jasmine-core&logoColor=white" alt="jasmine-core" style="margin-right:5px;margin-bottom:5px;"/>
 
 </div>
+</details>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
 
  <!-- Demo -->
-  ## 🖼️ Demo
+ <details open>
+<summary><h2>🖼️ Demo</h2></summary>
   <div style="display: flex; flex-wrap: wrap;">
     Insert your project demo here
     <!-- <img src="" alt="Demo of your project"> -->
   </div>
+ </details>
 
   <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
 
- ## ⚙️ Setup Process
+<details open>
+<summary><h2>⚙️ Setup Process</h2><summary>
 <p align="left">
-<pre><code>
 
+<pre><code>
 # 1. Clone the repository
   git clone https://github.com/abhisek247767/PeopleHub-Frontend.git/
+<code></pre>
 
+<pre><code>
 # 2. Install dependencies
   cd PeopleHub-Frontend
+<code></pre>
 
+<pre><code>
 # 3. Run the development server
   npm install
   ng serve
+<code></pre>
 
+<pre><code>
 # 4. Open in browser
   http://localhost:4200/
 <code></pre>
+
 </p>
+</details>
 
   <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
@@ -192,19 +210,22 @@
 </p>
 
 <!-- Owner -->
- ## ☺️ Owner
+<details open>
+<summary><h2>☺️ Owner</h2></summary>
  <section style="display: flex; flex-wrap: wrap;">
     <a href="https://avatars.githubusercontent.com/u/121193249?v=4" target="_blank">
       <img src="https://avatars.githubusercontent.com/u/121193249?v=4" width="50" style="border-radius:50%;">
     </a>
  </section>
+</detials> 
 
  <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
 
  <!-- Contributors -->
- ## 🤝 Contributors
+<details open>
+<summary><h2>🤝 Contributors</h2></summary>
   <div>
   
   <a href = "https://github.com/abhisek247767" target="_blank">
@@ -240,3 +261,5 @@
   </a>
 
 </div>
+
+</details>
