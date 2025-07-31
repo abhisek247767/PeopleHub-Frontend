@@ -158,8 +158,8 @@ All Issues are closed currently.
 
 ☺️ Owner
 <section style="display: flex; flex-wrap: wrap;">
-<a href="https://avatars.githubusercontent.com/u/121193249?v=4" target="_blank">
-<img src="https://avatars.githubusercontent.com/u/121193249?v=4" width="50" style="border-radius:50%;">
+<a href="https://github.com/abhisek247767" target="_blank">
+<img src="https://avatars.githubusercontent.com/u/69287212?v=4" width="50" style="border-radius:50%;">
 </a>
 </section>
 
