@@ -1,0 +1,34 @@
+name: 'Generate a readme file for a repo'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows/*'
+
+permissions:
+  contents: write
+
+jobs:
+  generate_readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout my repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          npm init -y
+          echo "Node installed successfully"
+
+      - name: Initialize my build action
+        uses: KanishkChhajed/git-readme-action@main
