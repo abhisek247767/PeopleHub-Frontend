@@ -90,23 +90,26 @@
 <p align="left">
 # 1. Clone the repository
   <pre><code>git clone https://github.com/abhisek247767/PeopleHub-Frontend.git/<code></pre>
-</p>
-
-<p align="left">
 # 2. Install dependencies
   <pre><code>cd PeopleHub-Frontend<code></pre>
-</p>
-
-<p align = "left">
 # 3. Run the development server
   <pre><code>npm install<code></pre>
   <pre><code>ng serve<code></pre>
-</p>
-
-<p align="left">
 # 4. Open in browser
   <pre><code>http://localhost:4200/<code></pre>
 </p>
+
+<!-- <p align="left">
+
+</p>
+
+<p align = "left">
+
+</p>
+
+<p align="left">
+
+</p> -->
 
   <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
