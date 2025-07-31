@@ -21,13 +21,14 @@
             ],
             "tsConfig": "tsconfig.app.json",
   "assets": [
-  {
-    "glob": "**/*",
-    "input": "public",
-    "output": ""
-  },
-  "src/assets"
-],
+    "src/favicon.ico",
+    "src/assets",
+    {
+      "glob": "**/*",
+      "input": "public",
+      "output": "/"
+    }
+  ],
 
             "styles": [
               "src/styles.css",
@@ -87,9 +88,12 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
+              "src/favicon.ico",
+              "src/assets",
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/"
               }
             ],
             "styles": [
