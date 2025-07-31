@@ -3,16 +3,13 @@
 
 <!-- Github status Badges -->
  ## 📊 Stats
- <div style="background-color:white; border-radius: 5px;border-color: beige; display:flex; flex-wrap: wrap; padding: 2px;align=center">
+ <div style="background-color:white; border-radius: 5px;border-color: beige; display:flex; flex-wrap: wrap; padding: 2px;">
     <!-- Watch -->
-    <img src="https://img.shields.io/github/watchers/abhisek247767/PeopleHub-Frontend
-    " alt="watchs" width="30" height="30">0
+    ![Github Repo Watcher](https://img.shields.io/github/watchers/abhisek247767/PeopleHub-Frontend)
     <!-- Fork -->
-     <img src="https://img.shields.io/github/forks/abhisek247767/PeopleHub-Frontend
-     " alt="fork" width="30" height="30">0
+    ![Github Reop fork](https://img.shields.io/github/forks/abhisek247767/PeopleHub-Frontend)
      <!-- Star -->
-      <img src="https://img.shields.io/github/stars/abhisek247767/PeopleHub-Frontend
-      " alt="star" width="30" height="30">0
+    ![GitHub Repo stars](https://img.shields.io/github/stars/abhisek247767/PeopleHub-Frontend)
  </div>
 
  <p align="center">
@@ -22,7 +19,9 @@
  <!-- Introduction -->
   <details open> 
   <summary><h2>📖 About Project</h2></summary>
-  This project is a comprehensive Employee Management Portal with secure login authentication.
+  This project is a comprehensive Employee Management Portal with secure login authentication.This repositry content frontend part of this project.
+  Want to explore backend part of this project checkout:
+! [PeopleHub-Backend (Node.js)](https://github.com/abhisek247767/PeopleHub-Backend)
 </details>
 
 <p align="center">
@@ -88,28 +87,22 @@
 
  ## ⚙️ Setup Process
 <p align="left">
+<pre><code>
+
 # 1. Clone the repository
-  <pre><code>git clone https://github.com/abhisek247767/PeopleHub-Frontend.git/<code></pre>
+  git clone https://github.com/abhisek247767/PeopleHub-Frontend.git/
+
 # 2. Install dependencies
-  <pre><code>cd PeopleHub-Frontend<code></pre>
+  cd PeopleHub-Frontend
+
 # 3. Run the development server
-  <pre><code>npm install<code></pre>
-  <pre><code>ng serve<code></pre>
+  npm install
+  ng serve
+
 # 4. Open in browser
-  <pre><code>http://localhost:4200/<code></pre>
+  http://localhost:4200/
+<code></pre>
 </p>
-
-<!-- <p align="left">
-
-</p>
-
-<p align = "left">
-
-</p>
-
-<p align="left">
-
-</p> -->
 
   <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
