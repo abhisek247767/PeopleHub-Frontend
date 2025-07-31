@@ -3,7 +3,7 @@
 
 <!-- Github status Badges -->
  ## 📊 Stats
- <div style="background-color:white; border-radius: 5px;border-color: beige; display:flex; flex-wrap: wrap; padding: 2px;">
+ <div style="background-color:white; border-radius: 5px;border-color: beige; display:flex; flex-wrap: wrap; padding: 2px;align=center">
     <!-- Watch -->
     <img src="https://img.shields.io/github/watchers/abhisek247767/PeopleHub-Frontend
     " alt="watchs" width="30" height="30">0
@@ -86,15 +86,24 @@
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
 
- ##⚙️ Setup Process
-<p align="center">
+ ## ⚙️ Setup Process
+<p align="left">
 # 1. Clone the repository
   <pre><code>git clone https://github.com/abhisek247767/PeopleHub-Frontend.git/<code></pre>
+</p>
+
+<p align="left">
 # 2. Install dependencies
   <pre><code>cd PeopleHub-Frontend<code></pre>
+</p>
+
+<p align = "left">
 # 3. Run the development server
   <pre><code>npm install<code></pre>
   <pre><code>ng serve<code></pre>
+</p>
+
+<p align="left">
 # 4. Open in browser
   <pre><code>http://localhost:4200/<code></pre>
 </p>
