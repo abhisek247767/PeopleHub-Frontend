@@ -58,7 +58,8 @@ Want to explore the backend part of this project? Checkout:
 ## 🖼️ Demo
 
 <div style="display: flex; flex-wrap: wrap;">
-  Insert your project demo here
+  <img width="1915" height="910" alt="image" src="https://github.com/user-attachments/assets/4c7a10be-495b-4371-90ad-9ca7c3a5d59f" />
+
   </div>
 
 <p align="center">
