@@ -5,11 +5,14 @@
  ## 📊 Stats
  <div style="background-color:white; border-radius: 5px;border-color: beige; display:flex; flex-wrap: wrap; padding: 2px;">
     <!-- Watch -->
-    <img src="icons/watch-icon.svg" alt="watchs" width="30" height="30">0
+    <img src="https://img.shields.io/github/watchers/abhisek247767/PeopleHub-Frontend
+    " alt="watchs" width="30" height="30">0
     <!-- Fork -->
-     <img src="icons/fork-icon.svg" alt="fork" width="30" height="30">0
+     <img src="https://img.shields.io/github/forks/abhisek247767/PeopleHub-Frontend
+     " alt="fork" width="30" height="30">0
      <!-- Star -->
-      <img src="icons/star-icon.svg" alt="star" width="30" height="30">0
+      <img src="https://img.shields.io/github/stars/abhisek247767/PeopleHub-Frontend
+      " alt="star" width="30" height="30">0
  </div>
 
  <p align="center">
@@ -19,7 +22,7 @@
  <!-- Introduction -->
   <details open> 
   <summary><h2>📖 About Project</h2></summary>
-  Details About your project goes here
+  This project is a comprehensive Employee Management Portal with secure login authentication.
 </details>
 
 <p align="center">
@@ -44,15 +47,11 @@
 
   <img src="https://img.shields.io/badge/%40angular%2Fplatform-browser-B53188?style=for-the-badge&logo=%40angular%2fplatform-browser&logoColor=white" alt="@angular/platform-browser" style="margin-right:5px;margin-bottom:5px;"/>
 
-  <img src="https://img.shields.io/badge/%40angular%2Fplatform-browser-dynamic-A982E6?style=for-the-badge&logo=%40angular%2fplatform-browser-dynamic&logoColor=white" alt="@angular/platform-browser-dynamic" style="margin-right:5px;margin-bottom:5px;"/>
-
   <img src="https://img.shields.io/badge/%40angular%2Frouter-C51654?style=for-the-badge&logo=%40angular%2frouter&logoColor=white" alt="@angular/router" style="margin-right:5px;margin-bottom:5px;"/>
 
   <img src="https://img.shields.io/badge/bootstrap-077B76?style=for-the-badge&logo=bootstrap&logoColor=white" alt="bootstrap" style="margin-right:5px;margin-bottom:5px;"/>
 
   <img src="https://img.shields.io/badge/font-awesome-5A52B2?style=for-the-badge&logo=font-awesome&logoColor=white" alt="font-awesome" style="margin-right:5px;margin-bottom:5px;"/>
-
-  <img src="https://img.shields.io/badge/ng-select2-component-E8FBAD?style=for-the-badge&logo=ng-select2-component&logoColor=white" alt="ng-select2-component" style="margin-right:5px;margin-bottom:5px;"/>
 
   <img src="https://img.shields.io/badge/ngx-toastr-80169A?style=for-the-badge&logo=ngx-toastr&logoColor=white" alt="ngx-toastr" style="margin-right:5px;margin-bottom:5px;"/>
 
@@ -61,8 +60,6 @@
   <img src="https://img.shields.io/badge/tslib-0E6A5B?style=for-the-badge&logo=tslib&logoColor=white" alt="tslib" style="margin-right:5px;margin-bottom:5px;"/>
 
   <img src="https://img.shields.io/badge/zone.js-CBFF51?style=for-the-badge&logo=zone.js&logoColor=white" alt="zone.js" style="margin-right:5px;margin-bottom:5px;"/>
-
-  <img src="https://img.shields.io/badge/%40angular-devkit%2Fbuild-angular-E21A0C?style=for-the-badge&logo=%40angular-devkit%2fbuild-angular&logoColor=white" alt="@angular-devkit/build-angular" style="margin-right:5px;margin-bottom:5px;"/>
 
   <img src="https://img.shields.io/badge/%40angular%2Fcli-39488B?style=for-the-badge&logo=%40angular%2fcli&logoColor=white" alt="@angular/cli" style="margin-right:5px;margin-bottom:5px;"/>
 
@@ -88,19 +85,18 @@
   <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
-  <!-- Setup --> 
-   <!-- <details open> -->
-  <!-- <summary><h2>⚙️ Setup Process</h2></summary> -->
-<!-- ## ⚙️ Setup Process
-`git clone YOUR_FORKED_REPO`
-`cd repoName `
- `# Add other setup instructions here` -->
 
  ##⚙️ Setup Process
 <p align="center">
-  <pre><code>git clone YOUR_FORKED_REPO
-cd PeopleHub-Frontend
-# Add other setup instructions here</code></pre>
+# 1. Clone the repository
+  <pre><code>git clone https://github.com/abhisek247767/PeopleHub-Frontend.git/<code></pre>
+# 2. Install dependencies
+  <pre><code>cd PeopleHub-Frontend<code></pre>
+# 3. Run the development server
+  <pre><code>npm install<code></pre>
+  <pre><code>ng serve<code></pre>
+# 4. Open in browser
+  <pre><code>http://localhost:4200/<code></pre>
 </p>
 
   <p align="center">
@@ -239,5 +235,3 @@ cd PeopleHub-Frontend
   </a>
 
 </div>
-
-  > *Generated with ❤️ by an automated GitHub Action* 🚀
