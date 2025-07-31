@@ -176,11 +176,11 @@ Integration of backend security features with frontend.
 <img src="https://avatars.githubusercontent.com/u/69287212?v=4" width="50" style="border-radius:50%;">
 </a>
 </section>
----
+
 <p align="center">
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
----
+
 🤝 Contributors
 <div style="display: flex; flex-wrap: wrap; gap: 5px;">
 <a href="https://github.com/abhisek247767" target="_blank">
