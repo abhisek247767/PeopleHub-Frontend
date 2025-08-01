@@ -1,106 +1,588 @@
-<div class="container-fluid my-4">
+<div class="container-fluid py-4">
   <div class="row g-4">
-    <!-- Project Table -->
-    <div [class.col-lg-7]="showForm" [class.col-md-12]="true" [class.col-12]="!showForm" class="mb-4">
-      <div class="card h-100">
-        <div class="card-header bg-secondary text-white d-flex justify-content-between">
-          <strong>Project Portal</strong>
-          <button class="btn btn-warning" (click)="showForm = true">Add New</button>
+    <!-- Project Table Section - Dynamic width based on form visibility -->
+    <div class="col-12" [ngClass]="{ 'col-xl-8 col-lg-7': showForm }">
+      <div class="card shadow-sm p-4 my-4">
+        <!-- Project Header -->
+        <div
+          class="card-header bg-light text-dark d-flex justify-content-between align-items-center py-3"
+        >
+          <div>
+            <h4 class="mb-0 fw-bold">
+              <i class="fas fa-project-diagram"></i> Project Portal
+            </h4>
+          </div>
+          <!-- Add New Button -->
+          <button
+            class="btn btn-white text-dark border btn-lg shadow-sm"
+            (click)="openForm()"
+            [disabled]="isLoading"
+            *ngIf="canPerformAdminActions()"
+          >
+            <i class="fas fa-plus me-2"></i>Add New Project
+          </button>
         </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
+
+        <div class="card-body p-0">
+          <!-- Loading State -->
+          <div
+            *ngIf="isLoading && projects.length === 0"
+            class="text-center py-5"
+          >
+            <div
+              class="spinner-border text-primary mb-3"
+              role="status"
+              style="width: 3rem; height: 3rem"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <h5 class="text-muted">Loading projects...</h5>
+            <p class="text-muted mb-0">Please wait while we fetch the data</p>
+          </div>
+
+          <!-- Empty State -->
+          <div
+            *ngIf="!isLoading && projects.length === 0"
+            class="text-center py-5"
+          >
+            <div class="mb-4">
+              <i class="fas fa-project-diagram fa-4x text-muted opacity-50"></i>
+            </div>
+            <h4 class="text-muted mb-3">No projects found</h4>
+            <p class="text-muted mb-4">
+              Start by creating your first project!
+            </p>
+            <button
+              class="btn btn-primary btn-lg"
+              (click)="openForm()"
+              *ngIf="!showForm && canPerformAdminActions()"
+            >
+              <i class="fas fa-plus me-2"></i>Create First Project
+            </button>
+          </div>
+
+          <!-- Project Table -->
+          <div *ngIf="projects.length > 0" class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="theme-header">
                 <tr>
-                  <th>Project Name</th>
-                  <th>Delivery Manager</th>
-                  <th>Team Lead</th>
-                  <th>Developers</th>
-                  <th>Actions</th>
+                  <th class="px-4 py-3" style="width: 20%">
+                    <i class="fas fa-project-diagram me-1"></i>Project Name
+                  </th>
+                  <th class="px-4 py-3" style="width: 15%">
+                    <i class="fas fa-user-tie me-1"></i>Delivery Manager
+                  </th>
+                  <th class="px-4 py-3" style="width: 12%">
+                    <i class="fas fa-user-cog me-1"></i>Manager
+                  </th>
+                  <th class="px-4 py-3" style="width: 12%">
+                    <i class="fas fa-user-graduate me-1"></i>Lead
+                  </th>
+                  <th class="px-4 py-3" style="width: 15%">
+                    <i class="fas fa-users me-1"></i>Developers
+                  </th>
+                  <th class="px-4 py-3" style="width: 10%">
+                    <i class="fas fa-flag me-1"></i>Status
+                  </th>
+                  <th class="px-4 py-3" style="width: 8%">
+                    <i class="fas fa-exclamation me-1"></i>Priority
+                  </th>
+                  <th class="px-4 py-3 text-center" style="width: 8%">
+                    <i class="fas fa-cogs me-1"></i>Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <!-- Use *ngFor here to render project rows -->
-                <!-- Example row -->
-                <tr>
-                  <td>Sample Project</td>
-                  <td>Manager A</td>
-                  <td>Lead B</td>
-                  <td>Dev1, Dev2</td>
-                  <td>
-                    <button class="btn btn-sm btn-info">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                <tr
+                  *ngFor="let project of projects; let i = index"
+                  class="border-bottom"
+                >
+                  <td class="px-4 py-3">
+                    <div>
+                      <div class="fw-semibold">{{ project.projectName }}</div>
+                      <small class="text-muted">{{ project.projectDescription | slice:0:50 }}...</small>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span class="text-primary">
+                      {{ project.deliveryManagerDetails?.username || getEmployeeName(project.deliveryManager) }}
+                    </span>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span class="text-info">
+                      {{ project.managerDetails?.username || getEmployeeName(project.manager) }}
+                    </span>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span class="text-success">
+                      {{ project.leadDetails?.username || getEmployeeName(project.lead) }}
+                    </span>
+                  </td>
+                  <td class="px-4 py-3">
+                    <div class="d-flex flex-wrap gap-1">
+                      <span
+                        *ngFor="let devId of project.developers"
+                        class="badge bg-secondary rounded-pill"
+                        style="font-size: 0.7em;">
+                        {{ getEmployeeName(devId) }}
+                      </span>
+                      <span *ngIf="project.developers.length === 0" class="text-muted small">
+                        No developers assigned
+                      </span>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span [ngClass]="getStatusBadgeClass(project.status)" class="rounded-pill px-2 py-1">
+                      {{ project.status | titlecase }}
+                    </span>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span [ngClass]="getPriorityBadgeClass(project.priority)" class="rounded-pill px-2 py-1">
+                      {{ project.priority | titlecase }}
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 text-center">
+                    <div class="btn-group" role="group" *ngIf="canPerformAdminActions()">
+                      <button
+                        class="btn btn-sm btn-outline-primary"
+                        title="Edit Project"
+                        (click)="editProject(project)"
+                        [disabled]="isLoading">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        title="Delete Project"
+                        (click)="deleteProject(project)"
+                        [disabled]="isLoading">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                    <div *ngIf="!canPerformAdminActions()" class="text-muted small">
+                      <i class="fas fa-lock"></i> Admin Only
+                    </div>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          <!-- Table Footer with Project Count -->
+          <div
+            *ngIf="projects.length > 0"
+            class="card-footer bg-light border-top-0"
+          >
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">
+                <i class="fas fa-info-circle me-1"></i>
+                Showing <strong>{{ projects.length }}</strong> of <strong>{{ totalProjects }}</strong> projects
+                <span *ngIf="totalPages > 1"> (Page {{ currentPage }} of {{ totalPages }})</span>
+              </small>
+              <small class="text-muted">
+                <i class="fas fa-project-diagram me-1"></i>
+                Total Projects: <strong>{{ totalProjects }}</strong>
+              </small>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Add/Edit Project Form -->
-    <div *ngIf="showForm" class="col-lg-5 col-md-12 mb-4">
-      <div class="card h-100">
-        <div class="card-header bg-secondary text-white d-flex justify-content-between">
-          <strong>New Project</strong>
-          <button class="btn btn-primary" (click)="closeForm()">Close</button>
+    <!-- Project Form Section -->
+    <div class="col-12 col-xl-4 col-lg-5" *ngIf="showForm">
+      <div class="card shadow-lg border-0 sticky-top" style="top: 20px">
+        <div class="card-header bg-primary text-white py-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="mb-0 fw-bold">
+                <i class="fas fa-plus-circle me-2"></i>
+                {{ isEditMode ? 'Edit Project' : 'Add New Project' }}
+              </h5>
+              <small class="opacity-75">{{ isEditMode ? 'Update project details' : 'Fill in the details below' }}</small>
+            </div>
+            <button
+              class="btn btn-sm btn-light rounded-circle p-2"
+              (click)="closeForm()"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
         </div>
-        <div class="card-body">
-          <form (submit)="submitProject()" #projectForm="ngForm">
-            <div class="mb-3">
-              <label class="form-label">Project Name</label>
+
+        <div class="card-body p-4">
+          <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" novalidate>
+            <!-- Project Name -->
+            <div class="mb-4">
+              <label for="projectName" class="form-label fw-semibold">
+                <i class="fas fa-project-diagram me-1 text-primary"></i>Project Name
+              </label>
               <input
                 type="text"
-                class="form-control"
-                [(ngModel)]="IProject.name"
-                name="projectName"
-                required
+                class="form-control form-control-lg"
+                id="projectName"
+                formControlName="projectName"
+                placeholder="Enter project name"
+                [ngClass]="{
+                  'is-invalid': f['projectName'].touched && f['projectName'].errors
+                }"
               />
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Delivery Manager</label>
-              <select
-                class="form-select"
-                [(ngModel)]="IProject.deliveryManagerId"
-                name="deliveryManagerId"
-                required
+              <div
+                *ngIf="f['projectName'].touched && f['projectName'].errors"
+                class="invalid-feedback"
               >
-                <option *ngFor="let emp of employees" [value]="emp.id">
-                  {{ emp.name }}
-                </option>
-              </select>
+                <div *ngIf="f['projectName'].errors?.['required']">
+                  Project name is required
+                </div>
+                <div *ngIf="f['projectName'].errors?.['minlength']">
+                  Minimum 3 characters required
+                </div>
+              </div>
             </div>
 
-            <div class="mb-3">
-              <label class="form-label">Team Lead</label>
-              <select
-                class="form-select"
-                [(ngModel)]="IProject.teamLeadId"
-                name="teamLeadId"
+            <!-- Project Description -->
+            <div class="mb-4">
+              <label for="projectDescription" class="form-label fw-semibold">
+                <i class="fas fa-align-left me-1 text-primary"></i>Description
+              </label>
+              <textarea
+                class="form-control"
+                id="projectDescription"
+                formControlName="projectDescription"
+                rows="3"
+                placeholder="Enter project description"
+                [ngClass]="{
+                  'is-invalid': f['projectDescription'].touched && f['projectDescription'].errors
+                }"
+              ></textarea>
+              <div
+                *ngIf="f['projectDescription'].touched && f['projectDescription'].errors"
+                class="invalid-feedback"
               >
-                <option *ngFor="let emp of employees" [value]="emp.id">
-                  {{ emp.name }}
-                </option>
-              </select>
+                <div *ngIf="f['projectDescription'].errors?.['required']">
+                  Description is required
+                </div>
+                <div *ngIf="f['projectDescription'].errors?.['minlength']">
+                  Minimum 10 characters required
+                </div>
+              </div>
             </div>
 
-            <div class="mb-3">
-              <label class="form-label">Developers</label>
-              <!-- <select
-                class="form-select"
-                [(ngModel)]="IProject.developerIds"
-                name="developerIds"
-                multiple
+            <!-- Delivery Manager and Manager Row -->
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label for="deliveryManager" class="form-label fw-semibold">
+                  <i class="fas fa-user-tie me-1 text-primary"></i>Delivery Manager
+                </label>
+                <div class="position-relative">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="deliveryManagerSearch"
+                    (input)="onDeliveryManagerSearchChange($event)"
+                    (keyup)="onDeliveryManagerSearchChange($event)"
+                    (focus)="onDeliveryManagerFocus()"
+                    (blur)="onBlurDeliveryManager()"
+                    placeholder="Search delivery manager..."
+                    [ngClass]="{
+                      'is-invalid': f['deliveryManager'].touched && f['deliveryManager'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="showDeliveryManagerDropdown"
+                    class="dropdown-menu show position-absolute w-100 mt-1"
+                    style="max-height: 200px; overflow-y: auto; z-index: 1000;"
+                  >
+                    <div
+                      *ngFor="let emp of filteredDeliveryManagers"
+                      class="dropdown-item cursor-pointer"
+                      (click)="selectDeliveryManager(emp)"
+                    >
+                      <div class="d-flex justify-content-between">
+                        <span class="fw-semibold">{{ emp.employeeName }}</span>
+                        <small class="text-muted">{{ emp.department }}</small>
+                      </div>
+                      <small class="text-muted">{{ emp.email }}</small>
+                    </div>
+                    <div
+                      *ngIf="filteredDeliveryManagers.length === 0"
+                      class="dropdown-item-text text-muted"
+                    >
+                      No employees found
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="f['deliveryManager'].touched && f['deliveryManager'].errors"
+                  class="invalid-feedback d-block"
+                >
+                  Delivery Manager is required
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="manager" class="form-label fw-semibold">
+                  <i class="fas fa-user-cog me-1 text-primary"></i>Manager
+                </label>
+                <div class="position-relative">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="managerSearch"
+                    (input)="onManagerSearchChange($event)"
+                    (keyup)="onManagerSearchChange($event)"
+                    (focus)="onManagerFocus()"
+                    (blur)="onBlurManager()"
+                    placeholder="Search manager..."
+                    [ngClass]="{
+                      'is-invalid': f['manager'].touched && f['manager'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="showManagerDropdown"
+                    class="dropdown-menu show position-absolute w-100 mt-1"
+                    style="max-height: 200px; overflow-y: auto; z-index: 1000;"
+                  >
+                    <div
+                      *ngFor="let emp of filteredManagers"
+                      class="dropdown-item cursor-pointer"
+                      (click)="selectManager(emp)"
+                    >
+                      <div class="d-flex justify-content-between">
+                        <span class="fw-semibold">{{ emp.employeeName }}</span>
+                        <small class="text-muted">{{ emp.department }}</small>
+                      </div>
+                      <small class="text-muted">{{ emp.email }}</small>
+                    </div>
+                    <div
+                      *ngIf="filteredManagers.length === 0"
+                      class="dropdown-item-text text-muted"
+                    >
+                      No employees found
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="f['manager'].touched && f['manager'].errors"
+                  class="invalid-feedback d-block"
+                >
+                  Manager is required
+                </div>
+              </div>
+            </div>
+
+            <!-- Lead -->
+            <div class="mb-4">
+              <label for="lead" class="form-label fw-semibold">
+                <i class="fas fa-user-graduate me-1 text-primary"></i>Team Lead
+              </label>
+              <div class="position-relative">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="leadSearch"
+                  (input)="onLeadSearchChange($event)"
+                  (keyup)="onLeadSearchChange($event)"
+                  (focus)="onLeadFocus()"
+                  (blur)="onBlurLead()"
+                  placeholder="Search team lead..."
+                  [ngClass]="{
+                    'is-invalid': f['lead'].touched && f['lead'].errors
+                  }"
+                />
+                <div
+                  *ngIf="showLeadDropdown"
+                  class="dropdown-menu show position-absolute w-100 mt-1"
+                  style="max-height: 200px; overflow-y: auto; z-index: 1000;"
+                >
+                  <div
+                    *ngFor="let emp of filteredLeads"
+                    class="dropdown-item cursor-pointer"
+                    (click)="selectLead(emp)"
+                  >
+                    <div class="d-flex justify-content-between">
+                      <span class="fw-semibold">{{ emp.employeeName }}</span>
+                      <small class="text-muted">{{ emp.department }}</small>
+                    </div>
+                    <small class="text-muted">{{ emp.email }}</small>
+                  </div>
+                  <div
+                    *ngIf="filteredLeads.length === 0"
+                    class="dropdown-item-text text-muted"
+                  >
+                    No employees found
+                  </div>
+                </div>
+              </div>
+              <div
+                *ngIf="f['lead'].touched && f['lead'].errors"
+                class="invalid-feedback d-block"
               >
-                <option *ngFor="let emp of employees" [value]="emp.id">
-                  {{ emp.name }}
-                </option>
-              </select> -->
+                Team Lead is required
+              </div>
             </div>
 
-            <button type="submit" class="btn btn-success w-100">Submit</button>
+            <!-- Developers -->
+            <div class="mb-4">
+              <label for="developers" class="form-label fw-semibold">
+                <i class="fas fa-users me-1 text-primary"></i>Developers
+              </label>
+
+              <!-- Selected Developers Display -->
+              <div *ngIf="getSelectedDevelopers().length > 0" class="mb-2">
+                <div class="d-flex flex-wrap gap-2">
+                  <span
+                    *ngFor="let dev of getSelectedDevelopers()"
+                    class="badge bg-primary d-flex align-items-center gap-1"
+                    style="font-size: 0.8em; padding: 0.5rem 0.75rem;"
+                  >
+                    {{ dev.employeeName }}
+                    <button
+                      type="button"
+                      class="btn-close btn-close-white"
+                      style="font-size: 0.6em;"
+                      (click)="removeDeveloper(dev.user_id)"
+                      title="Remove developer"
+                    ></button>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Developer Search -->
+              <div class="position-relative">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="developersSearch"
+                  (input)="onDevelopersSearchChange($event)"
+                  (keyup)="onDevelopersSearchChange($event)"
+                  (focus)="onDevelopersFocus()"
+                  (blur)="onBlurDevelopers()"
+                  placeholder="Search and add developers..."
+                  [ngClass]="{
+                    'is-invalid': f['developers'].touched && f['developers'].errors
+                  }"
+                />
+                <div
+                  *ngIf="showDevelopersDropdown"
+                  class="dropdown-menu show position-absolute w-100 mt-1"
+                  style="max-height: 250px; overflow-y: auto; z-index: 1000;"
+                >
+                  <div
+                    *ngFor="let emp of getFilteredDevelopers()"
+                    class="dropdown-item cursor-pointer d-flex justify-content-between align-items-center"
+                    (click)="toggleDeveloper(emp)"
+                  >
+                    <div>
+                      <div class="d-flex justify-content-between">
+                        <span class="fw-semibold">{{ emp.employeeName }}</span>
+                        <small class="text-muted">{{ emp.department }}</small>
+                      </div>
+                      <small class="text-muted">{{ emp.email }}</small>
+                    </div>
+                    <i
+                      class="fas fa-plus text-success"
+                      title="Add developer"
+                    ></i>
+                  </div>
+                  <div
+                    *ngIf="getFilteredDevelopers().length === 0"
+                    class="dropdown-item-text text-muted"
+                  >
+                    <span *ngIf="developersSearch.length === 0">Start typing to search for developers</span>
+                    <span *ngIf="developersSearch.length > 0">No employees found</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-muted small mt-1">
+                <i class="fas fa-info-circle me-1"></i>Search and click to add developers to the project
+              </div>
+              <div
+                *ngIf="f['developers'].touched && f['developers'].errors"
+                class="invalid-feedback d-block"
+              >
+                At least one developer is required
+              </div>
+            </div>
+
+            <!-- Priority and Status Row -->
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label for="priority" class="form-label fw-semibold">
+                  <i class="fas fa-exclamation me-1 text-primary"></i>Priority
+                </label>
+                <select
+                  class="form-select"
+                  id="priority"
+                  formControlName="priority"
+                  [ngClass]="{
+                    'is-invalid': f['priority'].touched && f['priority'].errors
+                  }"
+                >
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="critical">Critical</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="budget" class="form-label fw-semibold">
+                  <i class="fas fa-dollar-sign me-1 text-primary"></i>Budget
+                  <small class="text-muted">(optional)</small>
+                </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="budget"
+                  formControlName="budget"
+                  placeholder="0"
+                  min="0"
+                />
+              </div>
+            </div>
+
+            <!-- Date Range -->
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label for="startDate" class="form-label fw-semibold">
+                  <i class="fas fa-calendar-alt me-1 text-primary"></i>Start Date
+                  <small class="text-muted">(optional)</small>
+                </label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="startDate"
+                  formControlName="startDate"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="endDate" class="form-label fw-semibold">
+                  <i class="fas fa-calendar-check me-1 text-primary"></i>End Date
+                  <small class="text-muted">(optional)</small>
+                </label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="endDate"
+                  formControlName="endDate"
+                />
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg w-100 shadow-sm"
+              [disabled]="isLoading"
+            >
+              <span
+                *ngIf="isLoading"
+                class="spinner-border spinner-border-sm me-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              <i *ngIf="!isLoading" class="fas fa-save me-2"></i>
+              {{ isLoading ? (isEditMode ? 'Updating...' : 'Creating...') : (isEditMode ? 'Update Project' : 'Create Project') }}
+            </button>
           </form>
         </div>
       </div>
