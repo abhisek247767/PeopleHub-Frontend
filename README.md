@@ -96,6 +96,8 @@ ng serve
 
 # 6. Open in browser
 http://localhost:4200/
+
+### NOTE : When you raise pr raise in origin/development
 ```
 ---
 <p align="center">
