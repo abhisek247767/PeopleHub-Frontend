@@ -1,18 +1,16 @@
-<!-- Navbar with Warning Color Theme -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-  <div class="container-fluid">
-    <!-- Logo -->
-    <a class="navbar-brand" routerLink="/dashboard">
+<nav class="navbar navbar-expand-lg main-navbar">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/dashboard">
       <img
-        src="https://via.placeholder.com/50"
-        alt="Logo"
-        width="30"
-        height="30"
-        class="d-inline-block align-text-top"
+        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+        alt="PeopleHub Logo"
+        width="40"
+        height="40"
+        class="rounded-circle me-2"
       />
-      LOGO
+      <span class="fw-bold fs-5">PeopleHub</span>
     </a>
-    <!-- Toggle button for mobile view -->
+
     <button
       class="navbar-toggler"
       type="button"
@@ -24,75 +22,62 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+      <!-- Centered Links -->
+      <ul class="navbar-nav mx-auto d-flex justify-content-center gap-3">
         <li class="nav-item">
-          <a
-            class="nav-link active text-dark"
-            aria-current="page"
-            routerLink="/dashboard"
-            >Dashboard</a
-          >
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" routerLink="/employee">Employee</a>
+          <a class="nav-link" routerLink="/employee">Employee</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" routerLink="/projects">Projects</a>
+          <a class="nav-link" routerLink="/projects">Projects</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" routerLink="/project-employee"
-            >Project Employee</a
-          >
+          <a class="nav-link" routerLink="/project-employee">Project Employee</a>
         </li>
       </ul>
-      <!-- Right-aligned section: User name and Log off button -->
-      <!-- Right-aligned section: User name, Theme Toggle and Logout button -->
-<ul class="navbar-nav ms-auto">
-  <!-- Theme Toggle -->
-  <li class="nav-item d-flex align-items-center me-3">
-    <button
-      class="btn btn-link text-decoration-none"
-      (click)="toggleTheme()"
-      [attr.title]="currentTheme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'"
-    >
-     <i
-  class="bi"
-  [ngClass]="{
-    'bi-moon-fill text-dark': currentTheme === 'light',
-    'bi-sun-fill ': currentTheme === 'dark'
-  }"
-  style="font-size: 1.5rem;"
-></i>
 
-    </button>
-  </li>
+      <!-- Right Section -->
+      <ul class="navbar-nav ms-auto d-flex align-items-center gap-3">
+        <li class="nav-item">
+          <button
+            class="btn btn-link theme-toggle"
+            (click)="toggleTheme()"
+            [attr.title]="currentTheme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'"
+          >
+            <i
+              class="bi"
+              [ngClass]="{
+                'bi-moon-fill': currentTheme === 'light',
+                'bi-sun-fill': currentTheme === 'dark'
+              }"
+              style="font-size: 1.4rem;"
+            ></i>
+          </button>
+        </li>
 
-  <!-- Username and Logout -->
-  <li class="nav-item d-flex align-items-center">
-    <span
-      class="navbar-text me-2 text-dark"
-      [ngClass]="{ 'text-light': currentTheme === 'dark' }"
-      style="cursor: pointer"
-      (click)="goToSettings()"
-    >
-      Welcome, {{ userName }}
-    </span>
-    <button
-      class="btn btn-primary btn-sm"
-      type="button"
-      (click)="logout()"
-    >
-      Logout
-    </button>
-  </li>
-</ul>
-
+        <li class="nav-item d-flex align-items-center gap-2">
+          <span
+            class="navbar-text"
+            [ngClass]="{ 'text-light': currentTheme === 'dark', 'text-dark': currentTheme === 'light' }"
+            style="cursor: pointer;"
+            (click)="goToSettings()"
+          >
+            Welcome, {{ userName }}
+          </span>
+          <button
+            class="btn btn-sm btn-primary"
+            (click)="logout()"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
 
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>

@@ -65,17 +65,31 @@ export class LayoutComponent {
 
   // Logout logic
   logout() {
-    console.log('click on logout');
-    this.authService.logout().subscribe({
-      next: () => {
-        sessionStorage.removeItem('authToken');
-        sessionStorage.removeItem('user');
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error('Logout failed:', error);
-        this.errorMessage = 'Logout failed. Please try again.';
-      },
-    });
+  console.log('Click on logout');
+
+  const token = sessionStorage.getItem('authToken');
+  if (!token) {
+    console.warn('No auth token found. Logging out locally.');
+    this.performLocalLogout();
+    return;
   }
+
+  this.authService.logout().subscribe({
+    next: () => {
+      this.performLocalLogout();
+    },
+    error: (error) => {
+      console.error('Logout failed from server:', error);
+      this.errorMessage = 'Server logout failed. Logging out locally.';
+      this.performLocalLogout(); // still clear locally even if server fails
+    },
+  });
+}
+
+performLocalLogout() {
+  sessionStorage.removeItem('authToken');
+  sessionStorage.removeItem('user');
+  this.router.navigate(['/login']);
+}
+
 }

@@ -1,9 +1,85 @@
+/* === Base === */
+.main-navbar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-brand span {
+  color: #1e1e1e;
+}
+
+.navbar-nav .nav-link {
+  color: #333;
+  font-weight: 500;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #007bff !important;
+}
+
+.navbar-text {
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-link.theme-toggle {
+  color: inherit;
+  border: none;
+  text-decoration: none;
+  padding: 0;
+}
+
+.btn-link.theme-toggle:hover {
+  color: #ff9800;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav .nav-link {
+    margin-right: 0;
+    padding: 0.5rem;
+  }
+}
+
+/* === Dark Mode === */
 .dark-mode {
-  background-color: #121212;
-  color: white;
+  background-color: #0d1117;
+  color: #c9d1d9;
+}
+
+.dark-mode .main-navbar {
+  background-color: #161b22 !important;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .nav-link,
+.dark-mode .navbar-text {
+  color: #c9d1d9 !important;
+}
+
+.dark-mode .nav-link:hover {
+  color: #58a6ff !important;
+}
+
+.dark-mode .btn-primary {
+  background-color: #238636;
+  border-color: #238636;
 }
 
 .dark-mode .navbar {
-  background-color: #343a40 !important;
+  background: linear-gradient(90deg, #2e2e2e, #1a1a1a) !important;
+  border-bottom: 1px solid #444;
 }
-
