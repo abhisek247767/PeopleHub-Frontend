@@ -139,17 +139,27 @@
                   </td>
                   <td class="px-4 py-3">
                     <span class="badge bg-success rounded-pill px-3 py-2">{{
-                      emp.role | titlecase
+                      getUserRole(emp) | titlecase
                     }}</span>
                   </td>
                   <td class="px-4 py-3 text-center">
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-sm btn-outline-primary">
+                    <div class="btn-group" role="group" *ngIf="canPerformAdminActions()">
+                      <button
+                        class="btn btn-sm btn-outline-primary"
+                        title="Edit Employee"
+                        [disabled]="isLoading">
                         <i class="fas fa-edit"></i>
                       </button>
-                      <button class="btn btn-sm btn-outline-danger">
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        title="Delete Employee"
+                        (click)="deleteEmployee(emp)"
+                        [disabled]="isLoading">
                         <i class="fas fa-trash"></i>
                       </button>
+                    </div>
+                    <div *ngIf="!canPerformAdminActions()" class="text-muted small">
+                      <i class="fas fa-lock"></i> Admin Only
                     </div>
                   </td>
                 </tr>
@@ -157,7 +167,7 @@
             </table>
           </div>
 
-          <!-- Table Footer with Employee Count -->
+          <!-- Table Footer with Employee Count and Info -->
           <div
             *ngIf="employees.length > 0"
             class="card-footer bg-light border-top-0"
@@ -165,7 +175,12 @@
             <div class="d-flex justify-content-between align-items-center">
               <small class="text-muted">
                 <i class="fas fa-info-circle me-1"></i>
-                Total Employees: <strong>{{ employees.length }}</strong>
+                Showing <strong>{{ employees.length }}</strong> of <strong>{{ totalEmployees }}</strong> employees
+                <span *ngIf="totalPages > 1"> (Page {{ currentPage }} of {{ totalPages }})</span>
+              </small>
+              <small class="text-muted">
+                <i class="fas fa-users me-1"></i>
+                Total Employees: <strong>{{ totalEmployees }}</strong>
               </small>
             </div>
           </div>
@@ -182,7 +197,7 @@
               <h5 class="mb-0 fw-bold">
                 <i class="fas fa-user-plus me-2"></i>Add New Employee
               </h5>
-              <small class="opacity-75">Fill in the details below</small>
+              <small class="opacity-75">Fill in the details below. User account will be created automatically.</small>
             </div>
             <button
               class="btn btn-sm btn-light rounded-circle p-2"
@@ -281,7 +296,7 @@
               </div>
             </div>
 
-            <!-- Gender and Role Row -->
+            <!-- Gender Row -->
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <label for="gender" class="form-label fw-semibold">
@@ -308,28 +323,19 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <label for="role" class="form-label fw-semibold">
-                  <i class="fas fa-user-tag me-1 text-primary"></i>Role
+                <label for="username" class="form-label fw-semibold">
+                  <i class="fas fa-user-circle me-1 text-primary"></i>Username
+                  <small class="text-muted">(optional)</small>
                 </label>
-                <select
-                  class="form-select"
-                  id="role"
-                  formControlName="role"
-                  [ngClass]="{
-                    'is-invalid': f['role'].touched && f['role'].errors
-                  }"
-                >
-                  <option value="" disabled selected>Choose...</option>
-                  <option value="admin">Admin</option>
-                  <option value="user">User</option>
-                  <option value="employee">Employee</option>
-                  <option value="superadmin">SuperAdmin</option>
-                </select>
-                <div
-                  *ngIf="f['role'].touched && f['role'].errors"
-                  class="invalid-feedback"
-                >
-                  Role is required
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  formControlName="username"
+                  placeholder="Auto-generated if empty"
+                />
+                <div class="text-muted small mt-1">
+                  <i class="fas fa-info-circle me-1"></i>Leave empty to auto-generate
                 </div>
               </div>
             </div>

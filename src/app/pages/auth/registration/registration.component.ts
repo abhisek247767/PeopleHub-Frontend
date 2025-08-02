@@ -57,11 +57,11 @@ export class RegistrationComponent {
     this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
   }
 
+
   onRegister(): void {
     if (this.useForm.valid) {
-      const { username, email, password, confirmPassword } = this.useForm.value;
-
-      this.authService.registration(username, email, password, confirmPassword).subscribe({
+      const userData = this.useForm.value;
+      this.authService.registration(userData).subscribe({
         next: (response) => {
           this.successMessage = response.message;
           this.toastr.success(response.message, 'Success');
@@ -73,7 +73,7 @@ export class RegistrationComponent {
             this.errorMessage = 'User already exists but is not verified. Please verify your email.';
             this.toastr.warning(this.errorMessage, 'Verification Required');
             // Store email in sessionStorage to prefill verification form
-            sessionStorage.setItem('unverifiedEmail', email);
+            sessionStorage.setItem('unverifiedEmail', userData.email);
             this.router.navigateByUrl('/verify-email');
           } else {
             this.errorMessage = error.error?.message ||

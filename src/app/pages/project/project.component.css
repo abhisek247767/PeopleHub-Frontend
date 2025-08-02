@@ -1,3 +1,4 @@
+
 /* Dark Mode Improvements for Project Component */
 .dark-mode .card {
   background-color: #2c2c40;
@@ -107,3 +108,136 @@
   border-color: #5a5a70;
   box-shadow: 0 0 0 0.25rem rgba(74, 93, 155, 0.25);
 }
+
+/* Project Component Styles */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  border: 1px solid #dee2e6;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.dropdown-item {
+  border-bottom: 1px solid #f8f9fa;
+  padding: 0.75rem 1rem;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item.cursor-pointer:hover {
+  background-color: #e9ecef;
+}
+
+.badge .btn-close {
+  margin-left: 0.25rem;
+  opacity: 0.8;
+}
+
+.badge .btn-close:hover {
+  opacity: 1;
+}
+
+.theme-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.theme-header th {
+  border: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.85em;
+}
+
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f8f9fa;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.search-result-item:hover {
+  background-color: #f8f9fa;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.developer-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 0.125rem;
+}
+
+.developer-tag .remove-btn {
+  background: none;
+  border: none;
+  color: white;
+  opacity: 0.8;
+  padding: 0;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.developer-tag .remove-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.invalid-feedback.d-block {
+  display: block !important;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .search-dropdown {
+    max-height: 150px;
+  }
+
+  .developer-tag {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.5rem;
+  }
+}
+
