@@ -1,6 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("assets/css/main.css");
 
+/* Global Button Enhancements */
+.btn {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: inherit;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover::after {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0;
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Control Enhancements */
+.form-control, .form-select {
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Card Enhancements */
+.card {
+  transition: all 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
 .is-invalid {
   border-color: #dc3545;
 }
@@ -14,11 +87,14 @@
 .dark-mode {
   background-color: #1e1e2f; /* Slightly bluish dark */
   color: #e0e0e0; /* Light grey for readability */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Navbar */
 .dark-mode .navbar {
   background-color: #2c2f3a !important;
+  border-bottom: 1px solid #3a3a50;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode .nav-link {
@@ -27,18 +103,77 @@
 
 .dark-mode .nav-link:hover {
   color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .nav-link.active {
+  background-color: #ff8c00 !important;
+  color: #ffffff !important;
 }
 
 /* Buttons */
 .dark-mode .btn-primary {
-  background-color: #4a4e69;
-  border-color: #4a4e69;
-  color: #fff;
+  background-color: #2c2c40;
+  border-color: #3a3a50;
+  /* color: #000000; */
 }
 
 .dark-mode .btn-primary:hover {
-  background-color: #5e6280;
-  border-color: #5e6280;
+  background-color: #3a3a50;
+  border-color: #4a4a60;
+  /* color: #000000; */
+}
+
+.dark-mode .btn-secondary {
+  background-color: #4a4e69;
+  border-color: #3a3e59;
+}
+
+.dark-mode .btn-secondary:hover {
+  background-color: #5a5e79;
+  border-color: #4a4e69;
+}
+
+.dark-mode .btn-success {
+  background-color: #3a7563;
+  border-color: #2a6553;
+}
+
+.dark-mode .btn-success:hover {
+  background-color: #4a8573;
+  border-color: #3a7563;
+}
+
+.dark-mode .btn-danger {
+  background-color: #a04545;
+  border-color: #903535;
+}
+
+.dark-mode .btn-danger:hover {
+  background-color: #b05555;
+  border-color: #a04545;
+}
+
+.dark-mode .btn-warning {
+  background-color: #b3862e;
+  border-color: #94650d;
+  color: #ffffff;
+}
+
+.dark-mode .btn-warning:hover {
+  background-color: #c79632;
+  border-color: #b3862e;
+}
+
+.dark-mode .btn-info {
+  background-color: #4a7a9b;
+  border-color: #3a6a8b;
+  color: #ffffff;
+}
+
+.dark-mode .btn-info:hover {
+  background-color: #5a8aab;
+  border-color: #4a7a9b;
 }
 
 /* Forms and Inputs */
@@ -48,6 +183,16 @@
   background-color: #3f3f53;
   color: #ffffff;
   border: 1px solid #555;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.dark-mode input:focus,
+.dark-mode select:focus,
+.dark-mode textarea:focus {
+  background-color: #3f3f53;
+  color: #ffffff;
+  border-color: #5a5a70;
+  box-shadow: 0 0 0 0.25rem rgba(74, 93, 155, 0.25);
 }
 
 .dark-mode input::placeholder,
@@ -57,20 +202,45 @@
 
 /* Cards */
 .dark-mode .card {
-  background-color: #3b3b53;
+  background-color: #2c2c40;
   color: #e0e0e0;
-  border: 1px solid #444;
+  border: 1px solid #3a3a50;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .card-header {
+  background-color: #3a3a50 !important;
+  border-bottom: 1px solid #4a4a60;
+}
+
+.dark-mode .card-footer {
+  background-color: #3a3a50 !important;
+  border-top: 1px solid #4a4a60;
 }
 
 /* Table */
 .dark-mode table {
   color: #e0e0e0;
-  background-color: #47475f;
+  background-color: transparent;
+}
+
+.dark-mode .table {
+  --bs-table-bg: #2c2c40;
+  --bs-table-striped-bg: #353550;
+  --bs-table-striped-color: #e0e0e0;
+  --bs-table-hover-bg: #3a3a50;
+  --bs-table-hover-color: #ffffff;
 }
 
 .dark-mode th,
 .dark-mode td {
-  border-color: #444;
+  border-color: #3a3a50;
+}
+
+.dark-mode .table thead th {
+  background-color: #3f3f53;
+  color: #ffffff;
+  border-color: #4a4a60;
 }
 
 /* Tooltip / Help Text */
@@ -78,18 +248,26 @@
   color: #ff8080;
 }
 
+.dark-mode .form-text {
+  color: #b0b0c0;
+}
+
 /* Scrollbar (optional) */
 .dark-mode ::-webkit-scrollbar {
   width: 8px;
 }
 
+.dark-mode ::-webkit-scrollbar-track {
+  background: #2c2c40;
+}
+
 .dark-mode ::-webkit-scrollbar-thumb {
-  background-color: #555;
+  background-color: #4a4a60;
   border-radius: 4px;
 }
 
 .dark-mode ::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
+  background-color: #5a5a70;
 }
 /* DARK MODE: Make all text white */
 .dark-mode {
@@ -106,6 +284,19 @@
 }
 
 .dark-mode .nav-link {
+  color: #ffffff !important;
+}
+
+/* Ensure buttons with text-dark class keep black text in dark mode */
+.dark-mode .btn.text-dark {
+  color: #000000 !important;
+}
+
+/* Make form icons white in dark mode */
+.dark-mode form label i.fas,
+.dark-mode form label i.fa-solid,
+.dark-mode form label i.far,
+.dark-mode form label i.fa-regular {
   color: #ffffff !important;
 }
 
@@ -126,5 +317,48 @@
 /* Dark mode yellow sun icon */
 body.dark-mode .bi-sun-fill {
   color: #ffc107 !important; /* Bootstrap's warning/yellow */
+}
+
+/* Dark Mode Scrollbar */
+.dark-mode::-webkit-scrollbar-track {
+  background: #2c2c40;
+}
+
+.dark-mode::-webkit-scrollbar-thumb {
+  background: #4a4a60;
+  border: 3px solid #2c2c40;
+}
+
+.dark-mode::-webkit-scrollbar-thumb:hover {
+  background: #5a5a70;
+}
+
+/* Dark Mode Button Enhancements */
+.dark-mode .btn {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .btn:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark Mode Form Control Enhancements */
+.dark-mode .form-control, 
+.dark-mode .form-select {
+  background-color: #2c2c40;
+  border-color: #3a3a50;
+  color: #e0e0e0;
+}
+
+.dark-mode .form-control:focus, 
+.dark-mode .form-select:focus {
+  background-color: #2c2c40;
+  border-color: #4a4a60;
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.25);
+}
+
+/* Dark Mode Card Enhancements */
+.dark-mode .card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
