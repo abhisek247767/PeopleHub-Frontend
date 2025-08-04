@@ -10,17 +10,17 @@
         >
           <div>
             <h4 class="mb-0 fw-bold">
-              <i class="fas fa-users"></i> Employee Portal
+              <i class="fa-solid fa-users"></i> Employee Portal
             </h4>
           </div>
           <!-- White Button -->
           <button
-            class="btn btn-white text-dark border btn-lg shadow-sm"
+            class="btn btn-white text-dark border btn-lg shadow-sm add-new-employee"
             (click)="toggleForm()"
             [disabled]="isLoading"
           >
             <i
-              class="fas me-2"
+              class="fa-solid me-2"
               [ngClass]="isFormVisible ? 'fa-times' : 'fa-plus'"
             ></i>
             {{ isFormVisible ? "Close Form" : "Add New Employee" }}
@@ -50,18 +50,18 @@
             class="text-center py-5"
           >
             <div class="mb-4">
-              <i class="fas fa-users fa-4x text-muted opacity-50"></i>
+              <i class="fa-solid fa-users fa-4x text-muted opacity-50"></i>
             </div>
             <h4 class="text-muted mb-3">No employees found</h4>
             <p class="text-muted mb-4">
               Start building your team by adding your first employee!
             </p>
             <button
-              class="btn btn-primary btn-lg"
+              class="btn btn-primary btn-lg add-first-employee"
               (click)="toggleForm()"
               *ngIf="!isFormVisible"
             >
-              <i class="fas fa-plus me-2"></i>Add First Employee
+              <i class="fa-solid fa-plus me-2"></i>Add First Employee
             </button>
           </div>
 
@@ -71,7 +71,7 @@
               <thead class="theme-header">
                 <tr>
                   <th class="px-4 py-3" style="width: 8%">
-                    <i class="fas fa-hashtag me-1"></i>ID
+                    <i class="fa-solid fa-hashtag me-1"></i>ID
                   </th>
                   <th class="px-4 py-3" style="width: 18%">
                     <i class="fas fa-user me-1"></i>Name
