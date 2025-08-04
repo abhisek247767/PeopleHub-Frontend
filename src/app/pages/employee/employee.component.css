@@ -9,3 +9,143 @@
   color: black;
   border: 1px solid #ccc;
 }
+
+/* Dark Mode Improvements for Employee Component */
+.dark-mode .card {
+  background-color: #2c2c40;
+  border-color: #3a3a50;
+}
+
+.dark-mode .card-header.bg-light {
+  background-color: #3a3a50 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .card-header.bg-light.text-dark {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .card-footer.bg-light {
+  background-color: #3a3a50 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .btn-white {
+  background-color: #2c2c40;
+  color: #000000 !important;
+  border: 1px solid #3a3a50;
+}
+
+.dark-mode .btn-white:hover {
+  background-color: #3a3a50;
+  color: #000000 !important;
+}
+
+.dark-mode .btn-white.add-new-employee {
+  background-color: #ffffff;
+  color: #000000 !important;
+  border: 1px solid #e0e0e0;
+}
+
+.dark-mode .btn-white.add-new-employee:hover {
+  background-color: #f0f0f0;
+  color: #000000 !important;
+  border: 1px solid #d0d0d0;
+}
+
+/* Keep text-dark class for buttons in dark mode */
+.dark-mode .btn-white.text-dark {
+  color: #000000 !important;
+}
+
+/* Style for Add First Employee button in dark mode */
+.dark-mode .btn-primary.btn-lg.add-first-employee {
+  background-color: #ffffff;
+  border-color: #e0e0e0;
+  color: #000000 !important;
+}
+
+.dark-mode .btn-primary.btn-lg.add-first-employee:hover {
+  background-color: #f0f0f0;
+  border-color: #d0d0d0;
+  color: #000000 !important;
+}
+
+/* Style for Add Employee submit button in dark mode */
+.dark-mode .btn-primary.btn-lg.w-100 {
+  background-color: #ffffff;
+  border-color: #e0e0e0;
+  color: #000000 !important;
+}
+
+.dark-mode .btn-primary.btn-lg.w-100:hover {
+  background-color: #f0f0f0;
+  border-color: #d0d0d0;
+  color: #000000 !important;
+}
+
+/* Make form icons white in dark mode */
+.dark-mode .card-body form .text-primary {
+  color: #ffffff !important;
+}
+
+.dark-mode .theme-header {
+  background-color: #3f3f53;
+  color: #ffffff;
+}
+
+.dark-mode .table {
+  color: #e0e0e0;
+}
+
+.dark-mode .table-hover tbody tr:hover {
+  background-color: #3a3a50;
+}
+
+.dark-mode .badge.bg-secondary {
+  background-color: #5d5d7a !important;
+}
+
+.dark-mode .badge.bg-primary {
+  background-color: #4a5d9b !important;
+}
+
+.dark-mode .badge.bg-info {
+  background-color: #4a7a9b !important;
+}
+
+.dark-mode .badge.bg-success {
+  background-color: #3a7563 !important;
+}
+
+.dark-mode .text-muted {
+  color: #b0b0c0 !important;
+}
+
+.dark-mode .text-primary {
+  color: #8a9cdb !important;
+}
+
+.dark-mode .avatar-sm.bg-primary {
+  background-color: #4a5d9b !important;
+}
+
+.dark-mode .btn-outline-primary {
+  color: #8a9cdb;
+  border-color: #8a9cdb;
+}
+
+.dark-mode .btn-outline-primary:hover {
+  background-color: #4a5d9b;
+  color: #ffffff;
+}
+
+.dark-mode .btn-outline-danger {
+  color: #e07a7a;
+  border-color: #e07a7a;
+}
+
+.dark-mode .btn-outline-danger:hover {
+  background-color: #a04545;
+  color: #ffffff;
+}

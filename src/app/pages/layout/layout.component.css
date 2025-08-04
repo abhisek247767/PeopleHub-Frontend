@@ -10,6 +10,7 @@
 .navbar .container-fluid {
   display: flex;
   align-items: center;
+
   justify-content: space-between;
   flex-wrap: nowrap;
 }
@@ -32,6 +33,49 @@
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
   transition: all 0.3s ease;
+
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background: transparent;
+  transition: all 0.3s ease;
+  font-size: 1.5rem;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  overflow: hidden;
+  position: relative;
+}
+.mode-toggle-btn:hover {
+  border-color: #888;
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.mode-toggle-btn:active {
+  background: #e0e0e0;
+  transform: translateY(0);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+.mode-toggle-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease;
+}
+.mode-toggle-btn:hover::after {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0;
+
 }
 
 .navbar-brand:hover {
@@ -55,6 +99,7 @@
 
 .navbar-nav {
   display: flex;
+
   gap: 0.5rem;
   margin: 0 auto;
 }
@@ -125,6 +170,17 @@
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   cursor: pointer;
   position: relative;
+
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #222;
+  transition: transform 0.3s ease;
+}
+
+.mode-toggle-btn:hover .mode-icon {
+  transform: rotate(15deg);
+
 }
 
 .theme-toggle:hover {
@@ -147,6 +203,7 @@
   overflow: hidden;
 }
 
+
 .logout-btn::before {
   content: '';
   position: absolute;
@@ -156,6 +213,46 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
+
+/* Navbar brand animation */
+.navbar-brand {
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: translateY(-2px);
+}
+
+.navbar-brand img {
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover img {
+  transform: rotate(10deg);
+}
+
+/* Container Animation */
+.container {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode adaptation for toggle and navbar */
+.dark-mode .mode-toggle-btn {
+  border-color: #FFD600;
+  background: #23232e;
+  color: #FFD600;
+
 }
 
 .logout-btn:hover::before {
@@ -171,6 +268,7 @@
 .logout-btn:active {
   transform: translateY(0);
 }
+
 
 .dark-mode .navbar {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
@@ -197,15 +295,42 @@
 .dark-mode .navbar-text {
   color: rgba(240, 246, 255, 0.8);
   background: rgba(255, 255, 255, 0.05);
+
+.navbar {
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.dark-mode .navbar {
+  background: #181824 !important;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+
 }
 
 .dark-mode .navbar-text:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
+
 .dark-mode .theme-toggle {
   color: #ffd600;
   background: rgba(255, 214, 0, 0.1);
+
+.dark-mode .navbar .nav-link.active {
+  color: #fff !important;
+  padding-bottom: 5px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.dark-mode .navbar .nav-link::after {
+  background-color: #FFD600;
+}
+
+.dark-mode .navbar .nav-link.active::after {
+  box-shadow: 0 1px 5px rgba(255, 214, 0, 0.5);
+
 }
 
 .dark-mode .theme-toggle:hover {
@@ -222,6 +347,7 @@
   background: linear-gradient(135deg, #e53935, #c62828);
   box-shadow: 0 6px 25px rgba(244, 67, 54, 0.4);
 }
+
 
 @media (max-width: 991px) {
   .navbar {
@@ -286,3 +412,42 @@
     margin-right: 0.5rem;
   }
 }
+
+/* Light mode active link styling */
+.navbar .nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.navbar .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #FFD600;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.navbar .nav-link:hover::after {
+  width: 30%;
+  opacity: 0.7;
+}
+
+.navbar .nav-link.active {
+  color: #000 !important;
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+.navbar .nav-link.active::after {
+  width: 70%;
+  opacity: 1;
+  height: 2px;
+  background-color: #FFD600;
+  box-shadow: 0 1px 3px rgba(255, 214, 0, 0.3);
+}
+

@@ -1,4 +1,8 @@
+
 <nav class="navbar navbar-expand-lg custom-navbar">
+<!-- Navbar with Warning Color Theme -->
+<nav class="navbar navbar-expand-lg" [ngClass]="{'navbar-dark bg-secondary': currentTheme === 'light', 'navbar-dark': currentTheme === 'dark'}" style="box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+
   <div class="container-fluid">
     <!-- Brand Logo -->
     <a class="navbar-brand d-flex align-items-center" routerLink="/dashboard">
@@ -29,6 +33,7 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav text-center">
         <li class="nav-item">
+
           <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
         </li>
         <li class="nav-item">
@@ -39,6 +44,39 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/project-employee" routerLinkActive="active">Project Employee</a>
+          <a
+            class="nav-link"
+            [ngClass]="{'text-dark': currentTheme === 'light'}"
+            routerLink="/dashboard"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"
+            >Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link" 
+            [ngClass]="{'text-dark': currentTheme === 'light'}"
+            routerLink="/employee"
+            routerLinkActive="active"
+            >Employee</a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link" 
+            [ngClass]="{'text-dark': currentTheme === 'light'}"
+            routerLink="/projects"
+            routerLinkActive="active"
+            >Projects</a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link" 
+            [ngClass]="{'text-dark': currentTheme === 'light'}"
+            routerLink="/project-employee"
+            routerLinkActive="active"
+            >Project Employee</a>
+
         </li>
       </ul>
     </div>
