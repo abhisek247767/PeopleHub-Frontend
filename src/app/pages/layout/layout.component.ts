@@ -21,6 +21,11 @@ export class LayoutComponent {
   userName: string | null = null;
   errorMessage: string = '';
   currentTheme: string = 'light'; // Dark/Light Theme
+  get logoPath(): string {
+    return this.currentTheme === 'dark'
+      ? 'assets/img/logo-dark.svg'
+      : 'assets/img/logo-light.svg';
+  }
 
   constructor(
     private http: HttpClient,
