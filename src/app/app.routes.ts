@@ -39,7 +39,6 @@ export const routes: Routes = [
     {
         path:'',
         component:LayoutComponent,
-        canActivate: [authGuard],
         children:[
             {path:'dashboard',component:DashboardComponent},
             {path:'employee',component:EmployeeComponent},
@@ -50,5 +49,4 @@ export const routes: Routes = [
     },
     { path: 'setting', component: SettingComponent },
     { path: '**', component: NotFoundComponent }
-
 ];
