@@ -1,0 +1,56 @@
+<svg width="140" height="45" viewBox="0 0 140 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient for dark mode -->
+  <defs>
+    <linearGradient id="bgGradientDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowDark" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000040"/>
+    </filter>
+  </defs>
+  
+  <!-- Main logo circle with gradient -->
+  <circle cx="22.5" cy="22.5" r="20" fill="url(#bgGradientDark)" filter="url(#shadowDark)"/>
+  
+  <!-- People network design -->
+  <g transform="translate(7, 7)">
+    <!-- Connection lines (network effect) -->
+    <g opacity="0.4" stroke="#ffffff" stroke-width="1">
+      <line x1="10" y1="10" x2="20" y2="10"/>
+      <line x1="15" y1="7" x2="15" y2="13"/>
+      <line x1="8" y1="12" x2="12" y2="8"/>
+      <line x1="18" y1="8" x2="22" y2="12"/>
+    </g>
+    
+    <!-- Main people figures -->
+    <!-- Person 1 (left) -->
+    <circle cx="10" cy="10" r="3.5" fill="#ffffff" stroke="#d1fae5" stroke-width="0.5"/>
+    <path d="M5 22c0-3 2-5 5-5s5 2 5 5" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Person 2 (right) -->
+    <circle cx="20" cy="10" r="3.5" fill="#ffffff" stroke="#d1fae5" stroke-width="0.5"/>
+    <path d="M15 22c0-3 2-5 5-5s5 2 5 5" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Person 3 (center, elevated) -->
+    <circle cx="15" cy="7" r="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="0.5"/>
+    <path d="M11 19c0-2.5 1.5-4 4-4s4 1.5 4 4" stroke="#fef3c7" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Small connection dots -->
+    <circle cx="15" cy="15" r="1" fill="#6ee7b7" opacity="0.8"/>
+    <circle cx="12" cy="12" r="0.8" fill="#6ee7b7" opacity="0.6"/>
+    <circle cx="18" cy="12" r="0.8" fill="#6ee7b7" opacity="0.6"/>
+  </g>
+  
+  <!-- Text "PeopleHub" with modern typography for dark mode -->
+  <g font-family="system-ui, -apple-system, sans-serif">
+    <text x="50" y="20" font-size="16" font-weight="700" fill="#f9fafb" letter-spacing="-0.5px">People</text>
+    <text x="50" y="36" font-size="16" font-weight="700" fill="#10b981" letter-spacing="-0.5px">Hub</text>
+  </g>
+  
+  <!-- Connecting element between logo and text -->
+  <g opacity="0.5">
+    <line x1="43" y1="22.5" x2="48" y2="22.5" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="45.5" cy="22.5" r="1.5" fill="#10b981"/>
+  </g>
+</svg>

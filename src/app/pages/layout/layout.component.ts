@@ -23,8 +23,8 @@ export class LayoutComponent {
   currentTheme: string = 'light'; // Dark/Light Theme
   get logoPath(): string {
     return this.currentTheme === 'dark'
-      ? 'assets/img/WhatsApp Image 2025-07-30 at 6.41.50 PM.jpeg'
-      : 'assets/img/Untitled_design.png';
+      ? 'assets/img/logo-dark.svg'
+      : 'assets/img/logo-light.svg';
   }
 
   constructor(

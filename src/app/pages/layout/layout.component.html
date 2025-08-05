@@ -5,13 +5,11 @@
     <a class="navbar-brand d-flex align-items-center" routerLink="/dashboard">
       <img
         [src]="logoPath"
-        alt="Logo"
-        width="40"
-        height="40"
-        class="d-inline-block align-text-top me-2"
-        style="object-fit: contain; border-radius: 8px;"
+        alt="PeopleHub Logo"
+        height="45"
+        class="d-inline-block align-text-top"
+        style="object-fit: contain; transition: all 0.3s ease; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.1));"
       />
-      <span class="fw-bold" [ngClass]="{ 'text-light': currentTheme === 'dark', 'text-dark': currentTheme === 'light' }">PeopleHub</span>
     </a>
     <!-- Toggle button for mobile view -->
     <button
