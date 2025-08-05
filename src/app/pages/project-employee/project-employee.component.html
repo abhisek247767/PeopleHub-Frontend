@@ -1,1 +1,207 @@
-<p>project-employee works!</p>
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <!-- Header -->
+        <div class="card-header bg-gradient-primary text-white py-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h4 class="mb-0 fw-bold">
+                <i class="fas fa-user-projects me-2"></i>My Projects
+              </h4>
+              <small class="opacity-75">Projects you are assigned to</small>
+            </div>
+            <div class="text-end">
+              <span class="badge bg-light text-primary fs-6 px-3 py-2">
+                {{ projects.length }} Project{{ projects.length !== 1 ? 's' : '' }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body p-0">
+          <!-- Loading State -->
+          <div *ngIf="isLoading" class="text-center py-5">
+            <div
+              class="spinner-border text-primary mb-3"
+              role="status"
+              style="width: 3rem; height: 3rem"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <h5 class="text-muted">Loading your projects...</h5>
+            <p class="text-muted mb-0">Please wait while we fetch your assignments</p>
+          </div>
+
+          <!-- Empty State -->
+          <div *ngIf="!isLoading && projects.length === 0" class="text-center py-5">
+            <div class="mb-4">
+              <i class="fas fa-project-diagram fa-4x text-muted opacity-50"></i>
+            </div>
+            <h4 class="text-muted mb-3">No projects assigned</h4>
+            <p class="text-muted mb-4">
+              You are not currently assigned to any projects. Contact your manager for project assignments.
+            </p>
+          </div>
+
+          <!-- Projects Grid -->
+          <div *ngIf="!isLoading && projects.length > 0" class="p-4">
+            <div class="row g-4">
+              <div
+                *ngFor="let project of projects; let i = index"
+                class="col-12 col-md-6 col-lg-4"
+              >
+                <div class="card h-100 border-0 shadow-sm project-card">
+                  <div class="card-header bg-light border-0 pb-2">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <h6 class="card-title mb-1 fw-bold text-truncate" [title]="project.projectName">
+                        {{ project.projectName }}
+                      </h6>
+                      <span [ngClass]="getStatusBadgeClass(project.status)" class="rounded-pill px-2 py-1 small">
+                        {{ project.status | titlecase }}
+                      </span>
+                    </div>
+                    <p class="text-muted small mb-0" [title]="project.projectDescription">
+                      {{ project.projectDescription | slice:0:80 }}{{ (project.projectDescription && project.projectDescription.length > 80) ? '...' : '' }}
+                    </p>
+                  </div>
+
+                  <div class="card-body pt-2">
+                    <!-- Your Role -->
+                    <div class="mb-3">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <span class="text-muted small">Your Role:</span>
+                        <span [ngClass]="getRoleBadgeClass(getUserRole(project))" class="rounded-pill px-2 py-1">
+                          <i [ngClass]="getRoleIcon(getUserRole(project))" class="me-1"></i>
+                          {{ getUserRole(project) }}
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Priority -->
+                    <div class="mb-3">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <span class="text-muted small">Priority:</span>
+                        <span [ngClass]="getPriorityBadgeClass(project.priority)" class="rounded-pill px-2 py-1">
+                          <i class="fas fa-flag me-1"></i>
+                          {{ project.priority | titlecase }}
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Team Info -->
+                    <div class="mb-3">
+                      <h6 class="small fw-semibold text-muted mb-2">Team Structure:</h6>
+                      <div class="small">
+                        <div class="d-flex justify-content-between mb-1">
+                          <span class="text-muted">
+                            <i class="fas fa-user-tie me-1"></i>Delivery Manager:
+                          </span>
+                          <span class="fw-medium">
+                            {{ project.deliveryManagerDetails?.username || 'Assigned' }}
+                          </span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                          <span class="text-muted">
+                            <i class="fas fa-user-cog me-1"></i>Manager:
+                          </span>
+                          <span class="fw-medium">
+                            {{ project.managerDetails?.username || 'Assigned' }}
+                          </span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                          <span class="text-muted">
+                            <i class="fas fa-user-graduate me-1"></i>Lead:
+                          </span>
+                          <span class="fw-medium">
+                            {{ project.leadDetails?.username || 'Assigned' }}
+                          </span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <span class="text-muted">
+                            <i class="fas fa-users me-1"></i>Developers:
+                          </span>
+                          <span class="fw-medium">{{ project.developers.length }}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Dates -->
+                    <div class="mb-2" *ngIf="project.startDate || project.endDate">
+                      <h6 class="small fw-semibold text-muted mb-2">Timeline:</h6>
+                      <div class="small">
+                        <div class="d-flex justify-content-between mb-1" *ngIf="project.startDate">
+                          <span class="text-muted">
+                            <i class="fas fa-calendar-alt me-1"></i>Start:
+                          </span>
+                          <span>{{ project.startDate | date:'MMM dd, yyyy' }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between" *ngIf="project.endDate">
+                          <span class="text-muted">
+                            <i class="fas fa-calendar-check me-1"></i>End:
+                          </span>
+                          <span>{{ project.endDate | date:'MMM dd, yyyy' }}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Budget -->
+                    <div class="mb-2" *ngIf="project.budget">
+                      <div class="d-flex justify-content-between">
+                        <span class="text-muted small">
+                          <i class="fas fa-dollar-sign me-1"></i>Budget:
+                        </span>
+                        <span class="fw-medium">${{ project.budget | number:'1.0-0' }}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-footer bg-transparent border-0 pt-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">
+                        <i class="fas fa-clock me-1"></i>
+                        Created {{ project.createdAt | date:'MMM dd, yyyy' }}
+                      </small>
+                      <span class="badge bg-light text-dark" *ngIf="project.teamSize">
+                        <i class="fas fa-users me-1"></i>{{ project.teamSize }} members
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div *ngIf="projects.length > 0" class="card-footer bg-light border-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">
+              <i class="fas fa-info-circle me-1"></i>
+              Total projects assigned: <strong>{{ projects.length }}</strong>
+            </small>
+            <small class="text-muted">
+              <i class="fas fa-sync-alt me-1"></i>
+              Last updated: {{ currentDate | date:'MMM dd, yyyy h:mm a' }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.project-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+</style>

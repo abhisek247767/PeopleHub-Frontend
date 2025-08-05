@@ -1,0 +1,118 @@
+/* Dark Mode Improvements for Project-Employee Component */
+.dark-mode .card {
+  background-color: #2c2c40;
+  border-color: #3a3a50;
+}
+
+.dark-mode .card-header {
+  background-color: #3a3a50 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .table {
+  color: #e0e0e0;
+}
+
+.dark-mode .table-hover tbody tr:hover {
+  background-color: #3a3a50;
+}
+
+.dark-mode .table thead th {
+  background-color: #3f3f53;
+  color: #ffffff;
+  border-color: #4a4a60;
+}
+
+.dark-mode .table-bordered {
+  border-color: #3a3a50;
+}
+
+.dark-mode .table-bordered th,
+.dark-mode .table-bordered td {
+  border-color: #3a3a50;
+}
+
+.dark-mode .btn-primary {
+  background-color: #2c2c40;
+  border-color: #3a3a50;
+  color: #000000;
+}
+
+.dark-mode .btn-primary:hover {
+  background-color: #3a3a50;
+  border-color: #4a4a60;
+  color: #000000;
+}
+
+.dark-mode .btn-success {
+  background-color: #2c2c40;
+  border-color: #3a3a50;
+  color: #000000;
+}
+
+.dark-mode .btn-success:hover {
+  background-color: #3a3a50;
+  border-color: #4a4a60;
+  color: #000000;
+}
+
+.dark-mode .btn-danger {
+  background-color: #2c2c40;
+  border-color: #3a3a50;
+  color: #000000;
+}
+
+.dark-mode .btn-danger:hover {
+  background-color: #3a3a50;
+  border-color: #4a4a60;
+  color: #000000;
+}
+
+/* Make form icons white in dark mode */
+.dark-mode .card-body form .text-primary {
+  color: #ffffff !important;
+}
+
+.dark-mode .form-control,
+.dark-mode .form-select {
+  background-color: #3f3f53;
+  color: #ffffff;
+  border-color: #4a4a60;
+}
+
+.dark-mode .form-control:focus,
+.dark-mode .form-select:focus {
+  background-color: #3f3f53;
+  color: #ffffff;
+  border-color: #5a5a70;
+  box-shadow: 0 0 0 0.25rem rgba(74, 93, 155, 0.25);
+}
+
+.dark-mode .form-label {
+  color: #e0e0e0;
+}
+
+.dark-mode .badge {
+  border: none;
+}
+
+.dark-mode .badge.bg-primary {
+  background-color: #4a5d9b !important;
+}
+
+.dark-mode .badge.bg-success {
+  background-color: #3a7563 !important;
+}
+
+.dark-mode .badge.bg-info {
+  background-color: #4a7a9b !important;
+}
+
+.dark-mode .badge.bg-warning {
+  background-color: #b3862e !important;
+  color: #ffffff;
+}
+
+.dark-mode .badge.bg-danger {
+  background-color: #a04545 !important;
+}

@@ -1,0 +1,97 @@
+.profile-picture-container {
+  position: relative;
+}
+
+/* Profile image responsive styling */
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+/* Placeholder for when no profile picture exists */
+.placeholder-img {
+  background-color: #f8f9fa;
+  border: 2px dashed #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.placeholder-img:hover {
+  background-color: #e9ecef;
+  border-color: #ffc107;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 575.98px) {
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .placeholder-img .fas {
+    font-size: 1.5rem !important;
+  }
+
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Tablet responsiveness */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .profile-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .placeholder-img .fas {
+    font-size: 2.2rem !important;
+  }
+}
+
+/* Large screens */
+@media (min-width: 992px) {
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .placeholder-img .fas {
+    font-size: 2rem !important;
+  }
+}
+
+/* Form enhancements */
+.form-control:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
+}
+
+/* Center the form content */
+.row.justify-content-center {
+  max-width: 100%;
+}
+
+/* Ensure proper spacing on all devices */
+.g-3 > * {
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .g-md-4 > * {
+    margin-bottom: 1.5rem;
+  }
+}
