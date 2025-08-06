@@ -16,14 +16,14 @@
           <!-- White Button -->
           <button
             class="btn btn-white text-dark border btn-lg shadow-sm add-new-employee"
-            (click)="toggleForm()"
+            (click)="openNewEmployeeForm()"
             [disabled]="isLoading"
           >
             <i
               class="fa-solid me-2"
-              [ngClass]="isFormVisible ? 'fa-times' : 'fa-plus'"
+              [ngClass]="isFormVisible && !isEditMode ? 'fa-times' : 'fa-plus'"
             ></i>
-            {{ isFormVisible ? "Close Form" : "Add New Employee" }}
+            {{ (isFormVisible && !isEditMode) ? "Close Form" : "Add New Employee" }}
           </button>
         </div>
 
@@ -58,7 +58,7 @@
             </p>
             <button
               class="btn btn-primary btn-lg add-first-employee"
-              (click)="toggleForm()"
+              (click)="openNewEmployeeForm()"
               *ngIf="!isFormVisible"
             >
               <i class="fa-solid fa-plus me-2"></i>Add First Employee
@@ -147,6 +147,7 @@
                       <button
                         class="btn btn-sm btn-outline-primary"
                         title="Edit Employee"
+                        (click)="editEmployee(emp)"
                         [disabled]="isLoading">
                         <i class="fas fa-edit"></i>
                       </button>
@@ -195,9 +196,12 @@
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <h5 class="mb-0 fw-bold">
-                <i class="fas fa-user-plus me-2"></i>Add New Employee
+                <i class="fas fa-user-plus me-2" *ngIf="!isEditMode"></i>
+                <i class="fas fa-user-edit me-2" *ngIf="isEditMode"></i>
+                {{ isEditMode ? 'Edit Employee' : 'Add New Employee' }}
               </h5>
-              <small class="opacity-75">Fill in the details below. User account will be created automatically.</small>
+              <small class="opacity-75" *ngIf="!isEditMode">Fill in the details below. User account will be created automatically.</small>
+              <small class="opacity-75" *ngIf="isEditMode">Update employee details below. Leave password empty to keep current password.</small>
             </div>
             <button
               class="btn btn-sm btn-light rounded-circle p-2"
@@ -268,6 +272,7 @@
                   </div>
                 </div>
               </div>
+              <!-- Email (read-only in edit mode) -->
               <div class="col-md-6">
                 <label for="email" class="form-label fw-semibold">
                   <i class="fas fa-envelope me-1 text-primary"></i>Email
@@ -278,10 +283,14 @@
                   id="email"
                   formControlName="email"
                   placeholder="email@example.com"
+                  [readonly]="isEditMode"
                   [ngClass]="{
                     'is-invalid': f['email'].touched && f['email'].errors
                   }"
                 />
+                <div class="text-muted small mt-1" *ngIf="isEditMode">
+                  <i class="fas fa-info-circle me-1"></i>Email cannot be changed
+                </div>
                 <div
                   *ngIf="f['email'].touched && f['email'].errors"
                   class="invalid-feedback"
@@ -332,10 +341,13 @@
                   class="form-control"
                   id="username"
                   formControlName="username"
-                  placeholder="Auto-generated if empty"
+                  [placeholder]="isEditMode ? 'Current username' : 'Auto-generated if empty'"
                 />
-                <div class="text-muted small mt-1">
+                <div class="text-muted small mt-1" *ngIf="!isEditMode">
                   <i class="fas fa-info-circle me-1"></i>Leave empty to auto-generate
+                </div>
+                <div class="text-muted small mt-1" *ngIf="isEditMode">
+                  <i class="fas fa-info-circle me-1"></i>Leave empty to keep current username
                 </div>
               </div>
             </div>
@@ -409,17 +421,18 @@
               </div>
             </div>
 
-            <!-- Password -->
+            <!-- Password (optional in edit mode) -->
             <div class="mb-4">
               <label for="password" class="form-label fw-semibold">
                 <i class="fas fa-lock me-1 text-primary"></i>Password
+                <small class="text-muted" *ngIf="isEditMode">(optional - leave empty to keep current)</small>
               </label>
               <input
                 type="password"
                 class="form-control"
                 id="password"
                 formControlName="password"
-                placeholder="Enter secure password"
+                [placeholder]="isEditMode ? 'Leave empty to keep current password' : 'Enter secure password'"
                 [ngClass]="{
                   'is-invalid': f['password'].touched && f['password'].errors
                 }"
@@ -449,8 +462,9 @@
                 role="status"
                 aria-hidden="true"
               ></span>
-              <i *ngIf="!isLoading" class="fas fa-user-plus me-2"></i>
-              {{ isLoading ? "Adding Employee..." : "Add Employee" }}
+              <i *ngIf="!isLoading && !isEditMode" class="fas fa-user-plus me-2"></i>
+              <i *ngIf="!isLoading && isEditMode" class="fas fa-save me-2"></i>
+              {{ isLoading ? (isEditMode ? 'Updating Employee...' : 'Adding Employee...') : (isEditMode ? 'Update Employee' : 'Add Employee') }}
             </button>
           </form>
         </div>
