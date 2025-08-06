@@ -1,0 +1,75 @@
+<svg width="140" height="45" viewBox="0 0 140 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with animated gradient -->
+  <defs>
+    <linearGradient id="animatedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1">
+        <animate attributeName="stop-color" values="#3b82f6;#8b5cf6;#06b6d4;#3b82f6" dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1">
+        <animate attributeName="stop-color" values="#1d4ed8;#7c3aed;#0891b2;#1d4ed8" dur="3s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    <filter id="glowShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#3b82f650"/>
+    </filter>
+  </defs>
+  
+  <!-- Main logo circle with animated gradient -->
+  <circle cx="22.5" cy="22.5" r="20" fill="url(#animatedGradient)" filter="url(#glowShadow)">
+    <animateTransform attributeName="transform" type="rotate" values="0 22.5 22.5;360 22.5 22.5" dur="20s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- People network design with subtle animations -->
+  <g transform="translate(7, 7)">
+    <!-- Connection lines with pulse effect -->
+    <g opacity="0.3" stroke="#ffffff" stroke-width="1">
+      <line x1="10" y1="10" x2="20" y2="10">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/>
+      </line>
+      <line x1="15" y1="7" x2="15" y2="13">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+      </line>
+      <line x1="8" y1="12" x2="12" y2="8">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" begin="1s" repeatCount="indefinite"/>
+      </line>
+      <line x1="18" y1="8" x2="22" y2="12">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" begin="1.5s" repeatCount="indefinite"/>
+      </line>
+    </g>
+    
+    <!-- Main people figures -->
+    <circle cx="10" cy="10" r="3.5" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.5"/>
+    <path d="M5 22c0-3 2-5 5-5s5 2 5 5" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <circle cx="20" cy="10" r="3.5" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.5"/>
+    <path d="M15 22c0-3 2-5 5-5s5 2 5 5" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <circle cx="15" cy="7" r="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="0.5"/>
+    <path d="M11 19c0-2.5 1.5-4 4-4s4 1.5 4 4" stroke="#fef3c7" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Animated connection dots -->
+    <circle cx="15" cy="15" r="1" fill="#60a5fa" opacity="0.7">
+      <animate attributeName="r" values="1;1.5;1" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="12" cy="12" r="0.8" fill="#60a5fa" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;0.9;0.5" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="18" cy="12" r="0.8" fill="#60a5fa" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;0.9;0.5" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Text "PeopleHub" -->
+  <g font-family="system-ui, -apple-system, sans-serif">
+    <text x="50" y="20" font-size="16" font-weight="700" fill="#1f2937" letter-spacing="-0.5px">People</text>
+    <text x="50" y="36" font-size="16" font-weight="700" fill="#3b82f6" letter-spacing="-0.5px">Hub</text>
+  </g>
+  
+  <!-- Connecting element -->
+  <g opacity="0.4">
+    <line x1="43" y1="22.5" x2="48" y2="22.5" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="45.5" cy="22.5" r="1.5" fill="#3b82f6">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>
