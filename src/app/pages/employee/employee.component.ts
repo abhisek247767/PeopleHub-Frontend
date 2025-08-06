@@ -28,6 +28,10 @@ export class EmployeeComponent implements OnInit {
   employees: IEmployee[] = [];
   isLoading: boolean = false;
   
+  // Edit state
+  isEditMode: boolean = false;
+  editingEmployeeId: string | null = null;
+  
   // Pagination
   currentPage: number = 1;
   totalPages: number = 1;
@@ -64,7 +68,7 @@ export class EmployeeComponent implements OnInit {
       gender: ['', Validators.required],
       department: ['', Validators.required],
       subDepartment: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', this.isEditMode ? [] : [Validators.required, Validators.minLength(6)]], // Password optional in edit mode
       username: [''] // Optional field, will be auto-generated if not provided
     });
   }
@@ -140,12 +144,108 @@ export class EmployeeComponent implements OnInit {
   }
 
   toggleForm(): void {
-    this.isFormVisible = !this.isFormVisible;
-    if (!this.isFormVisible) {
-      this.employeeForm.reset();
-      this.selectedParentDeptId = null;
-      this.childDepartments = [];
+    if (this.isFormVisible) {
+      // Closing the form
+      this.isFormVisible = false;
+      this.resetForm();
+    } else {
+      // Opening the form for new employee
+      this.isFormVisible = true;
+      this.resetForm(); // Ensure it's in create mode
     }
+  }
+
+  openNewEmployeeForm(): void {
+    if (this.isFormVisible && !this.isEditMode) {
+      // Close form if it's already open for new employee
+      this.isFormVisible = false;
+      this.resetForm();
+    } else {
+      // Open form for new employee
+      this.isFormVisible = true;
+      this.resetForm(); // This will set isEditMode to false
+    }
+  }
+
+  resetForm(): void {
+    this.employeeForm.reset();
+    this.selectedParentDeptId = null;
+    this.childDepartments = [];
+    this.isEditMode = false;
+    this.editingEmployeeId = null;
+    this.initializeForm(); // Re-initialize form to reset password validation
+  }
+
+  /**
+   * Open form for editing an employee
+   */
+  editEmployee(employee: IEmployee): void {
+    this.isEditMode = true;
+    this.editingEmployeeId = employee._id;
+    this.isFormVisible = true;
+    
+    // Load the department's child departments first
+    const selectedDept = this.parentDepartments.find(dept => dept.departmentName === employee.department);
+    if (selectedDept) {
+      this.selectedParentDeptId = selectedDept.departmentId;
+      this.loadChildDepartments(this.selectedParentDeptId).then(() => {
+        // Populate the form with employee data
+        this.employeeForm.patchValue({
+          employeeName: employee.employeeName,
+          contactNo: employee.contactNo,
+          email: employee.email,
+          gender: employee.gender,
+          department: employee.department,
+          subDepartment: employee.subDepartment,
+          username: employee.user?.username || ''
+          // Password is left empty intentionally
+        });
+      });
+    } else {
+      // If department not found, just populate the form
+      this.employeeForm.patchValue({
+        employeeName: employee.employeeName,
+        contactNo: employee.contactNo,
+        email: employee.email,
+        gender: employee.gender,
+        department: employee.department,
+        subDepartment: employee.subDepartment,
+        username: employee.user?.username || ''
+      });
+    }
+    
+    // Re-initialize form to update password validation
+    this.initializeForm();
+    // Re-patch values after re-initialization
+    this.employeeForm.patchValue({
+      employeeName: employee.employeeName,
+      contactNo: employee.contactNo,
+      email: employee.email,
+      gender: employee.gender,
+      department: employee.department,
+      subDepartment: employee.subDepartment,
+      username: employee.user?.username || ''
+    });
+  }
+
+  /**
+   * Load child departments and return a promise
+   */
+  private loadChildDepartments(parentDeptId: number): Promise<void> {
+    return new Promise((resolve) => {
+      this.masterService.getAllChildDeptBy(parentDeptId).subscribe({
+        next: (res: IApiResponse) => {
+          if (res.result && res.data) {
+            this.childDepartments = res.data;
+          }
+          resolve();
+        },
+        error: (err) => {
+          console.error('Error loading sub-departments:', err);
+          resolve();
+        }
+      });
+    });
   }
 
   onSubmit(): void {
@@ -157,41 +257,78 @@ export class EmployeeComponent implements OnInit {
 
     this.isLoading = true;
     
-    const formData: IEmployeeCreateRequest = this.employeeForm.value;
-    
-    // Auto-generate username if not provided
-    if (!formData.username || formData.username.trim() === '') {
-      formData.username = formData.employeeName.toLowerCase().replace(/\s+/g, '');
-    }
-
-    this.employeeService.addEmployee(formData).subscribe({
-      next: (response: IEmployeeCreateResponse) => {
-        const message = response.userCreated 
-          ? 'Employee and user account created successfully!' 
-          : 'Employee created successfully! (User account already existed)';
-        
-        this.toastr.success(message, 'Success');
-        this.employeeForm.reset();
-        this.isFormVisible = false;
-        this.selectedParentDeptId = null;
-        this.childDepartments = [];
-        this.loadEmployees(); // Refresh the list
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Error creating employee:', err);
-        let errorMessage = 'Failed to add employee';
-        
-        if (err.error?.message) {
-          errorMessage = err.error.message;
-        } else if (err.message) {
-          errorMessage = err.message;
-        }
-        
-        this.toastr.error(errorMessage, 'Error');
-        this.isLoading = false;
+    if (this.isEditMode && this.editingEmployeeId) {
+      // Update existing employee
+      const updateData: Partial<IEmployeeCreateRequest> = { ...this.employeeForm.value };
+      
+      // Remove password if it's empty (don't update password)
+      if (!updateData.password || updateData.password.trim() === '') {
+        delete updateData.password;
       }
-    });
+      
+      // Remove username from update if it's the same or empty
+      if (!updateData.username || updateData.username.trim() === '') {
+        delete updateData.username;
+      }
+
+      this.employeeService.updateEmployee(this.editingEmployeeId, updateData).subscribe({
+        next: (response: IEmployee) => {
+          this.toastr.success('Employee updated successfully!', 'Success');
+          this.resetForm();
+          this.isFormVisible = false;
+          this.loadEmployees(); // Refresh the list
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Error updating employee:', err);
+          let errorMessage = 'Failed to update employee';
+          
+          if (err.error?.message) {
+            errorMessage = err.error.message;
+          } else if (err.message) {
+            errorMessage = err.message;
+          }
+          
+          this.toastr.error(errorMessage, 'Error');
+          this.isLoading = false;
+        }
+      });
+    } else {
+      // Create new employee
+      const formData: IEmployeeCreateRequest = this.employeeForm.value;
+      
+      // Auto-generate username if not provided
+      if (!formData.username || formData.username.trim() === '') {
+        formData.username = formData.employeeName.toLowerCase().replace(/\s+/g, '');
+      }
+
+      this.employeeService.addEmployee(formData).subscribe({
+        next: (response: IEmployeeCreateResponse) => {
+          const message = response.userCreated 
+            ? 'Employee and user account created successfully!' 
+            : 'Employee created successfully! (User account already existed)';
+          
+          this.toastr.success(message, 'Success');
+          this.resetForm();
+          this.isFormVisible = false;
+          this.loadEmployees(); // Refresh the list
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Error creating employee:', err);
+          let errorMessage = 'Failed to add employee';
+          
+          if (err.error?.message) {
+            errorMessage = err.error.message;
+          } else if (err.message) {
+            errorMessage = err.message;
+          }
+          
+          this.toastr.error(errorMessage, 'Error');
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
   /**
