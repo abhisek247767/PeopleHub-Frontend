@@ -9049,6 +9049,34 @@ textarea.form-control-lg {
     border-radius: 0;
 }
 
+
+.dark-mode .modal-content {
+    background-color: #1f2937; 
+    color: #f9fafb; 
+    border: 0.0625rem solid rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .modal-title {
+    color: #f9fafb;
+}
+
+.dark-mode .modal-body {
+    color: #e5e7eb;
+}
+
+
+
+.dark-mode .modal-backdrop {
+    background-color: #000000;
+    opacity: 0.7;
+}
+
+
 @media (max-width: 575.98px) {
     .modal-fullscreen-sm-down {
         width: 100vw;

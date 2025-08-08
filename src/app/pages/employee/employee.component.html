@@ -154,7 +154,7 @@
                       <button
                         class="btn btn-sm btn-outline-danger"
                         title="Delete Employee"
-                        (click)="deleteEmployee(emp)"
+                        (click)="openDeleteModal(emp)"
                         [disabled]="isLoading">
                         <i class="fas fa-trash"></i>
                       </button>
@@ -472,3 +472,12 @@
     </div>
   </div>
 </div>
+<app-confirm-modal
+  [title]="'Delete Employee'"
+  [message]="'Are you sure you want to delete ' + selectedEmployee?.employeeName + '? This action cannot be undone.'"
+  [confirmText]="'Yes, Delete'"
+  [cancelText]="'Cancel'"
+  [show]="showDeleteModal"
+  (confirmed)="confirmDelete()"
+  (cancelled)="cancelDelete()">
+</app-confirm-modal>
