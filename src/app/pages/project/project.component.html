@@ -49,9 +49,7 @@
               <i class="fas fa-project-diagram fa-4x text-muted opacity-50"></i>
             </div>
             <h4 class="text-muted mb-3">No projects found</h4>
-            <p class="text-muted mb-4">
-              Start by creating your first project!
-            </p>
+            <p class="text-muted mb-4">Start by creating your first project!</p>
             <button
               class="btn btn-primary btn-lg"
               (click)="openForm()"
@@ -100,22 +98,35 @@
                   <td class="px-4 py-3">
                     <div>
                       <div class="fw-semibold">{{ project.projectName }}</div>
-                      <small class="text-muted">{{ project.projectDescription | slice:0:50 }}...</small>
+                      <small class="text-muted"
+                        >{{
+                          project.projectDescription | slice : 0 : 50
+                        }}...</small
+                      >
                     </div>
                   </td>
                   <td class="px-4 py-3">
                     <span class="text-primary">
-                      {{ project.deliveryManagerDetails?.username || getEmployeeName(project.deliveryManager) }}
+                      {{
+                        project.deliveryManagerDetails?.username ||
+                          getEmployeeName(project.deliveryManager)
+                      }}
                     </span>
                   </td>
                   <td class="px-4 py-3">
                     <span class="text-info">
-                      {{ project.managerDetails?.username || getEmployeeName(project.manager) }}
+                      {{
+                        project.managerDetails?.username ||
+                          getEmployeeName(project.manager)
+                      }}
                     </span>
                   </td>
                   <td class="px-4 py-3">
                     <span class="text-success">
-                      {{ project.leadDetails?.username || getEmployeeName(project.lead) }}
+                      {{
+                        project.leadDetails?.username ||
+                          getEmployeeName(project.lead)
+                      }}
                     </span>
                   </td>
                   <td class="px-4 py-3">
@@ -123,42 +134,61 @@
                       <span
                         *ngFor="let devId of project.developers"
                         class="badge bg-secondary rounded-pill"
-                        style="font-size: 0.7em;">
+                        style="font-size: 0.7em"
+                      >
                         {{ getEmployeeName(devId) }}
                       </span>
-                      <span *ngIf="project.developers.length === 0" class="text-muted small">
+                      <span
+                        *ngIf="project.developers.length === 0"
+                        class="text-muted small"
+                      >
                         No developers assigned
                       </span>
                     </div>
                   </td>
                   <td class="px-4 py-3">
-                    <span [ngClass]="getStatusBadgeClass(project.status)" class="rounded-pill px-2 py-1">
+                    <span
+                      [ngClass]="getStatusBadgeClass(project.status)"
+                      class="rounded-pill px-2 py-1"
+                    >
                       {{ project.status | titlecase }}
                     </span>
                   </td>
                   <td class="px-4 py-3">
-                    <span [ngClass]="getPriorityBadgeClass(project.priority)" class="rounded-pill px-2 py-1">
+                    <span
+                      [ngClass]="getPriorityBadgeClass(project.priority)"
+                      class="rounded-pill px-2 py-1"
+                    >
                       {{ project.priority | titlecase }}
                     </span>
                   </td>
                   <td class="px-4 py-3 text-center">
-                    <div class="btn-group" role="group" *ngIf="canPerformAdminActions()">
+                    <div
+                      class="btn-group "
+                      role="group"
+                      *ngIf="canPerformAdminActions()"
+                    >
                       <button
                         class="btn btn-sm btn-outline-primary"
                         title="Edit Project"
                         (click)="editProject(project)"
-                        [disabled]="isLoading">
+                        [disabled]="isLoading"
+                      >
                         <i class="fas fa-edit"></i>
                       </button>
                       <button
                         class="btn btn-sm btn-outline-danger"
                         title="Delete Project"
                         (click)="deleteProject(project)"
-                        [disabled]="isLoading">
+                        [disabled]="isLoading"
+                      >
                         <i class="fas fa-trash"></i>
                       </button>
                     </div>
-                    <div *ngIf="!canPerformAdminActions()" class="text-muted small">
+                    <div
+                      *ngIf="!canPerformAdminActions()"
+                      class="text-muted small"
+                    >
                       <i class="fas fa-lock"></i> Admin Only
                     </div>
                   </td>
@@ -175,8 +205,11 @@
             <div class="d-flex justify-content-between align-items-center">
               <small class="text-muted">
                 <i class="fas fa-info-circle me-1"></i>
-                Showing <strong>{{ projects.length }}</strong> of <strong>{{ totalProjects }}</strong> projects
-                <span *ngIf="totalPages > 1"> (Page {{ currentPage }} of {{ totalPages }})</span>
+                Showing <strong>{{ projects.length }}</strong> of
+                <strong>{{ totalProjects }}</strong> projects
+                <span *ngIf="totalPages > 1">
+                  (Page {{ currentPage }} of {{ totalPages }})</span
+                >
               </small>
               <small class="text-muted">
                 <i class="fas fa-project-diagram me-1"></i>
@@ -196,9 +229,13 @@
             <div>
               <h5 class="mb-0 fw-bold">
                 <i class="fas fa-plus-circle me-2"></i>
-                {{ isEditMode ? 'Edit Project' : 'Add New Project' }}
+                {{ isEditMode ? "Edit Project" : "Add New Project" }}
               </h5>
-              <small class="opacity-75">{{ isEditMode ? 'Update project details' : 'Fill in the details below' }}</small>
+              <small class="opacity-75">{{
+                isEditMode
+                  ? "Update project details"
+                  : "Fill in the details below"
+              }}</small>
             </div>
             <button
               class="btn btn-sm btn-light rounded-circle p-2"
@@ -214,7 +251,8 @@
             <!-- Project Name -->
             <div class="mb-4">
               <label for="projectName" class="form-label fw-semibold">
-                <i class="fas fa-project-diagram me-1 text-primary"></i>Project Name
+                <i class="fas fa-project-diagram me-1 text-primary"></i>Project
+                Name
               </label>
               <input
                 type="text"
@@ -223,7 +261,8 @@
                 formControlName="projectName"
                 placeholder="Enter project name"
                 [ngClass]="{
-                  'is-invalid': f['projectName'].touched && f['projectName'].errors
+                  'is-invalid':
+                    f['projectName'].touched && f['projectName'].errors
                 }"
               />
               <div
@@ -251,11 +290,16 @@
                 rows="3"
                 placeholder="Enter project description"
                 [ngClass]="{
-                  'is-invalid': f['projectDescription'].touched && f['projectDescription'].errors
+                  'is-invalid':
+                    f['projectDescription'].touched &&
+                    f['projectDescription'].errors
                 }"
               ></textarea>
               <div
-                *ngIf="f['projectDescription'].touched && f['projectDescription'].errors"
+                *ngIf="
+                  f['projectDescription'].touched &&
+                  f['projectDescription'].errors
+                "
                 class="invalid-feedback"
               >
                 <div *ngIf="f['projectDescription'].errors?.['required']">
@@ -271,7 +315,8 @@
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <label for="deliveryManager" class="form-label fw-semibold">
-                  <i class="fas fa-user-tie me-1 text-primary"></i>Delivery Manager
+                  <i class="fas fa-user-tie me-1 text-primary"></i>Delivery
+                  Manager
                 </label>
                 <div class="position-relative">
                   <input
@@ -284,13 +329,15 @@
                     (blur)="onBlurDeliveryManager()"
                     placeholder="Search delivery manager..."
                     [ngClass]="{
-                      'is-invalid': f['deliveryManager'].touched && f['deliveryManager'].errors
+                      'is-invalid':
+                        f['deliveryManager'].touched &&
+                        f['deliveryManager'].errors
                     }"
                   />
                   <div
                     *ngIf="showDeliveryManagerDropdown"
                     class="dropdown-menu show position-absolute w-100 mt-1"
-                    style="max-height: 200px; overflow-y: auto; z-index: 1000;"
+                    style="max-height: 200px; overflow-y: auto; z-index: 1000"
                   >
                     <div
                       *ngFor="let emp of filteredDeliveryManagers"
@@ -312,7 +359,9 @@
                   </div>
                 </div>
                 <div
-                  *ngIf="f['deliveryManager'].touched && f['deliveryManager'].errors"
+                  *ngIf="
+                    f['deliveryManager'].touched && f['deliveryManager'].errors
+                  "
                   class="invalid-feedback d-block"
                 >
                   Delivery Manager is required
@@ -339,7 +388,7 @@
                   <div
                     *ngIf="showManagerDropdown"
                     class="dropdown-menu show position-absolute w-100 mt-1"
-                    style="max-height: 200px; overflow-y: auto; z-index: 1000;"
+                    style="max-height: 200px; overflow-y: auto; z-index: 1000"
                   >
                     <div
                       *ngFor="let emp of filteredManagers"
@@ -391,7 +440,7 @@
                 <div
                   *ngIf="showLeadDropdown"
                   class="dropdown-menu show position-absolute w-100 mt-1"
-                  style="max-height: 200px; overflow-y: auto; z-index: 1000;"
+                  style="max-height: 200px; overflow-y: auto; z-index: 1000"
                 >
                   <div
                     *ngFor="let emp of filteredLeads"
@@ -432,13 +481,13 @@
                   <span
                     *ngFor="let dev of getSelectedDevelopers()"
                     class="badge bg-primary d-flex align-items-center gap-1"
-                    style="font-size: 0.8em; padding: 0.5rem 0.75rem;"
+                    style="font-size: 0.8em; padding: 0.5rem 0.75rem"
                   >
                     {{ dev.employeeName }}
                     <button
                       type="button"
                       class="btn-close btn-close-white"
-                      style="font-size: 0.6em;"
+                      style="font-size: 0.6em"
                       (click)="removeDeveloper(dev.user_id)"
                       title="Remove developer"
                     ></button>
@@ -458,13 +507,14 @@
                   (blur)="onBlurDevelopers()"
                   placeholder="Search and add developers..."
                   [ngClass]="{
-                    'is-invalid': f['developers'].touched && f['developers'].errors
+                    'is-invalid':
+                      f['developers'].touched && f['developers'].errors
                   }"
                 />
                 <div
                   *ngIf="showDevelopersDropdown"
                   class="dropdown-menu show position-absolute w-100 mt-1"
-                  style="max-height: 250px; overflow-y: auto; z-index: 1000;"
+                  style="max-height: 250px; overflow-y: auto; z-index: 1000"
                 >
                   <div
                     *ngFor="let emp of getFilteredDevelopers()"
@@ -487,14 +537,19 @@
                     *ngIf="getFilteredDevelopers().length === 0"
                     class="dropdown-item-text text-muted"
                   >
-                    <span *ngIf="developersSearch.length === 0">Start typing to search for developers</span>
-                    <span *ngIf="developersSearch.length > 0">No employees found</span>
+                    <span *ngIf="developersSearch.length === 0"
+                      >Start typing to search for developers</span
+                    >
+                    <span *ngIf="developersSearch.length > 0"
+                      >No employees found</span
+                    >
                   </div>
                 </div>
               </div>
 
               <div class="text-muted small mt-1">
-                <i class="fas fa-info-circle me-1"></i>Search and click to add developers to the project
+                <i class="fas fa-info-circle me-1"></i>Search and click to add
+                developers to the project
               </div>
               <div
                 *ngIf="f['developers'].touched && f['developers'].errors"
@@ -544,7 +599,8 @@
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <label for="startDate" class="form-label fw-semibold">
-                  <i class="fas fa-calendar-alt me-1 text-primary"></i>Start Date
+                  <i class="fas fa-calendar-alt me-1 text-primary"></i>Start
+                  Date
                   <small class="text-muted">(optional)</small>
                 </label>
                 <input
@@ -556,7 +612,8 @@
               </div>
               <div class="col-md-6">
                 <label for="endDate" class="form-label fw-semibold">
-                  <i class="fas fa-calendar-check me-1 text-primary"></i>End Date
+                  <i class="fas fa-calendar-check me-1 text-primary"></i>End
+                  Date
                   <small class="text-muted">(optional)</small>
                 </label>
                 <input
@@ -581,7 +638,15 @@
                 aria-hidden="true"
               ></span>
               <i *ngIf="!isLoading" class="fas fa-save me-2"></i>
-              {{ isLoading ? (isEditMode ? 'Updating...' : 'Creating...') : (isEditMode ? 'Update Project' : 'Create Project') }}
+              {{
+                isLoading
+                  ? isEditMode
+                    ? "Updating..."
+                    : "Creating..."
+                  : isEditMode
+                  ? "Update Project"
+                  : "Create Project"
+              }}
             </button>
           </form>
         </div>
