@@ -38,12 +38,14 @@
 }
 
 /* Form Control Enhancements */
-.form-control, .form-select {
+.form-control,
+.form-select {
   transition: all 0.3s ease;
   border-radius: 6px;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
   box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
   transform: translateY(-1px);
 }
@@ -85,8 +87,10 @@
 
 /* Base Dark Mode */
 .dark-mode {
-  background-color: #1e1e2f; /* Slightly bluish dark */
-  color: #e0e0e0; /* Light grey for readability */
+  background-color: #1e1e2f;
+  /* Slightly bluish dark */
+  color: #e0e0e0;
+  /* Light grey for readability */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -269,6 +273,7 @@
 .dark-mode ::-webkit-scrollbar-thumb:hover {
   background-color: #5a5a70;
 }
+
 /* DARK MODE: Make all text white */
 .dark-mode {
   color: #ffffff !important;
@@ -289,6 +294,16 @@
 
 /* Ensure buttons with text-dark class keep black text in dark mode */
 .dark-mode .btn.text-dark {
+  color: #000000 !important;
+}
+
+.dark-mode .btn-group .btn-outline-primary {
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .btn-group .btn-outline-primary:hover {
+  background-color: #ffffff !important;
   color: #000000 !important;
 }
 
@@ -314,9 +329,11 @@
 .dark-mode small {
   color: #ffffff !important;
 }
+
 /* Dark mode yellow sun icon */
 body.dark-mode .bi-sun-fill {
-  color: #ffc107 !important; /* Bootstrap's warning/yellow */
+  color: #ffc107 !important;
+  /* Bootstrap's warning/yellow */
 }
 
 /* Dark Mode Scrollbar */
@@ -343,14 +360,14 @@ body.dark-mode .bi-sun-fill {
 }
 
 /* Dark Mode Form Control Enhancements */
-.dark-mode .form-control, 
+.dark-mode .form-control,
 .dark-mode .form-select {
   background-color: #2c2c40;
   border-color: #3a3a50;
   color: #e0e0e0;
 }
 
-.dark-mode .form-control:focus, 
+.dark-mode .form-control:focus,
 .dark-mode .form-select:focus {
   background-color: #2c2c40;
   border-color: #4a4a60;
@@ -361,4 +378,3 @@ body.dark-mode .bi-sun-fill {
 .dark-mode .card {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-
