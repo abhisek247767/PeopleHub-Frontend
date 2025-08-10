@@ -44,20 +44,7 @@ export class EmployeeComponent implements OnInit {
   selectedParentDeptId: number | null = null;
 
   // Common sub-departments that are always available
-  commonSubDepartments = [
-    'Administration',
-    'Operations', 
-    'Support',
-    'Management',
-    'Research & Development',
-    'Quality Assurance',
-    'Training',
-    'General',
-    'Internship',
-    'Contract',
-    'Temporary',
-    'Other'
-  ];
+  // commonSubDepartments = [];
 
   // Filter state
   filters = {
@@ -376,16 +363,6 @@ export class EmployeeComponent implements OnInit {
    */
   getUserRole(employee: IEmployee): string {
     return employee.user?.role || 'employee';
-  }
-
-  /**
-   * Get all available sub-departments (dynamic + static)
-   */
-  getAllAvailableSubDepartments(): string[] {
-    const dynamicDepts = this.childDepartments.map(dept => dept.departmentName);
-    const allDepts = [...dynamicDepts, ...this.commonSubDepartments];
-    // Remove duplicates
-    return [...new Set(allDepts)];
   }
 
   /**

@@ -402,41 +402,19 @@
                   Select sub-department
                 </option>
                 
-                <!-- Common/Default Sub-Departments -->
-                <optgroup label="Common Sub-Departments" *ngIf="selectedParentDeptId && childDepartments.length === 0">
-                  <option value="Administration">Administration</option>
-                  <option value="Operations">Operations</option>
-                  <option value="Support">Support</option>
-                  <option value="Management">Management</option>
-                  <option value="Research & Development">Research & Development</option>
-                  <option value="Quality Assurance">Quality Assurance</option>
-                  <option value="Training">Training</option>
-                  <option value="General">General</option>
-                </optgroup>
                 
-                <!-- Dynamic Sub-Departments from Backend -->
-                <optgroup label="Department Specific" *ngIf="childDepartments.length > 0">
+               
                   <option
                     *ngFor="let subDept of childDepartments"
                     [value]="subDept.departmentName"
                   >
                     {{ subDept.departmentName }}
                   </option>
-                </optgroup>
+              
                 
-                <!-- Additional Common Options that always appear -->
-                <optgroup label="Other Options">
-                  <option value="Internship">Internship</option>
-                  <option value="Contract">Contract</option>
-                  <option value="Temporary">Temporary</option>
-                  <option value="Other">Other</option>
-                </optgroup>
               </select>
               <div class="text-muted small mt-1" *ngIf="!selectedParentDeptId">
                 <i class="fas fa-info-circle me-1"></i>Select a department first
-              </div>
-              <div class="text-muted small mt-1" *ngIf="selectedParentDeptId && childDepartments.length === 0">
-                <i class="fas fa-info-circle me-1"></i>Showing default sub-departments
               </div>
               <div
                 *ngIf="f['subDepartment'].touched && f['subDepartment'].errors"
