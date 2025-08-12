@@ -11,6 +11,7 @@
         style="object-fit: contain; transition: all 0.3s ease; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.1));"
       />
     </a>
+    
     <!-- Toggle button for mobile view -->
     <button
       class="navbar-toggler"
@@ -23,6 +24,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <!-- Navbar Links -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -61,47 +63,58 @@
             >Project Employee</a>
         </li>
       </ul>
-      <!-- Right-aligned section: User name, Theme Toggle and Logout button -->
-<ul class="navbar-nav ms-auto">
-  <!-- Theme Toggle -->
-  <li class="nav-item d-flex align-items-center me-3">
-    <button
-      class="btn btn-link text-decoration-none"
-      (click)="toggleTheme()"
-      [attr.title]="currentTheme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'"
-    >
-     <i
-  class="bi"
-  [ngClass]="{
-    'bi-moon-fill text-dark': currentTheme === 'light',
-    'bi-sun-fill ': currentTheme === 'dark'
-  }"
-  style="font-size: 1.5rem;"
-></i>
+      
+      <!-- Right-aligned section with proper spacing -->
+      <div class="d-flex align-items-center gap-3">
+        <!-- Theme Toggle with better spacing -->
+        <div class="nav-item">
+          <button
+            class="btn btn-link text-decoration-none p-2"
+            (click)="toggleTheme()"
+            [attr.title]="currentTheme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'"
+          >
+            <i
+              class="bi"
+              [ngClass]="{
+                'bi-moon-fill text-dark': currentTheme === 'light',
+                'bi-sun-fill text-warning': currentTheme === 'dark'
+              }"
+              style="font-size: 1.25rem;"
+            ></i>
+          </button>
+        </div>
 
-    </button>
-  </li>
+        <!-- User Avatar Section with improved spacing -->
+        <div class="nav-item">
+          <div class="d-flex align-items-center gap-2">
+            <div 
+              class="user-avatar"
+              [ngClass]="{
+                'with-image': userAvatar,
+                'with-letter': !userAvatar
+              }"
+              [attr.title]="'Go to Settings - ' + userName"
+              (click)="goToSettings()"
+            >
+              <img *ngIf="userAvatar" [src]="userAvatar" [alt]="userName + ' Avatar'" (error)="onAvatarError()"/>
+              <span *ngIf="!userAvatar && userName">{{ getFirstLetter(userName) }}</span>
+            </div>
+            <span class="username-text d-none d-md-inline">{{ userName || 'User' }}</span>
+          </div>
+        </div>
 
-  <!-- Username and Logout -->
-  <li class="nav-item d-flex align-items-center">
-    <span
-      class="navbar-text me-2 text-dark"
-      [ngClass]="{ 'text-light': currentTheme === 'dark' }"
-      style="cursor: pointer"
-      (click)="goToSettings()"
-    >
-      Welcome, {{ userName }}
-    </span>
-    <button
-      class="btn btn-primary btn-sm"
-      type="button"
-      (click)="logout()"
-    >
-      Logout
-    </button>
-  </li>
-</ul>
-
+        <!-- Logout Button with better spacing -->
+        <div class="nav-item">
+          <button
+            class="btn btn-outline-danger btn-sm px-3"
+            type="button"
+            (click)="logout()"
+          >
+            <i class="bi bi-box-arrow-right me-1"></i>
+            <span class="d-none d-sm-inline">Logout</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
