@@ -14,12 +14,12 @@ import {
 } from '../../model/interface/master';
 import { MasterService } from './../../service/master.service';
 import { EmployeeService } from '../../employee.service';
-import { AuthService } from '../auth/service/auth.service';
+import { ConfirmModalComponent } from "../../shared/confirm-modal/confirm-modal.component";
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule, ConfirmModalComponent],
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
@@ -32,6 +32,11 @@ export class EmployeeComponent implements OnInit {
   // Edit state
   isEditMode: boolean = false;
   editingEmployeeId: string | null = null;
+selectedEmployee?: IEmployee | null = null;
+showDeleteModal = false;
+
+
+
   
   // Pagination
   currentPage: number = 1;
@@ -42,9 +47,6 @@ export class EmployeeComponent implements OnInit {
   parentDepartments: IParentDept[] = [];
   childDepartments: IChildDept[] = [];
   selectedParentDeptId: number | null = null;
-
-  // Common sub-departments that are always available
-  // commonSubDepartments = [];
 
   // Filter state
   filters = {
@@ -338,25 +340,39 @@ export class EmployeeComponent implements OnInit {
   /**
    * Delete employee with confirmation
    */
-  deleteEmployee(employee: IEmployee): void {
-    if (confirm(`Are you sure you want to delete ${employee.employeeName}? This action cannot be undone.`)) {
-      // Only call employeeService.deleteEmployee, never projectService.deleteProject
-      this.employeeService.deleteEmployee(employee._id).subscribe({
-        next: (response) => {
-          this.toastr.success('Employee deleted successfully', 'Success');
-          this.loadEmployees(); // Refresh the list
-        },
-        error: (err) => {
-          // If error is about assigned projects, show error and do NOT delete any project
-          if (err.error?.message?.includes('assigned to active projects')) {
-            this.toastr.error('Cannot delete employee: assigned to active projects.', 'Error');
-          } else {
-            this.toastr.error(err.error?.message || 'Failed to delete employee', 'Error');
-          }
-        }
-      });
+openDeleteModal(employee: IEmployee) {
+  this.selectedEmployee = employee;
+  this.showDeleteModal = true;
+}
+
+// called when user confirms in modal
+confirmDelete(): void {
+  if (!this.selectedEmployee) return;
+  this.isLoading = true;
+
+  this.employeeService.deleteEmployee(this.selectedEmployee._id).subscribe({
+    next: (response) => {
+      this.toastr.success('Employee deleted successfully', 'Success');
+      this.loadEmployees(); // refresh list
+      this.showDeleteModal = false;
+      this.selectedEmployee = null;
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error('Error deleting employee:', err);
+      this.toastr.error(err.error?.message || 'Failed to delete employee', 'Error');
+      this.isLoading = false;
+      this.showDeleteModal = false;
+      this.selectedEmployee = null;
     }
-  }
+  });
+}
+
+cancelDelete(): void {
+  this.showDeleteModal = false;
+  this.selectedEmployee = null;
+}
+
 
   /**
    * Get user role for display
