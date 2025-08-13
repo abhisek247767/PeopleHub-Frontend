@@ -14,6 +14,9 @@ import { EmployeeService } from '../../employee.service';
   styleUrl: './project.component.css'
 })
 export class ProjectComponent implements OnInit {
+  showDeleteModal: boolean = false;
+  isDarkMode: boolean = false;
+  projectToDelete: IProject | null = null;
   projectForm!: FormGroup;
   projects: IProject[] = [];
   employees: IEmployee[] = [];
@@ -63,6 +66,19 @@ export class ProjectComponent implements OnInit {
     this.initializeForm();
     this.loadProjects();
     this.loadEmployees();
+    this.detectDarkMode();
+
+  }
+
+  detectDarkMode(): void {
+    // Detect dark mode by checking body or a global class
+    this.isDarkMode = document.body.classList.contains('dark-mode');
+    // Optionally, listen for changes
+    const observer = new MutationObserver(() => {
+      this.isDarkMode = document.body.classList.contains('dark-mode');
+      this.cdr.detectChanges();
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
   }
 
   initializeForm(): void {
@@ -256,29 +272,37 @@ export class ProjectComponent implements OnInit {
   onBlurDeliveryManager(): void {
     // Delay hiding to allow selection click
     setTimeout(() => {
-      this.showDeliveryManagerDropdown = false;
-    }, 200);
+      if (!document.activeElement || !document.activeElement.classList.contains('dropdown-item')) {
+        this.showDeliveryManagerDropdown = false;
+      }
+    }, 250);
   }
 
   onBlurManager(): void {
     // Delay hiding to allow selection click
     setTimeout(() => {
-      this.showManagerDropdown = false;
-    }, 200);
+      if (!document.activeElement || !document.activeElement.classList.contains('dropdown-item')) {
+        this.showManagerDropdown = false;
+      }
+    }, 250);
   }
 
   onBlurLead(): void {
     // Delay hiding to allow selection click
     setTimeout(() => {
-      this.showLeadDropdown = false;
-    }, 200);
+      if (!document.activeElement || !document.activeElement.classList.contains('dropdown-item')) {
+        this.showLeadDropdown = false;
+      }
+    }, 250);
   }
 
   onBlurDevelopers(): void {
     // Delay hiding to allow selection click
     setTimeout(() => {
-      this.showDevelopersDropdown = false;
-    }, 200);
+      if (!document.activeElement || !document.activeElement.classList.contains('dropdown-item')) {
+        this.showDevelopersDropdown = false;
+      }
+    }, 250);
   }
 
   // Helper methods for template
@@ -497,18 +521,30 @@ export class ProjectComponent implements OnInit {
   }
 
   deleteProject(project: IProject): void {
-    if (confirm(`Are you sure you want to delete "${project.projectName}"? This action cannot be undone.`)) {
-      this.projectService.deleteProject(project._id).subscribe({
+    this.projectToDelete = project;
+    this.showDeleteModal = true;
+  }
+
+  confirmDeleteProject(): void {
+    if (this.projectToDelete) {
+      this.projectService.deleteProject(this.projectToDelete._id).subscribe({
         next: (response) => {
           this.toastr.success('Project deleted successfully', 'Success');
           this.loadProjects();
+          this.closeDeleteModal();
         },
         error: (err) => {
           console.error('Error deleting project:', err);
           this.toastr.error(err.error?.message || 'Failed to delete project', 'Error');
+          this.closeDeleteModal();
         }
       });
     }
+  }
+
+  closeDeleteModal(): void {
+    this.showDeleteModal = false;
+    this.projectToDelete = null;
   }
 
   openForm(): void {
