@@ -154,7 +154,7 @@
                       <button
                         class="btn btn-sm btn-outline-danger"
                         title="Delete Employee"
-                        (click)="deleteEmployee(emp)"
+                        (click)="openDeleteModal(emp)"
                         [disabled]="isLoading">
                         <i class="fas fa-trash"></i>
                       </button>
@@ -396,22 +396,19 @@
                   'is-invalid':
                     f['subDepartment'].touched && f['subDepartment'].errors
                 }"
-                [disabled]="!selectedParentDeptId"
+                [disabled]="
+                  !selectedParentDeptId || childDepartments.length === 0
+                "
               >
                 <option value="" disabled selected>
                   Select sub-department
                 </option>
-                
-                
-               
-                  <option
-                    *ngFor="let subDept of childDepartments"
-                    [value]="subDept.departmentName"
-                  >
-                    {{ subDept.departmentName }}
-                  </option>
-              
-                
+                <option
+                  *ngFor="let subDept of childDepartments"
+                  [value]="subDept.departmentName"
+                >
+                  {{ subDept.departmentName }}
+                </option>
               </select>
               <div class="text-muted small mt-1" *ngIf="!selectedParentDeptId">
                 <i class="fas fa-info-circle me-1"></i>Select a department first
@@ -475,3 +472,12 @@
     </div>
   </div>
 </div>
+<app-confirm-modal
+  [title]="'Delete Employee'"
+  [message]="'Are you sure you want to delete ' + selectedEmployee?.employeeName + '? This action cannot be undone.'"
+  [confirmText]="'Yes, Delete'"
+  [cancelText]="'Cancel'"
+  [show]="showDeleteModal"
+  (confirmed)="confirmDelete()"
+  (cancelled)="cancelDelete()">
+</app-confirm-modal>
