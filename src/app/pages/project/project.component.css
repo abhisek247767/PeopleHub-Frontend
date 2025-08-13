@@ -1,3 +1,26 @@
+/* Dark mode dropdown menu styling */
+.dark-mode .dropdown-menu.show {
+  background: #222 !important;
+  color: #fff !important;
+  border: 1px solid #444 !important;
+}
+.dark-mode .dropdown-menu.show .dropdown-item {
+  color: #fff !important;
+}
+.dark-mode .dropdown-menu.show .dropdown-item-text {
+  color: #bbb !important;
+}
+/* Dark mode dropdown input styling */
+.dark-mode-input {
+  background: #222 !important;
+  color: #fff !important;
+  border: 1px solid #444 !important;
+}
+.delivery-dropdown-input,
+.manager-dropdown-input,
+.lead-dropdown-input {
+  transition: background 0.2s, color 0.2s;
+}
 
 /* Dark Mode Improvements for Project Component */
 .dark-mode .card {
