@@ -1,31 +1,22 @@
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth/service/auth.service';
+import { environment } from '../../environments/environment';  // Import your env config
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive
-  ],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
 })
-export class LayoutComponent {
-  private userDetails: any;
+export class LayoutComponent implements OnInit {
   userName: string | null = null;
+  userAvatar: string | null = null;
   errorMessage: string = '';
-  currentTheme: string = 'light'; // Dark/Light Theme
-  get logoPath(): string {
-    return this.currentTheme === 'dark'
-      ? 'assets/img/logo-dark.svg'
-      : 'assets/img/logo-light.svg';
-  }
+  currentTheme: string = 'light';
 
   constructor(
     private http: HttpClient,
@@ -33,40 +24,73 @@ export class LayoutComponent {
     private authService: AuthService
   ) {}
 
+  get logoPath(): string {
+  return this.currentTheme === 'dark'
+    ? 'assets/img/logo-dark.svg'
+    : 'assets/img/logo-light.svg';
+}
+
   ngOnInit(): void {
-    // Theme setup
+    // Load theme
     const savedTheme = localStorage.getItem('theme') || 'light';
     this.currentTheme = savedTheme;
     document.body.classList.toggle('dark-mode', savedTheme === 'dark');
 
-    // User setup
-    const storedUserData = sessionStorage.getItem('user');
-    if (storedUserData) {
-      this.userDetails = JSON.parse(storedUserData);
-      this.userName = this.userDetails?.username ?? null;
-    } else {
-      this.errorMessage = 'No user data';
-    }
+    // Fetch fresh user data
+    this.loadUserData();
   }
 
-  // Toggle Dark/Light Mode
+  loadUserData(): void {
+    const token = sessionStorage.getItem('authToken');
+    if (!token) {
+      this.errorMessage = 'User not authenticated';
+      return;
+    }
+
+    this.http.get<{ username: string; profilePicture?: string; _id?: string }>(
+      `${environment.apiUrl}/me`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+      }
+    ).subscribe({
+      next: (data) => {
+        this.userName = data.username;
+
+        if (data._id && data.profilePicture) {
+          // Add timestamp to bust cache
+          this.userAvatar = `http://localhost:3000/profile-picture/${data._id}?t=${Date.now()}`;
+        } else {
+          this.userAvatar = null;
+        }
+      },
+      error: (err) => {
+        console.error('Failed to fetch user data', err);
+        this.errorMessage = 'Failed to load user data';
+      }
+    });
+  }
+
+  getFirstLetter(name: string | null): string {
+    if (!name) return 'U';
+    return name.charAt(0).toUpperCase();
+  }
+
+  onAvatarError(): void {
+    this.userAvatar = null;
+  }
+
   toggleTheme(): void {
     this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
     localStorage.setItem('theme', this.currentTheme);
-    if (this.currentTheme === 'dark') {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
+    document.body.classList.toggle('dark-mode', this.currentTheme === 'dark');
   }
 
-  goToSettings() {
+  goToSettings(): void {
     this.router.navigate(['/setting']);
   }
 
-  // Logout logic
-  logout() {
-    console.log('click on logout');
+  logout(): void {
     this.authService.logout().subscribe({
       next: () => {
         sessionStorage.removeItem('authToken');
