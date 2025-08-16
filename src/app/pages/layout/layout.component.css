@@ -71,6 +71,63 @@
   transform: translateY(-1px);
 }
 
+.simple-greeting-section {
+  padding: 1.5rem 0;
+  width: 100%;
+}
+
+.simple-greeting {
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+  transition: all 0.3s ease;
+  padding-left: 1rem; /* Mobile default */
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .simple-greeting {
+    padding-left: 1.5rem;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .simple-greeting {
+    padding-left: 3rem; /* Increased from 2.5rem */
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .simple-greeting {
+    padding-left: 6rem; /* Increased from 4.5rem - aligns right of Dashboard text */
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .simple-greeting {
+    padding-left: 7rem; /* Increased from 5.5rem - slightly more right */
+  }
+}
+
+/* XXL devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  .simple-greeting {
+    padding-left: 10.5rem; /* Even more right for very large screens */
+  }
+}
+
+/* Dark mode text color */
+.dark-mode .simple-greeting {
+  color: #fff !important;
+}
+
+
+
+
 /* Navbar brand animation */
 .navbar-brand {
   transition: all 0.3s ease;
@@ -85,21 +142,6 @@
 .navbar-brand:hover img {
   transform: scale(1.05);
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
-}
-
-/* Container Animation */
-.container {
-  animation: fadeIn 0.5s ease forwards;
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Dark mode navbar and avatar styles */
@@ -236,6 +278,32 @@
   
   .dark-mode .d-flex.gap-3 {
     border-top-color: rgba(255,255,255,0.1);
+  }
+
+  .welcome-section {
+    padding: 1.5rem 0;
+  }
+
+  .welcome-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .greeting-text {
+    font-size: 1.5rem;
+  }
+
+  .greeting-time {
+    font-size: 1.8rem;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+  }
+
+  .current-time {
+    align-self: flex-start;
   }
 }
 
