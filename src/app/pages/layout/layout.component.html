@@ -119,6 +119,18 @@
   </div>
 </nav>
 
-<div class="container">
+<!-- Simple Greeting Section -->
+<div class="simple-greeting-section" [ngClass]="{'dark-mode': currentTheme === 'dark'}">
+  <div class="container-fluid px-0">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="simple-greeting" [ngClass]="{'text-dark': currentTheme === 'light'}">
+          {{ greeting }}, {{ userName || 'User' }}
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container main-content">
   <router-outlet></router-outlet>
 </div>

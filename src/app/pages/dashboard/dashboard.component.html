@@ -1,13 +1,15 @@
 <div class="container my-4">
-  <h3>Dashboard</h3>
-  <p class="welcome-text">Welcome, {{ userName || 'User' }}!</p>
-  <div class="row">
-    <!-- Total Employees Widget -->
-    <div class="col-md-4">
-      <div class="card text-white bg-primary mb-3">
-        <div class="card-header">Total Employees</div>
-        <div class="card-body">
-          <p class="card-text" id="totalEmployees">{{ totalEmployees || 0 }}</p>
+    <h3>Dashboard</h3>
+    <!-- <p class="welcome-text">Welcome, {{ userName || 'User' }}!</p> -->
+      <div class="row">
+        <!-- Total Employees Widget -->
+        <div class="col-md-4">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Total Employees</div>
+            <div class="card-body"> 
+              <p class="card-text" id="totalEmployees">0</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -114,6 +116,6 @@
               </ul>
             </div>
           </div>
-        </div> -->
-  </div>
-</div>
+        </div>
+      </div>
+    </div>

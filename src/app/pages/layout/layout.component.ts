@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth/service/auth.service';
-import { environment } from '../../environments/environment';  // Import your env config
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-layout',
@@ -17,6 +17,7 @@ export class LayoutComponent implements OnInit {
   userAvatar: string | null = null;
   errorMessage: string = '';
   currentTheme: string = 'light';
+  greeting: string = '';
 
   constructor(
     private http: HttpClient,
@@ -25,10 +26,10 @@ export class LayoutComponent implements OnInit {
   ) {}
 
   get logoPath(): string {
-  return this.currentTheme === 'dark'
-    ? 'assets/img/logo-dark.svg'
-    : 'assets/img/logo-light.svg';
-}
+    return this.currentTheme === 'dark'
+      ? 'assets/img/logo-dark.svg'
+      : 'assets/img/logo-light.svg';
+  }
 
   ngOnInit(): void {
     // Load theme
@@ -36,8 +37,23 @@ export class LayoutComponent implements OnInit {
     this.currentTheme = savedTheme;
     document.body.classList.toggle('dark-mode', savedTheme === 'dark');
 
+    // Set greeting based on current time
+    this.setGreeting();
+
     // Fetch fresh user data
     this.loadUserData();
+  }
+
+  setGreeting(): void {
+    const currentHour = new Date().getHours();
+    
+    if (currentHour < 12) {
+      this.greeting = 'Good morning';
+    } else if (currentHour < 17) {
+      this.greeting = 'Good afternoon';
+    } else {
+      this.greeting = 'Good evening';
+    }
   }
 
   loadUserData(): void {
@@ -88,6 +104,15 @@ export class LayoutComponent implements OnInit {
 
   goToSettings(): void {
     this.router.navigate(['/setting']);
+  }
+
+  getCurrentTime(): string {
+    const now = new Date();
+    return now.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit',
+      hour12: true 
+    });
   }
 
   logout(): void {
