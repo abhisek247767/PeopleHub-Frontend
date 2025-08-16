@@ -10,10 +10,17 @@ import { environment } from '../../environments/environment';
 export class DashboardComponent implements OnInit {
   userName: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  // Dashboard Data fetched from `/dashboard/stats` backend
+  totalEmployees: number = 0;
+  totalProjects: number = 0;
+  assignedEmployees: number = 0;
+  benchEmployees: number = 0;
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.loadUserName();
+    this.fetchDashboardCounts();
   }
 
   loadUserName() {
@@ -33,5 +40,29 @@ export class DashboardComponent implements OnInit {
         this.userName = null;
       }
     });
+  }
+
+  fetchDashboardCounts() {
+    const token = sessionStorage.getItem('authToken');
+    if (!token) {
+      this.userName = null;
+      return;
+    }
+
+    this.http.get<any>(`${environment.apiUrl}/dashboard/stats`, {
+      headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true
+    })
+      .subscribe({
+        next: (data) => {
+          this.totalEmployees = data.totalEmployees;
+          this.totalProjects = data.totalProjects;
+          this.assignedEmployees = data.assignedEmployees;
+          this.benchEmployees = data.benchEmployees;
+        },
+        error: (err) => {
+          console.error('Failed to fetch dashboard counts', err);
+        }
+      });
   }
 }
