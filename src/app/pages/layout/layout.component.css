@@ -1,3 +1,27 @@
+/* Prevent horizontal scrolling globally */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Layout Wrapper - Full Height with Flex for Footer */
+.layout-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Main Content Area - Grows to push footer down */
+.main-content {
+  flex: 1;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* Avatar Styles */
 .user-avatar {
   width: 40px;
@@ -71,9 +95,11 @@
   transform: translateY(-1px);
 }
 
+/* Fixed Simple Greeting Section - No Horizontal Overflow */
 .simple-greeting-section {
   padding: 1.5rem 0;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .simple-greeting {
@@ -82,41 +108,56 @@
   font-weight: 400;
   margin: 0;
   transition: all 0.3s ease;
-  padding-left: 1rem; /* Mobile default */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: calc(100vw - 2rem);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .simple-greeting {
     padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: calc(100vw - 3rem);
   }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .simple-greeting {
-    padding-left: 3rem; /* Increased from 2.5rem */
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-width: calc(100vw - 4rem);
   }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .simple-greeting {
-    padding-left: 6rem; /* Increased from 4.5rem - aligns right of Dashboard text */
+    padding-left: 3rem;
+    padding-right: 2rem;
+    max-width: calc(100vw - 5rem);
   }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .simple-greeting {
-    padding-left: 7rem; /* Increased from 5.5rem - slightly more right */
+    padding-left: 4rem;
+    padding-right: 2rem;
+    max-width: calc(100vw - 6rem);
   }
 }
 
 /* XXL devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
   .simple-greeting {
-    padding-left: 10.5rem; /* Even more right for very large screens */
+    padding-left: 5rem;
+    padding-right: 2rem;
+    max-width: calc(100vw - 7rem);
   }
 }
 
@@ -125,8 +166,13 @@
   color: #fff !important;
 }
 
-
-
+/* Container fluid fixes */
+.container-fluid {
+  max-width: 100%;
+  overflow-x: hidden;
+  padding-left: 12px;
+  padding-right: 12px;
+}
 
 /* Navbar brand animation */
 .navbar-brand {
@@ -223,9 +269,23 @@
   box-shadow: 0 1px 3px rgba(255, 214, 0, 0.3);
 }
 
-/* Improved spacing for navbar elements */
+/* Improved navbar spacing with overflow prevention */
 .navbar-nav {
-  gap: 0.75rem;
+  gap: 0.5rem;
+}
+
+.navbar {
+  overflow-x: hidden;
+}
+
+.navbar .container-fluid {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.navbar .container-fluid::-webkit-scrollbar {
+  display: none;
 }
 
 /* Theme toggle button */
@@ -263,17 +323,19 @@
   background-color: rgba(255, 214, 0, 0.1);
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments with overflow fixes */
 @media (max-width: 767.98px) {
   .navbar-collapse {
     padding-top: 1rem;
   }
   
   .d-flex.gap-3 {
-    gap: 1rem !important;
+    gap: 0.5rem !important;
     padding: 0.5rem 0;
     border-top: 1px solid rgba(0,0,0,0.1);
     margin-top: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
   
   .dark-mode .d-flex.gap-3 {
@@ -305,9 +367,58 @@
   .current-time {
     align-self: flex-start;
   }
+
+  /* Mobile layout adjustments */
+  .main-content {
+    padding-bottom: 1rem;
+  }
+  
+  .layout-wrapper {
+    min-height: 100dvh;
+  }
+
+  /* Mobile navbar adjustments */
+  .navbar-nav {
+    gap: 0.25rem;
+  }
+
+  .username-text {
+    display: none !important;
+  }
+}
+
+/* Additional mobile fixes */
+@media (max-width: 575.98px) {
+  .simple-greeting {
+    font-size: 1.25rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    max-width: calc(100vw - 1.5rem);
+  }
+
+  .d-flex.gap-3 {
+    gap: 0.25rem !important;
+  }
+
+  .btn-outline-danger {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
 }
 
 /* Smooth theme transition */
 * {
   transition: background-color 0.3s ease, color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Additional safety measures */
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.col-12 {
+  padding-left: 0;
+  padding-right: 0;
 }

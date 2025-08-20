@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth/service/auth.service';
+import { FooterComponent } from '../footer/footer.component'; 
 import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, FooterComponent], // Add FooterComponent
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
 })
