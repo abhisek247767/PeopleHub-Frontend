@@ -45,3 +45,48 @@ congratulations you have done the frontennd set up .
 #### NOTE : When you raise pr raise in origin/development 
 ### Please follow me and star the repo for my motivation (MandatoryüòÉ)
 Now go to backend repo for set up backend repository [PeopleHub-Backend (Node.js)](https://github.com/abhisek247767/PeopleHub-Backend)
+# Ìºê FinPilot  
+
+![Contributors](https://img.shields.io/github/contributors/abhisek247767/FinPilot)  
+![Forks](https://img.shields.io/github/forks/abhisek247767/FinPilot?style=social)  
+![Stars](https://img.shields.io/github/stars/abhisek247767/FinPilot?style=social)  
+![Issues](https://img.shields.io/github/issues/abhisek247767/FinPilot)  
+![License](https://img.shields.io/github/license/abhisek247767/FinPilot)  
+![Build Status](https://img.shields.io/github/actions/workflow/status/abhisek247767/FinPilot/ci.yml)  
+
+---
+
+## Ì≥ñ Project Overview
+**FinPilot** is an intelligent financial assistant application designed to help users analyze, track, and manage their financial activities seamlessly.  
+It leverages **modern frameworks and APIs** to provide real-time insights and make personal finance easier for everyone.  
+
+---
+
+## Ì∫Ä Features
+- Ì≥ä **Real-time Analytics**: Track financial performance in a clean dashboard.  
+- Ìª† **AI-Powered Insights**: Recommendations for better money management.  
+- Ì¥ê **Secure Login**: Authentication with role-based access.  
+- Ì≥± **Responsive UI**: Works across desktop and mobile.  
+- Ì≥¶ **Easy Setup**: Beginner-friendly installation process.  
+
+---
+
+## Ìª†Ô∏è Tech Stack
+**Frontend:** React, TailwindCSS  
+**Backend:** Node.js, Express  
+**Database:** MongoDB  
+**Other Tools:**  
+- Git & GitHub (Version Control)  
+- GitHub Actions (CI/CD)  
+- Docker (optional)  
+
+---
+
+## Ì≥Ç Folder Structure
+```bash
+FinPilot/
+‚îÇ‚îÄ‚îÄ frontend/       # React app for UI
+‚îÇ‚îÄ‚îÄ backend/        # Express + Node backend
+‚îÇ‚îÄ‚îÄ docs/           # Documentation and assets
+‚îÇ‚îÄ‚îÄ .github/        # Workflows and CI configs
+‚îÇ‚îÄ‚îÄ README.md       # Project documentation
