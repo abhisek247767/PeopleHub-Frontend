@@ -1,1 +1,62 @@
-<p>leaves works!</p>
+<div class="container my-4">
+  <h3 class="mb-3">Leave Management</h3>
+
+  <!-- Leave Balance -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card bg-primary text-white shadow-sm">
+        <div class="card-body">
+          Casual Leaves: <strong>{{ casualLeave }}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-success text-white shadow-sm">
+        <div class="card-body">
+          Privilege Leaves: <strong>{{ privilegeLeave }}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-warning text-dark shadow-sm">
+        <div class="card-body">
+          Sick Leaves: <strong>{{ sickLeave }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apply Leave Form -->
+  <div class="card shadow">
+    <div class="card-header">Apply for Leave</div>
+    <div class="card-body">
+      <form [formGroup]="leaveForm" (ngSubmit)="applyLeave()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>From Date</label>
+            <input type="date" class="form-control" formControlName="fromDate">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>To Date</label>
+            <input type="date" class="form-control" formControlName="toDate">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label>Description</label>
+          <textarea class="form-control" rows="3" formControlName="description" placeholder="Describe your reason (max 30-40 words)"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label>To</label>
+          <select class="form-control" formControlName="toEmail">
+            <option value="">-- Select Email --</option>
+            <option *ngFor="let email of emails" [value]="email">{{ email }}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Apply</button>
+      </form>
+    </div>
+  </div>
+</div>
