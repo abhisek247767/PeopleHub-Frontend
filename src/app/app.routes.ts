@@ -15,6 +15,7 @@ import { SettingComponent } from './settings/settings.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { LeavesComponent } from './leaves/leaves.component';
 
 export const routes: Routes = [
    {
@@ -44,6 +45,7 @@ export const routes: Routes = [
             {path:'employee',component:EmployeeComponent},
             {path:'projects',component:ProjectComponent},
             {path:'project-employee',component:ProjectEmployeeComponent },
+            {path : 'leaves', component : LeavesComponent},
             {path: 'setting', component: SettingComponent }
         ]
     },
