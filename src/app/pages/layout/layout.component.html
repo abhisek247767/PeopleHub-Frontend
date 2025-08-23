@@ -65,6 +65,14 @@
               routerLinkActive="active"
               >Project Employee</a>
           </li>
+           <li class="nav-item">
+            <a 
+              class="nav-link" 
+              [ngClass]="{'text-dark': currentTheme === 'light'}"
+              routerLink="/leaves"
+              routerLinkActive="active"
+              >Leaves</a>
+          </li>
         </ul>
         
         <!-- Right-aligned section with proper spacing -->
