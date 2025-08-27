@@ -14,7 +14,6 @@
 **PeopleHub Frontend** is the front-facing web application built using **Angular 16+**, designed for efficient user interaction and seamless integration with the [PeopleHub Backend](https://github.com/abhisek247767/PeopleHub-Backend). This project features a responsive UI, clean architecture, and scalable component structure to support various features of PeopleHub.
 
 ---
-
 ## 🔗 Backend Repository
 
 The backend for this project is available at:  
@@ -31,6 +30,7 @@ Make sure you have the following installed on your machine:
 - [Git](https://git-scm.com/)
 
 ---
+<img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/25f9f6e3-07e0-49bc-91f7-25d1ea11f6d3" />
 
 ## 🚀 Project Setup
 
@@ -42,7 +42,7 @@ git clone https://github.com/abhisek247767/PeopleHub-Frontend.git
 cd PeopleHub-Frontend
 
 # 2. Install dependencies
-npm install
+npm install --force
 
 # 3. Run the development server
 ng serve
