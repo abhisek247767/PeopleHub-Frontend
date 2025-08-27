@@ -120,6 +120,7 @@
   background-color: #2c2c40;
   border-color: #3a3a50;
   /* color: #000000; */
+  color: #FFF;
 }
 
 .dark-mode .btn-primary:hover {
