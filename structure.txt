@@ -1,0 +1,331 @@
+.
+├── angular.json
+├── dockerfile
+├── FRONTEND_UPDATES.md
+├── package.json
+├── package-lock.json
+├── PROJECT_UPDATES.md
+├── public
+│   └── favicon.ico
+├── README.md
+├── src
+│   ├── app
+│   │   ├── app.component.css
+│   │   ├── app.component.html
+│   │   ├── app.component.spec.ts
+│   │   ├── app.component.ts
+│   │   ├── app.config.ts
+│   │   ├── app.routes.ts
+│   │   ├── employee.service.spec.ts
+│   │   ├── employee.service.ts
+│   │   ├── environments
+│   │   │   └── environment.ts
+│   │   ├── leaves
+│   │   │   ├── leaves.component.css
+│   │   │   ├── leaves.component.html
+│   │   │   ├── leaves.component.spec.ts
+│   │   │   └── leaves.component.ts
+│   │   ├── leaves.service.spec.ts
+│   │   ├── leaves.service.ts
+│   │   ├── model
+│   │   │   └── interface
+│   │   │       └── master.ts
+│   │   ├── pages
+│   │   │   ├── admin
+│   │   │   │   ├── admin-dashboard
+│   │   │   │   │   ├── admin-dashboard.component.css
+│   │   │   │   │   ├── admin-dashboard.component.html
+│   │   │   │   │   ├── admin-dashboard.component.spec.ts
+│   │   │   │   │   └── admin-dashboard.component.ts
+│   │   │   │   ├── admin-layout
+│   │   │   │   │   ├── admin-layout.component.css
+│   │   │   │   │   ├── admin-layout.component.html
+│   │   │   │   │   ├── admin-layout.component.spec.ts
+│   │   │   │   │   └── admin-layout.component.ts
+│   │   │   │   ├── footer
+│   │   │   │   │   ├── footer.component.css
+│   │   │   │   │   ├── footer.component.html
+│   │   │   │   │   ├── footer.component.spec.ts
+│   │   │   │   │   └── footer.component.ts
+│   │   │   │   ├── sidebar
+│   │   │   │   │   ├── sidebar.component.css
+│   │   │   │   │   ├── sidebar.component.html
+│   │   │   │   │   ├── sidebar.component.spec.ts
+│   │   │   │   │   └── sidebar.component.ts
+│   │   │   │   └── topbar
+│   │   │   │       ├── topbar.component.css
+│   │   │   │       ├── topbar.component.html
+│   │   │   │       ├── topbar.component.spec.ts
+│   │   │   │       └── topbar.component.ts
+│   │   │   ├── auth
+│   │   │   │   ├── auth-layout
+│   │   │   │   │   ├── auth-layout.component.css
+│   │   │   │   │   ├── auth-layout.component.html
+│   │   │   │   │   ├── auth-layout.component.spec.ts
+│   │   │   │   │   └── auth-layout.component.ts
+│   │   │   │   ├── forgot-password
+│   │   │   │   │   ├── forgot-password.component.css
+│   │   │   │   │   ├── forgot-password.component.html
+│   │   │   │   │   └── forgot-password.component.ts
+│   │   │   │   ├── guard
+│   │   │   │   │   ├── auth.guard.spec.ts
+│   │   │   │   │   └── auth.guard.ts
+│   │   │   │   ├── login
+│   │   │   │   │   ├── login.component.css
+│   │   │   │   │   ├── login.component.html
+│   │   │   │   │   ├── login.component.spec.ts
+│   │   │   │   │   └── login.component.ts
+│   │   │   │   ├── model
+│   │   │   │   │   └── interface
+│   │   │   │   │       └── auth.ts
+│   │   │   │   ├── registration
+│   │   │   │   │   ├── registration.component.css
+│   │   │   │   │   ├── registration.component.html
+│   │   │   │   │   ├── registration.component.spec.ts
+│   │   │   │   │   └── registration.component.ts
+│   │   │   │   ├── reset-password
+│   │   │   │   │   ├── reset-password.component.css
+│   │   │   │   │   ├── reset-password.component.html
+│   │   │   │   │   └── reset-password.component.ts
+│   │   │   │   ├── service
+│   │   │   │   │   ├── auth.service.spec.ts
+│   │   │   │   │   └── auth.service.ts
+│   │   │   │   └── verify-email
+│   │   │   │       ├── verify-email.component.css
+│   │   │   │       ├── verify-email.component.html
+│   │   │   │       └── verify-email.component.ts
+│   │   │   ├── dashboard
+│   │   │   │   ├── dashboard.component.css
+│   │   │   │   ├── dashboard.component.html
+│   │   │   │   ├── dashboard.component.spec.ts
+│   │   │   │   └── dashboard.component.ts
+│   │   │   ├── employee
+│   │   │   │   ├── employee.component.css
+│   │   │   │   ├── employee.component.html
+│   │   │   │   ├── employee.component.spec.ts
+│   │   │   │   └── employee.component.ts
+│   │   │   ├── footer
+│   │   │   │   ├── footer.component.css
+│   │   │   │   ├── footer.component.html
+│   │   │   │   ├── footer.component.spec.ts
+│   │   │   │   └── footer.component.ts
+│   │   │   ├── layout
+│   │   │   │   ├── guide
+│   │   │   │   │   └── components
+│   │   │   │   │       └── importing
+│   │   │   │   ├── layout.component.css
+│   │   │   │   ├── layout.component.html
+│   │   │   │   ├── layout.component.spec.ts
+│   │   │   │   └── layout.component.ts
+│   │   │   ├── not-found
+│   │   │   │   ├── not-found.component.css
+│   │   │   │   ├── not-found.component.html
+│   │   │   │   ├── not-found.component.spec.ts
+│   │   │   │   └── not-found.component.ts
+│   │   │   ├── project
+│   │   │   │   ├── project.component.css
+│   │   │   │   ├── project.component.html
+│   │   │   │   ├── project.component.spec.ts
+│   │   │   │   └── project.component.ts
+│   │   │   └── project-employee
+│   │   │       ├── project-employee.component.css
+│   │   │       ├── project-employee.component.html
+│   │   │       ├── project-employee.component.spec.ts
+│   │   │       └── project-employee.component.ts
+│   │   ├── project.service.ts
+│   │   ├── service
+│   │   │   ├── master.service.spec.ts
+│   │   │   └── master.service.ts
+│   │   ├── settings
+│   │   │   ├── settings.component.css
+│   │   │   ├── settings.component.html
+│   │   │   ├── settings.component.spec.ts
+│   │   │   └── settings.component.ts
+│   │   └── shared
+│   │       └── confirm-modal
+│   │           ├── confirm-modal.component.css
+│   │           ├── confirm-modal.component.html
+│   │           ├── confirm-modal.component.spec.ts
+│   │           └── confirm-modal.component.ts
+│   ├── assets
+│   │   ├── css
+│   │   │   ├── main.css
+│   │   │   └── volt.css.map
+│   │   ├── img
+│   │   │   ├── brand
+│   │   │   │   ├── dark.svg
+│   │   │   │   └── light.svg
+│   │   │   ├── favicon
+│   │   │   │   ├── android-chrome-192x192.png
+│   │   │   │   ├── android-chrome-512x512.png
+│   │   │   │   ├── apple-touch-icon.png
+│   │   │   │   ├── browserconfig.xml
+│   │   │   │   ├── favicon-16x16.png
+│   │   │   │   ├── favicon-32x32.png
+│   │   │   │   ├── favicon.ico
+│   │   │   │   ├── favicon.svg
+│   │   │   │   ├── manifest.json
+│   │   │   │   ├── mstile-150x150.png
+│   │   │   │   ├── safari-pinned-tab.svg
+│   │   │   │   └── site.webmanifest
+│   │   │   ├── flags
+│   │   │   │   ├── aland-islands.svg
+│   │   │   │   ├── albania.svg
+│   │   │   │   ├── algeria.svg
+│   │   │   │   ├── american-samoa.svg
+│   │   │   │   ├── anguilla.svg
+│   │   │   │   ├── argentina.svg
+│   │   │   │   ├── armenia.svg
+│   │   │   │   ├── australia.svg
+│   │   │   │   ├── austria.svg
+│   │   │   │   ├── azerbaijan.svg
+│   │   │   │   ├── bahrain.svg
+│   │   │   │   ├── belarus.svg
+│   │   │   │   ├── belgium.svg
+│   │   │   │   ├── bolivia.svg
+│   │   │   │   ├── bosnia-and-herzegovina.svg
+│   │   │   │   ├── botswana.svg
+│   │   │   │   ├── brazil.svg
+│   │   │   │   ├── bulgaria.svg
+│   │   │   │   ├── cambodia.svg
+│   │   │   │   ├── cameroon.svg
+│   │   │   │   ├── canada.svg
+│   │   │   │   ├── chile.svg
+│   │   │   │   ├── china.svg
+│   │   │   │   ├── colombia.svg
+│   │   │   │   ├── costa-rica.svg
+│   │   │   │   ├── croatia.svg
+│   │   │   │   ├── cuba.svg
+│   │   │   │   ├── cyprus.svg
+│   │   │   │   ├── czech-republic.svg
+│   │   │   │   ├── denmark.svg
+│   │   │   │   ├── ecuador.svg
+│   │   │   │   ├── egypt.svg
+│   │   │   │   ├── estonia.svg
+│   │   │   │   ├── ethiopia.svg
+│   │   │   │   ├── finland.svg
+│   │   │   │   ├── france.svg
+│   │   │   │   ├── georgia.svg
+│   │   │   │   ├── germany.svg
+│   │   │   │   ├── greece.svg
+│   │   │   │   ├── haiti.svg
+│   │   │   │   ├── hong-kong.svg
+│   │   │   │   ├── hungary.svg
+│   │   │   │   ├── iceland.svg
+│   │   │   │   ├── india.svg
+│   │   │   │   ├── indonesia.svg
+│   │   │   │   ├── iran.svg
+│   │   │   │   ├── iraq.svg
+│   │   │   │   ├── ireland.svg
+│   │   │   │   ├── israel.svg
+│   │   │   │   ├── italy.svg
+│   │   │   │   ├── ivory-coast.svg
+│   │   │   │   ├── japan.svg
+│   │   │   │   ├── kazakhstan.svg
+│   │   │   │   ├── kuwait.svg
+│   │   │   │   ├── latvia.svg
+│   │   │   │   ├── liechtenstein.svg
+│   │   │   │   ├── lithuania.svg
+│   │   │   │   ├── luxembourg.svg
+│   │   │   │   ├── malaysia.svg
+│   │   │   │   ├── mexico.svg
+│   │   │   │   ├── mongolia.svg
+│   │   │   │   ├── montenegro.svg
+│   │   │   │   ├── nauru.svg
+│   │   │   │   ├── netherlands.svg
+│   │   │   │   ├── nicaragua.svg
+│   │   │   │   ├── nigeria.svg
+│   │   │   │   ├── norway.svg
+│   │   │   │   ├── pakistan.svg
+│   │   │   │   ├── panama.svg
+│   │   │   │   ├── paraguay.svg
+│   │   │   │   ├── peru.svg
+│   │   │   │   ├── philippines.svg
+│   │   │   │   ├── portugal.svg
+│   │   │   │   ├── puerto-rico.svg
+│   │   │   │   ├── republic-of-macedonia.svg
+│   │   │   │   ├── republic-of-poland.svg
+│   │   │   │   ├── romania.svg
+│   │   │   │   ├── russia.svg
+│   │   │   │   ├── serbia.svg
+│   │   │   │   ├── singapore.svg
+│   │   │   │   ├── slovakia.svg
+│   │   │   │   ├── slovenia.svg
+│   │   │   │   ├── south-africa.svg
+│   │   │   │   ├── south-korea.svg
+│   │   │   │   ├── spain.svg
+│   │   │   │   ├── sri-lanka.svg
+│   │   │   │   ├── sweden.svg
+│   │   │   │   ├── switzerland.svg
+│   │   │   │   ├── taiwan.svg
+│   │   │   │   ├── thailand.svg
+│   │   │   │   ├── tunisia.svg
+│   │   │   │   ├── turkey.svg
+│   │   │   │   ├── ukraine.svg
+│   │   │   │   ├── united-arab-emirates.svg
+│   │   │   │   ├── united-kingdom.svg
+│   │   │   │   ├── united-states-of-america.svg
+│   │   │   │   ├── united-states.svg
+│   │   │   │   ├── uruguay.svg
+│   │   │   │   ├── venezuela.svg
+│   │   │   │   └── vietnam.svg
+│   │   │   ├── icons
+│   │   │   │   ├── github.svg
+│   │   │   │   ├── google_analytics.svg
+│   │   │   │   └── google-tag-manager.svg
+│   │   │   ├── illustrations
+│   │   │   │   ├── 404.svg
+│   │   │   │   ├── 500.svg
+│   │   │   │   ├── bs5-illustrations.svg
+│   │   │   │   └── signin.svg
+│   │   │   ├── logo-animated.svg
+│   │   │   ├── logo-dark.svg
+│   │   │   ├── logo-light.svg
+│   │   │   ├── marker.svg
+│   │   │   ├── mockup-calendar-presentation.png
+│   │   │   ├── mockup-kanban-presentation.png
+│   │   │   ├── mockup-map-presentation.png
+│   │   │   ├── mockup-presentation.png
+│   │   │   ├── pages
+│   │   │   │   ├── 404.jpg
+│   │   │   │   ├── 500.jpg
+│   │   │   │   ├── forgot-password.jpg
+│   │   │   │   ├── lock.jpg
+│   │   │   │   ├── mockup-presentation.png
+│   │   │   │   ├── overview.jpg
+│   │   │   │   ├── reset-password.jpg
+│   │   │   │   ├── settings.jpg
+│   │   │   │   ├── sign-in.jpg
+│   │   │   │   ├── sign-up.jpg
+│   │   │   │   └── transactions.jpg
+│   │   │   ├── paypal-logo.svg
+│   │   │   ├── profile-cover.jpg
+│   │   │   ├── team
+│   │   │   │   ├── profile-picture-1.jpg
+│   │   │   │   ├── profile-picture-2.jpg
+│   │   │   │   ├── profile-picture-3.jpg
+│   │   │   │   ├── profile-picture-4.jpg
+│   │   │   │   ├── profile-picture-5.jpg
+│   │   │   │   └── profile-picture-6.jpg
+│   │   │   ├── technologies
+│   │   │   │   ├── bootstrap-5-logo.svg
+│   │   │   │   ├── react-logo-primary.svg
+│   │   │   │   ├── react-logo.svg
+│   │   │   │   └── vuejs-logo.svg
+│   │   │   ├── themesberg-logo-alt.svg
+│   │   │   ├── themesberg-mockup.jpg
+│   │   │   ├── themesberg.svg
+│   │   │   ├── Untitled_design.png
+│   │   │   └── WhatsApp Image 2025-07-30 at 6.41.50 PM.jpeg
+│   │   └── js
+│   │       └── main.js
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.css
+├── structure.txt
+├── tsconfig.app.json
+├── tsconfig.json
+└── tsconfig.spec.json
+
+51 directories, 278 files
