@@ -34,7 +34,7 @@ export class ResetPasswordComponent {
     newPassword: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
-      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/)
     ]),
     confirmPassword: new FormControl('', [Validators.required])
   }, { validators: this.passwordsMatchValidator() });
