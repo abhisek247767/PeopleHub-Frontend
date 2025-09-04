@@ -47,6 +47,17 @@
           <textarea class="form-control" rows="3" formControlName="description" placeholder="Describe your reason (max 30-40 words)"></textarea>
         </div>
 
+        <!-- Leave Type div -->
+         <div class="mb-3">
+          <label>Leave Type</label>
+          <select class="form-control" formControlName="leaveType">
+            <option value="" disabled>-- Select Leave Type --</option>
+            <option value="Casual">Casual Leave</option>
+            <option value="Sick">Sick Leave</option>
+            <option value="Privilege">Privilege Leave</option>
+          </select>
+        </div>
+
         <div class="mb-3">
           <label>To</label>
           <select class="form-control" formControlName="toEmail">
