@@ -8,6 +8,11 @@
 </p>
 
 ---
+## 📌 Problem Statement
+
+Managing employee information, authentication, and communication efficiently is a common challenge for organizations. Many existing tools are either too complex or lack seamless integration between frontend and backend systems. PeopleHub aims to solve this by providing a unified, scalable, and user-friendly Employee Management System that streamlines user interaction, authentication, session handling, and notifications — all integrated through a modern web application stack.
+
+---
 
 ## 📚 Overview
 
