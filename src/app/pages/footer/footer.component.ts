@@ -49,27 +49,42 @@ export class FooterComponent implements OnInit {
     });
   }
 
-  navigateToPrivacy(): void {
-    // You can implement this route or open external link
-    console.log('Navigate to Privacy Policy');
-    // this.router.navigate(['/privacy']);
+  navigateToHome(): void {
+    this.router.navigate(['/dashboard']);
   }
 
-  navigateToTerms(): void {
-    // You can implement this route or open external link
-    console.log('Navigate to Terms & Conditions');
-    // this.router.navigate(['/terms']);
-  }
-
-  navigateToSupport(): void {
-    // You can implement this route or open external link
-    console.log('Navigate to Support');
-    // this.router.navigate(['/support']);
+  navigateToAbout(): void {
+    // For now, scroll to top and show a message
+    // In a real app, you would navigate to /about page
+    this.scrollToTop();
+    alert('About page coming soon! This will show information about PeopleHub.');
   }
 
   navigateToContact(): void {
-    // You can implement this route or open external link
-    console.log('Navigate to Contact');
-    // this.router.navigate(['/contact']);
+    // For now, scroll to top and show contact info
+    // In a real app, you would navigate to /contact page
+    this.scrollToTop();
+    alert('Contact Information:\n\nEmail: support@peoplehub.com\nPhone: +1 (555) 123-4567\n\nContact page coming soon!');
+  }
+
+  navigateToPrivacy(): void {
+    // For now, scroll to top and show a message
+    // In a real app, you would navigate to /privacy page
+    this.scrollToTop();
+    alert('Privacy Policy page coming soon! This will show our privacy policy and data handling practices.');
+  }
+
+  navigateToTerms(): void {
+    // For now, scroll to top and show a message
+    // In a real app, you would navigate to /terms page
+    this.scrollToTop();
+    alert('Terms & Conditions page coming soon! This will show our terms of service and user agreement.');
+  }
+
+  navigateToSupport(): void {
+    // For now, scroll to top and show support info
+    // In a real app, you would navigate to /support page
+    this.scrollToTop();
+    alert('Support Information:\n\nEmail: support@peoplehub.com\nDocumentation: Coming soon!\n\nSupport page coming soon!');
   }
 }
