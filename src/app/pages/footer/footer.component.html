@@ -44,6 +44,40 @@
             <div class="links-grid">
               <button 
                 class="footer-link-btn"
+                (click)="navigateToHome()"
+                [attr.title]="'Home'"
+              >
+                <i class="bi bi-house me-2"></i>
+                Home
+              </button>
+              <button 
+                class="footer-link-btn"
+                (click)="navigateToAbout()"
+                [attr.title]="'About Us'"
+              >
+                <i class="bi bi-info-circle me-2"></i>
+                About
+              </button>
+              <button 
+                class="footer-link-btn"
+                (click)="navigateToContact()"
+                [attr.title]="'Contact Us'"
+              >
+                <i class="bi bi-envelope me-2"></i>
+                Contact
+              </button>
+              <a 
+                href="https://github.com/abhisek247767/PeopleHub-Frontend"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-link-btn external-link"
+                [attr.title]="'GitHub Repository'"
+              >
+                <i class="bi bi-github me-2"></i>
+                GitHub Repo
+              </a>
+              <button 
+                class="footer-link-btn"
                 (click)="navigateToPrivacy()"
                 [attr.title]="'Privacy Policy'"
               >
@@ -58,22 +92,6 @@
                 <i class="bi bi-file-text me-2"></i>
                 Terms & Conditions
               </button>
-              <button 
-                class="footer-link-btn"
-                (click)="navigateToSupport()"
-                [attr.title]="'Support Center'"
-              >
-                <i class="bi bi-life-preserver me-2"></i>
-                Support Center
-              </button>
-              <button 
-                class="footer-link-btn"
-                (click)="navigateToContact()"
-                [attr.title]="'Contact Us'"
-              >
-                <i class="bi bi-envelope me-2"></i>
-                Contact Us
-              </button>
             </div>
           </div>
         </div>
@@ -84,17 +102,17 @@
             <div class="social-section">
               <h6 class="social-title">Connect with us</h6>
               <div class="social-links">
-                <a href="#" class="social-link" title="GitHub">
+                <a href="https://github.com/abhisek247767/PeopleHub-Frontend" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub Repository">
                   <i class="bi bi-github"></i>
                 </a>
-                <a href="#" class="social-link" title="LinkedIn">
-                  <i class="bi bi-linkedin"></i>
+                <a href="https://github.com/abhisek247767/PeopleHub-Backend" target="_blank" rel="noopener noreferrer" class="social-link" title="Backend Repository">
+                  <i class="bi bi-server"></i>
                 </a>
-                <a href="#" class="social-link" title="Twitter">
-                  <i class="bi bi-twitter"></i>
-                </a>
-                <a href="#" class="social-link" title="Email">
+                <a href="mailto:support@peoplehub.com" class="social-link" title="Email Support">
                   <i class="bi bi-envelope-fill"></i>
+                </a>
+                <a href="#" class="social-link" title="Documentation">
+                  <i class="bi bi-book"></i>
                 </a>
               </div>
             </div>
@@ -127,6 +145,9 @@
               <span class="separator">•</span>
               <i class="bi bi-geo-alt me-1"></i>
               Serving organizations worldwide
+              <span class="separator">•</span>
+              <i class="bi bi-code-slash me-1"></i>
+              Open Source Project
             </p>
           </div>
         </div>
