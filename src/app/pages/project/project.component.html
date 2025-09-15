@@ -14,21 +14,11 @@
           </div>
           <!-- Add New Button -->
           <button
-            class="btn btn-white text-dark border btn-lg shadow-sm me-2"
-            (click)="toggleView()"
-            [disabled]="isLoading"
-          >
-            <i
-              class="fas"
-              [ngClass]="{
-                'fa-th-list': isTreeView,
-                'fa-sitemap': !isTreeView}">
-            </i>
-            <button class="btn btn-white text-dark border btn-lg shadow-sm" 
-            (click)="openForm()" 
+            class="btn btn-white text-dark border btn-lg shadow-sm"
+            (click)="openForm()"
             [disabled]="isLoading"
             *ngIf="canPerformAdminActions()"
-            >
+          >
             <i class="fas fa-plus me-2"></i>Add New Project
           </button>
         </div>
@@ -69,14 +59,8 @@
             </button>
           </div>
 
-          <div *ngif="projects.length>0 && isTreeView" class="tree-view-wrapper py-4">
-            <div id="treewrapper" style="width: 100%; height: 50em">
-              <tree-data [treeData]="treeData"></tree-data>
-            </div> >
-              
-          </div>
           <!-- Project Table -->
-          <div *ngIf="projects.length > 0 && !isTreeView" class="table-responsive">
+          <div *ngIf="projects.length > 0" class="table-responsive">
             <table class="table table-hover align-middle mb-0">
               <thead class="theme-header">
                 <tr>
