@@ -26,6 +26,10 @@ export class ProjectComponent implements OnInit {
   isEditMode = false;
   editingProjectId: string | null = null;
 
+  //New State Variable
+  isTreeView: boolean = false;
+  treeData: any;
+
   // Search states
   deliveryManagerSearch = '';
   managerSearch = '';
@@ -69,7 +73,14 @@ export class ProjectComponent implements OnInit {
     this.detectDarkMode();
 
   }
-
+  //method to toggle view
+  toggleView(): void {
+    this.isTreeView = !this.isTreeView;
+    if(this.isTreeView && !this.treeData){
+      this.loadProjectTree();
+    }
+  }
+  
   detectDarkMode(): void {
     // Detect dark mode by checking body or a global class
     this.isDarkMode = document.body.classList.contains('dark-mode');
@@ -123,7 +134,28 @@ export class ProjectComponent implements OnInit {
       }
     });
   }
-
+  loadProjectTree():void{
+    this.isLoading = true;
+  this.projectService.getProjectTree().subscribe({
+    next: (response: any) => {
+      // Assuming the API returns a structured object or an array of top-level projects
+      if (response && response.children) {
+        // The API response is already in the correct format
+        this.treeData = response;
+      } else {
+        // If the API returns an array, you need to format it for the tree component
+        this.treeData = { name: 'All Projects', children: response };
+      }
+      this.isLoading = false;
+      this.cdr.detectChanges();
+    },
+    error: (err:any) => {
+      console.error('Error loading project tree:', err);
+      this.toastr.error('Failed to load project hierarchy', 'Error');
+      this.isLoading = false;
+    }
+  });
+  }
   loadEmployees(): void {
     this.projectService.getAvailableEmployees().subscribe({
       next: (response: any) => {

@@ -70,7 +70,17 @@ export class ProjectService {
 
     return this.http.get<any>(`${this.apiUrl}/projects`, { headers, params });
   }
-
+  /**
+   * Get project by ID
+   * @param projectId Project ID
+   * @returns Observable with project data
+   */
+  getProjectTree(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getAuthToken()}`
+    });
+    return this.http.get<any>(`${this.apiUrl}/projects/tree`, { headers });
+  }
   /**
    * Get project by ID
    * @param projectId Project ID
