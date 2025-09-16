@@ -26,7 +26,7 @@
 }
 
 /* Dark theme support */
-.dark-theme .custom-alert-modal {
+:host-context(.dark-mode) .custom-alert-modal {
   background: #2d3748;
   color: #e2e8f0;
 }
@@ -41,7 +41,7 @@
   min-height: 3rem;
 }
 
-.dark-theme .alert-header {
+:host-context(.dark-mode) .alert-header {
   border-bottom-color: #4a5568;
 }
 
@@ -93,11 +93,11 @@
   color: #374151;
 }
 
-.dark-theme .alert-close-btn {
+:host-context(.dark-mode) .alert-close-btn {
   color: #a0aec0;
 }
 
-.dark-theme .alert-close-btn:hover {
+:host-context(.dark-mode) .alert-close-btn:hover {
   background-color: #4a5568;
   color: #e2e8f0;
 }
@@ -114,7 +114,7 @@
   color: #374151;
 }
 
-.dark-theme .alert-message {
+:host-context(.dark-mode) .alert-message {
   color: #e2e8f0;
 }
 
@@ -127,7 +127,7 @@
   border-top: 1px solid #e2e8f0;
 }
 
-.dark-theme .alert-footer {
+:host-context(.dark-mode) .alert-footer {
   border-top-color: #4a5568;
 }
 
@@ -181,22 +181,22 @@
   border-color: #4b5563;
 }
 
-.dark-theme .btn-primary {
+:host-context(.dark-mode) .btn-primary {
   background-color: #4f46e5;
   border-color: #4f46e5;
 }
 
-.dark-theme .btn-primary:hover {
+:host-context(.dark-mode) .btn-primary:hover {
   background-color: #4338ca;
   border-color: #4338ca;
 }
 
-.dark-theme .btn-secondary {
+:host-context(.dark-mode) .btn-secondary {
   background-color: #6b7280;
   border-color: #6b7280;
 }
 
-.dark-theme .btn-secondary:hover {
+:host-context(.dark-mode) .btn-secondary:hover {
   background-color: #4b5563;
   border-color: #4b5563;
 }
