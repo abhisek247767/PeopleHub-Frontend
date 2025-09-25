@@ -4,6 +4,7 @@ export interface ILoginResponse {
       id: string;
       email: string;
       username: string;
+      role: string; // Added role field
     };
   }
 
