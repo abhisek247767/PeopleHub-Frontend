@@ -1,0 +1,41 @@
+<div class="custom-alert-overlay" *ngIf="isVisible" (click)="onBackdropClick($event)">
+  <div class="custom-alert-modal" [class]="getAlertClass()">
+    <!-- Header -->
+    <div class="alert-header">
+      <div class="alert-icon">
+        <i [class]="getIconClass()"></i>
+      </div>
+      <h4 class="alert-title" *ngIf="options.title">{{ options.title }}</h4>
+      <button 
+        class="alert-close-btn" 
+        *ngIf="options.showCloseButton"
+        (click)="onClose()"
+        type="button"
+        aria-label="Close">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="alert-body">
+      <p class="alert-message">{{ options.message }}</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="alert-footer">
+      <button 
+        class="btn btn-secondary me-2" 
+        *ngIf="options.showCancelButton"
+        (click)="onCancel()"
+        type="button">
+        {{ options.cancelButtonText }}
+      </button>
+      <button 
+        class="btn btn-primary" 
+        (click)="onConfirm()"
+        type="button">
+        {{ options.confirmButtonText }}
+      </button>
+    </div>
+  </div>
+</div>

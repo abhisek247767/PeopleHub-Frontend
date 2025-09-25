@@ -33,6 +33,11 @@ export class AuthService {
     );
   }
 
+  // Seperate usermail from email if "+ " is present
+  private getUsermail(email: string): string{
+    return email.includes('+') ? email.split('+')[1] : email;
+  }
+
   verifyEmail(email: string, verificationCode: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/verify`, { email, verificationCode }, {
       headers: new HttpHeaders({
@@ -67,7 +72,8 @@ export class AuthService {
   }
 
   forgotPassword(email: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/forgot-password`, { email }, {
+    const usermail = this.getUsermail(email);
+    return this.http.post<any>(`${this.apiUrl}/forgot-password`, { usermail }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
@@ -76,7 +82,8 @@ export class AuthService {
   }
 
   resetPassword(email: string, resetCode: string, newPassword: string, confirmPassword: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/reset-password`, { email, resetCode, newPassword, confirmPassword }, {
+    const usermail = this.getUsermail(email);
+    return this.http.post<any>(`${this.apiUrl}/reset-password`, { usermail, resetCode, newPassword, confirmPassword }, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),

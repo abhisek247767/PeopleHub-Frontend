@@ -35,7 +35,12 @@ Make sure you have the following installed on your machine:
 - [Git](https://git-scm.com/)
 
 ---
+## GSSOC-2025
 <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/25f9f6e3-07e0-49bc-91f7-25d1ea11f6d3" />
+
+## Hacktoberfest-2025
+<img width="1382" height="682" alt="image" src="https://github.com/user-attachments/assets/a98704db-7458-4c62-b124-7c220e05550f" />
+
 
 ## 🚀 Project Setup
 
