@@ -121,6 +121,7 @@ export class LayoutComponent implements OnInit {
       next: () => {
         sessionStorage.removeItem('authToken');
         sessionStorage.removeItem('user');
+        sessionStorage.removeItem('role');
         this.router.navigate(['/login']);
       },
       error: (error) => {
