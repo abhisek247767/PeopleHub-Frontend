@@ -3,8 +3,11 @@
     <div class="bg-white shadow-lg border-0 rounded-lg p-5 w-100" style="max-width: 500px; min-width: 400px;">
       <div class="text-center mb-5">
         <div class="mb-3">
-          <svg class="icon icon-xl text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
+          <svg class="icon icon-xl text-primary" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+              clip-rule="evenodd"></path>
           </svg>
         </div>
         <h1 class="h3 mb-2 fw-bold text-gray-900">Welcome Back</h1>
@@ -18,16 +21,19 @@
           <label for="email" class="form-label fw-semibold text-gray-800 mb-2">Email Address</label>
           <div class="input-group">
             <span class="input-group-text border-0 bg-gray-50">
-              <svg class="icon icon-xs text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <svg class="icon icon-xs text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
               </svg>
             </span>
-            <input type="email" class="form-control border-start-0 border-end-0 bg-gray-50 py-3" id="email" formControlName="email"
-                   [ngClass]="{'is-invalid': loginForm.controls['email'].touched && loginForm.controls['email'].invalid}"
-                   placeholder="Enter your email address" autofocus required>
+            <input type="email" class="form-control border-start-0 border-end-0 bg-gray-50 py-3" id="email"
+              formControlName="email"
+              [ngClass]="{'is-invalid': loginForm.controls['email'].touched && loginForm.controls['email'].invalid}"
+              placeholder="Enter your email address" autofocus required>
           </div>
-          <div *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid" class="invalid-feedback d-block mt-2">
+          <div *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid"
+            class="invalid-feedback d-block mt-2">
             <div *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</div>
             <div *ngIf="loginForm.controls['email'].errors?.['email']">Please enter a valid email address.</div>
             <div *ngIf="loginForm.controls['email'].errors?.['pattern']">Please enter a valid email format.</div>
@@ -37,22 +43,28 @@
           <label for="password" class="form-label fw-semibold text-gray-800 mb-2">Password</label>
           <div class="input-group">
             <span class="input-group-text border-0 bg-gray-50">
-              <svg class="icon icon-xs text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+              <svg class="icon icon-xs text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clip-rule="evenodd"></path>
               </svg>
             </span>
-            <input [type]="passwordVisible ? 'text' : 'password'" class="form-control border-start-0 bg-gray-50 py-3" id="password" formControlName="password"
-                   [ngClass]="{'is-invalid': loginForm.controls['password'].touched && loginForm.controls['password'].invalid}"
-                   placeholder="Enter your password" required>
+            <input [type]="passwordVisible ? 'text' : 'password'" class="form-control border-start-0 bg-gray-50 py-3"
+              id="password" formControlName="password"
+              [ngClass]="{'is-invalid': loginForm.controls['password'].touched && loginForm.controls['password'].invalid}"
+              placeholder="Enter your password" required>
             <span class="input-group-text border-0 bg-gray-50">
               <button type="button" class="btn btn-link p-0 text-decoration-none" (click)="togglePasswordVisibility()">
                 <i class="fa-solid text-gray-500" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
               </button>
             </span>
           </div>
-          <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid" class="invalid-feedback d-block mt-2">
+          <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid"
+            class="invalid-feedback d-block mt-2">
             <div *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</div>
-            <div *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters long.</div>
+            <div *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters
+              long.</div>
           </div>
         </div>
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -60,11 +72,12 @@
             <input class="form-check-input" type="checkbox" value="" id="remember">
             <label class="form-check-label text-gray-600" for="remember">Remember me</label>
           </div>
-          <div><a routerLink="/forgot-password" class="text-primary text-decoration-none fw-semibold">Forgot password?</a></div>
+          <div><a routerLink="/forgot-password" class="text-primary text-decoration-none fw-semibold">Forgot
+              password?</a></div>
         </div>
         <div class="d-grid mb-4">
           <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary btn-lg py-3 fw-semibold"
-                  [ngClass]="{'disabled': loginForm.invalid}">
+            [ngClass]="{'disabled': loginForm.invalid}">
             <span *ngIf="!loginForm.pending">Sign In</span>
             <span *ngIf="loginForm.pending" class="spinner-border spinner-border-sm me-2" role="status"></span>
             <span *ngIf="loginForm.pending">Signing In...</span>
