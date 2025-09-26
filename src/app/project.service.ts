@@ -73,7 +73,7 @@ export class ProjectService {
   /**
    * Get project by ID
    * @param projectId Project ID
-   * @returns Observable with project data
+   * @returns Observable with tree-strcutured projects
    */
   getProjectTree(): Observable<any> {
     const headers = new HttpHeaders({

@@ -6837,13 +6837,17 @@ textarea.form-control-lg {
 }
 
 .navbar {
-    position: relative;
+    position: fixed;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .navbar > .container,

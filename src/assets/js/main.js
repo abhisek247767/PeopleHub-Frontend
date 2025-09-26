@@ -3,13 +3,14 @@
 const d = document;
 d.addEventListener("DOMContentLoaded", function(event) {
 
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-primary me-3',
-            cancelButton: 'btn btn-gray'
-        },
-        buttonsStyling: false
-    });
+    // SweetAlert removed - uncomment if you install sweetalert2
+    // const swalWithBootstrapButtons = Swal.mixin({
+    //     customClass: {
+    //         confirmButton: 'btn btn-primary me-3',
+    //         cancelButton: 'btn btn-gray'
+    //     },
+    //     buttonsStyling: false
+    // });
 
     var themeSettingsEl = document.getElementById('theme-settings');
     var themeSettingsExpandEl = document.getElementById('theme-settings-expand');

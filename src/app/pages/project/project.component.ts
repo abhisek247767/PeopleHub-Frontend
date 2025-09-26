@@ -6,12 +6,13 @@ import { ToastrService } from 'ngx-toastr';
 import { IEmployee, IProject, IUser } from '../../model/interface/master';
 import { ProjectService, IProjectCreateRequest, IProjectCreateResponse } from '../../project.service';
 import { EmployeeService } from '../../employee.service';
-
+import { TreeDataComponent } from '../../components/tree-data/tree-data.component';
 @Component({
   selector: 'app-project',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, TreeDataComponent],
   templateUrl: './project.component.html',
-  styleUrl: './project.component.css'
+  styleUrl: './project.component.css',
+  standalone: true,
 })
 export class ProjectComponent implements OnInit {
   showDeleteModal: boolean = false;
@@ -138,14 +139,29 @@ export class ProjectComponent implements OnInit {
     this.isLoading = true;
   this.projectService.getProjectTree().subscribe({
     next: (response: any) => {
-      // Assuming the API returns a structured object or an array of top-level projects
-      if (response && response.children) {
-        // The API response is already in the correct format
-        this.treeData = response;
-      } else {
-        // If the API returns an array, you need to format it for the tree component
-        this.treeData = { name: 'All Projects', children: response };
+      let tree: any;
+      if(!response){
+        tree={name:'All Projects',children:[]};
       }
+      // already a tree object
+      else if (response.children && Array.isArray(response.children)) {
+        // The API response is already in the correct format
+        tree = response;
+      } 
+      else if(Array.isArray(response)){
+        // raw array of projects
+        tree = { name: 'All Projects', children: response };
+      }
+      else if (response.projects && Array.isArray(response.projects)) {
+        // wrapped object like {projects:[...]}
+        tree ={name:'All Projects',children: response.projects};
+      }
+      // Fallback
+      else{
+        tree= { name: 'All Projects', children: [] };
+        console.warn('Unexpected project tree response format:',response);
+      }
+      this.treeData=tree;
       this.isLoading = false;
       this.cdr.detectChanges();
     },
