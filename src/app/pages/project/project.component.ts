@@ -6,12 +6,13 @@ import { ToastrService } from 'ngx-toastr';
 import { IEmployee, IProject, IUser } from '../../model/interface/master';
 import { ProjectService, IProjectCreateRequest, IProjectCreateResponse } from '../../project.service';
 import { EmployeeService } from '../../employee.service';
-
+import { TreeDataComponent } from '../../components/tree-data/tree-data.component';
 @Component({
   selector: 'app-project',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, TreeDataComponent],
   templateUrl: './project.component.html',
-  styleUrl: './project.component.css'
+  styleUrl: './project.component.css',
+  standalone: true,
 })
 export class ProjectComponent implements OnInit {
   showDeleteModal: boolean = false;
@@ -122,6 +123,44 @@ export class ProjectComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  loadProjectTree():void{
+    this.isLoading = true;
+  this.projectService.getProjectTree().subscribe({
+    next: (response: any) => {
+      let tree: any;
+      if(!response){
+        tree={name:'All Projects',children:[]};
+      }
+      // already a tree object
+      else if (response.children && Array.isArray(response.children)) {
+        // The API response is already in the correct format
+        tree = response;
+      } 
+      else if(Array.isArray(response)){
+        // raw array of projects
+        tree = { name: 'All Projects', children: response };
+      }
+      else if (response.projects && Array.isArray(response.projects)) {
+        // wrapped object like {projects:[...]}
+        tree ={name:'All Projects',children: response.projects};
+      }
+      // Fallback
+      else{
+        tree= { name: 'All Projects', children: [] };
+        console.warn('Unexpected project tree response format:',response);
+      }
+      this.treeData=tree;
+      this.isLoading = false;
+      this.cdr.detectChanges();
+    },
+    error: (err:any) => {
+      console.error('Error loading project tree:', err);
+      this.toastr.error('Failed to load project hierarchy', 'Error');
+      this.isLoading = false;
+    }
+  });
   }
 
   loadEmployees(): void {

@@ -41,7 +41,6 @@ Make sure you have the following installed on your machine:
 ## Hacktoberfest-2025
 <img width="1382" height="682" alt="image" src="https://github.com/user-attachments/assets/a98704db-7458-4c62-b124-7c220e05550f" />
 
-
 ## 🚀 Project Setup
 
 Follow the steps below to set up the project locally:

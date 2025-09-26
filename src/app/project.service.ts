@@ -74,6 +74,18 @@ export class ProjectService {
   /**
    * Get project by ID
    * @param projectId Project ID
+   * @returns Observable with tree-strcutured projects
+   */
+  getProjectTree(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getAuthToken()}`
+    });
+    return this.http.get<any>(`${this.apiUrl}/projects/tree`, { headers });
+  }
+
+  /**
+   * Get project by ID
+   * @param projectId Project ID
    * @returns Observable with project data
    */
   getProjectById(projectId: string): Observable<IProject> {
