@@ -105,7 +105,7 @@
                 <a href="https://github.com/abhisek247767/PeopleHub-Frontend" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub Repository">
                   <i class="bi bi-github"></i>
                 </a>
-                <a href="https://github.com/abhisek247767/PeopleHub-Frontend" target="_blank" rel="noopener noreferrer" class="social-link" title="Backend Repository">
+                <a href="https://github.com/abhisek247767/PeopleHub-Backend" target="_blank" rel="noopener noreferrer" class="social-link" title="Backend Repository">
                   <i class="bi bi-server"></i>
                 </a>
                 <a href="mailto:support@peoplehub.com" class="social-link" title="Email Support">
@@ -164,4 +164,13 @@
   >
     <i class="bi bi-chevron-up"></i>
   </div>
+
+  <!-- Custom Alert Component -->
+  <app-custom-alert
+    [isVisible]="alertVisible"
+    [options]="alertOptions"
+    (confirm)="alertService.onConfirm()"
+    (cancel)="alertService.onCancel()"
+    (close)="alertService.onClose()">
+  </app-custom-alert>
 </footer>

@@ -1,21 +1,31 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AlertService } from '../../shared/custom-alert/alert.service';
+import { CustomAlertComponent } from '../../shared/custom-alert/custom-alert.component';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CustomAlertComponent],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
   currentTheme: string = 'light';
   currentYear: number = new Date().getFullYear();
   appVersion: string = '2.0.1';
   showBackToTop: boolean = false;
+  
+  // Alert properties
+  alertVisible: boolean = false;
+  alertOptions: any = {};
+  private alertSubscription: any;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    public alertService: AlertService
+  ) {}
 
   ngOnInit(): void {
     // Load theme from localStorage
@@ -24,6 +34,18 @@ export class FooterComponent implements OnInit {
     
     // Listen for theme changes
     this.watchThemeChanges();
+    
+    // Subscribe to alert service
+    this.alertSubscription = this.alertService.alert$.subscribe(alert => {
+      this.alertVisible = alert.isVisible;
+      this.alertOptions = alert.options;
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.alertSubscription) {
+      this.alertSubscription.unsubscribe();
+    }
   }
 
   @HostListener('window:scroll', [])
@@ -59,6 +81,7 @@ export class FooterComponent implements OnInit {
     alert('About page coming soon! This will show information about PeopleHub.');
   }
 
+
   navigateToContact(): void {
     // For now, scroll to top and show contact info
     // In a real app, you would navigate to /contact page
@@ -70,11 +93,44 @@ export class FooterComponent implements OnInit {
     // In a real app, you would navigate to /privacy page
     this.scrollToTop();
     alert('Privacy Policy page coming soon! This will show our privacy policy and data handling practices.');
+    
+  navigateToHome(): void {
+    this.scrollToTop();
+    this.router.navigate(['/dashboard']);
+  }
+
+  navigateToAbout(): void {
+    // For now, scroll to top and show a message
+    // In a real app, you would navigate to /about page
+    this.alertService.showInfo(
+      'About page coming soon! This will show information about PeopleHub.',
+      'About Us'
+    );
+  }
+
+  navigateToContact(): void {
+    // For now, scroll to top and show contact info
+    // In a real app, you would navigate to /contact page
+    this.alertService.showInfo(
+      'Email: support@peoplehub.com',
+      'Contact Us'
+    );
+  }
+
+  navigateToPrivacy(): void {
+    // For now, scroll to top and show a message
+    // In a real app, you would navigate to /privacy page
+    this.alertService.showInfo(
+      'Privacy Policy page coming soon! This will show our privacy policy and data handling practices.',
+      'Privacy Policy'
+    );
+
   }
 
   navigateToTerms(): void {
     // For now, scroll to top and show a message
     // In a real app, you would navigate to /terms page
+
     this.scrollToTop();
     alert('Terms & Conditions page coming soon! This will show our terms of service and user agreement.');
   }
@@ -84,5 +140,18 @@ export class FooterComponent implements OnInit {
     // In a real app, you would navigate to /support page
     this.scrollToTop();
     alert('Support Information:\n\nEmail: support@peoplehub.com\nDocumentation: Coming soon!\n\nSupport page coming soon!');
+    this.alertService.showInfo(
+      'Terms & Conditions page coming soon! This will show our terms of service and user agreement.',
+      'Terms & Conditions'
+    );
+  }
+
+  navigateToSupport(): void {
+    // For now, scroll to top and show support info
+    // In a real app, you would navigate to /support page
+    this.alertService.showInfo(
+      'Support Information:\n\nEmail: support@peoplehub.com\nDocumentation: Coming soon!\n\nSupport page coming soon!',
+      'Support'
+    );
   }
 }

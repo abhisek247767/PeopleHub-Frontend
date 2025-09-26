@@ -27,10 +27,6 @@ export class ProjectComponent implements OnInit {
   isEditMode = false;
   editingProjectId: string | null = null;
 
-  //New State Variable
-  isTreeView: boolean = false;
-  treeData: any;
-
   // Search states
   deliveryManagerSearch = '';
   managerSearch = '';
@@ -74,14 +70,7 @@ export class ProjectComponent implements OnInit {
     this.detectDarkMode();
 
   }
-  //method to toggle view
-  toggleView(): void {
-    this.isTreeView = !this.isTreeView;
-    if(this.isTreeView && !this.treeData){
-      this.loadProjectTree();
-    }
-  }
-  
+
   detectDarkMode(): void {
     // Detect dark mode by checking body or a global class
     this.isDarkMode = document.body.classList.contains('dark-mode');
@@ -135,6 +124,7 @@ export class ProjectComponent implements OnInit {
       }
     });
   }
+
   loadProjectTree():void{
     this.isLoading = true;
   this.projectService.getProjectTree().subscribe({
@@ -172,6 +162,7 @@ export class ProjectComponent implements OnInit {
     }
   });
   }
+
   loadEmployees(): void {
     this.projectService.getAvailableEmployees().subscribe({
       next: (response: any) => {

@@ -70,6 +70,7 @@ export class ProjectService {
 
     return this.http.get<any>(`${this.apiUrl}/projects`, { headers, params });
   }
+
   /**
    * Get project by ID
    * @param projectId Project ID
@@ -81,6 +82,7 @@ export class ProjectService {
     });
     return this.http.get<any>(`${this.apiUrl}/projects/tree`, { headers });
   }
+
   /**
    * Get project by ID
    * @param projectId Project ID

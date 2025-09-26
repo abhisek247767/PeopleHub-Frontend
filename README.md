@@ -8,6 +8,11 @@
 </p>
 
 ---
+## 📌 Problem Statement
+
+Managing employee information, authentication, and communication efficiently is a common challenge for organizations. Many existing tools are either too complex or lack seamless integration between frontend and backend systems. PeopleHub aims to solve this by providing a unified, scalable, and user-friendly Employee Management System that streamlines user interaction, authentication, session handling, and notifications — all integrated through a modern web application stack.
+
+---
 
 ## 📚 Overview
 
@@ -34,7 +39,6 @@ Make sure you have the following installed on your machine:
 <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/25f9f6e3-07e0-49bc-91f7-25d1ea11f6d3" />
 
 ## Hacktoberfest-2025
-
 <img width="1382" height="682" alt="image" src="https://github.com/user-attachments/assets/a98704db-7458-4c62-b124-7c220e05550f" />
 
 ## 🚀 Project Setup
