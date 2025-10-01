@@ -164,7 +164,7 @@
                   </td>
                   <td class="px-4 py-3 text-center">
                     <div
-                      class="btn-group "
+                      class="btn-group"
                       role="group"
                       *ngIf="canPerformAdminActions()"
                     >
@@ -185,24 +185,52 @@
                         <i class="fas fa-trash"></i>
                       </button>
                     </div>
-  <!-- Delete Project Modal -->
-  <div class="modal fade show" tabindex="-1" [ngStyle]="{display: showDeleteModal ? 'block' : 'none'}" *ngIf="showDeleteModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirm Delete</h5>
-          <button type="button" class="btn-close" (click)="closeDeleteModal()"></button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete <strong>{{ projectToDelete?.projectName }}</strong></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Cancel</button>
-          <button type="button" class="btn btn-danger" (click)="confirmDeleteProject()">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                    <!-- Delete Project Modal -->
+                    <div
+                      class="modal fade show"
+                      tabindex="-1"
+                      [ngStyle]="{
+                        display: showDeleteModal ? 'block' : 'none'
+                      }"
+                      *ngIf="showDeleteModal"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Confirm Delete</h5>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              (click)="closeDeleteModal()"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                              Are you sure you want to delete
+                              <strong>{{
+                                projectToDelete?.projectName
+                              }}</strong>
+                            </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              (click)="closeDeleteModal()"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              (click)="confirmDeleteProject()"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div
                       *ngIf="!canPerformAdminActions()"
                       class="text-muted small"
@@ -241,7 +269,16 @@
 
     <!-- Project Form Section -->
     <div class="col-12 col-xl-4 col-lg-5" *ngIf="showForm">
-      <div class="card shadow-lg border-0 sticky-top" style="top: 20px; min-width: 500px; max-width: 650px; margin-left: auto; margin-right: auto;">
+      <div
+        class="card shadow-lg border-0 sticky-top"
+        style="
+          top: 20px;
+          min-width: 500px;
+          max-width: 650px;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      >
         <div class="card-header bg-primary text-white py-3">
           <div class="d-flex justify-content-between align-items-center">
             <div>
@@ -340,7 +377,7 @@
                   <input
                     type="text"
                     class="form-control delivery-dropdown-input"
-                    [ngClass]="{'dark-mode-input': isDarkMode}"
+                    [ngClass]="{ 'dark-mode-input': isDarkMode }"
                     formControlName="deliveryManagerSearch"
                     (input)="onDeliveryManagerSearchChange($event)"
                     (keyup)="onDeliveryManagerSearchChange($event)"
@@ -356,7 +393,7 @@
                   <div
                     *ngIf="showDeliveryManagerDropdown"
                     class="dropdown-menu show position-absolute w-100 mt-1"
-                    [ngClass]="{'dark-mode': isDarkMode}"
+                    [ngClass]="{ 'dark-mode': isDarkMode }"
                     style="max-height: 200px; overflow-y: auto; z-index: 1000"
                   >
                     <div
@@ -395,7 +432,7 @@
                   <input
                     type="text"
                     class="form-control manager-dropdown-input"
-                    [ngClass]="{'dark-mode-input': isDarkMode}"
+                    [ngClass]="{ 'dark-mode-input': isDarkMode }"
                     formControlName="managerSearch"
                     (input)="onManagerSearchChange($event)"
                     (keyup)="onManagerSearchChange($event)"
@@ -409,7 +446,7 @@
                   <div
                     *ngIf="showManagerDropdown"
                     class="dropdown-menu show position-absolute w-100 mt-1"
-                    [ngClass]="{'dark-mode': isDarkMode}"
+                    [ngClass]="{ 'dark-mode': isDarkMode }"
                     style="max-height: 200px; overflow-y: auto; z-index: 1000"
                   >
                     <div
@@ -455,12 +492,15 @@
                   (focus)="onLeadFocus()"
                   (blur)="onBlurLead()"
                   placeholder="Search team lead..."
-                  [ngClass]="{'is-invalid': f['lead'].touched && f['lead'].errors, 'dark-mode-input': isDarkMode}"
+                  [ngClass]="{
+                    'is-invalid': f['lead'].touched && f['lead'].errors,
+                    'dark-mode-input': isDarkMode
+                  }"
                 />
                 <div
                   *ngIf="showLeadDropdown"
                   class="dropdown-menu show position-absolute w-100 mt-1"
-                  [ngClass]="{'dark-mode': isDarkMode}"
+                  [ngClass]="{ 'dark-mode': isDarkMode }"
                   style="max-height: 200px; overflow-y: auto; z-index: 1000"
                 >
                   <div
@@ -527,12 +567,16 @@
                   (focus)="onDevelopersFocus()"
                   (blur)="onBlurDevelopers()"
                   placeholder="Search and add developers..."
-                  [ngClass]="{'is-invalid': f['developers'].touched && f['developers'].errors, 'dark-mode-input': isDarkMode}"
+                  [ngClass]="{
+                    'is-invalid':
+                      f['developers'].touched && f['developers'].errors,
+                    'dark-mode-input': isDarkMode
+                  }"
                 />
                 <div
                   *ngIf="showDevelopersDropdown"
                   class="dropdown-menu show position-absolute w-100 mt-1"
-                  [ngClass]="{'dark-mode': isDarkMode}"
+                  [ngClass]="{ 'dark-mode': isDarkMode }"
                   style="max-height: 250px; overflow-y: auto; z-index: 1000"
                 >
                   <div
