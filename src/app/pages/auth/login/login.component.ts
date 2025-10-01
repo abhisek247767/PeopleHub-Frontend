@@ -56,6 +56,22 @@ export class LoginComponent {
     const { email, password } = this.loginForm.value;
     this.authService.login(email, password).subscribe({
       next: (response) => {
+<<<<<<< HEAD
+        this.toastr.success('Login successful!', 'Success');
+
+        if(response.user){
+          sessionStorage.setItem('user', JSON.stringify(response.user));
+        }
+
+        if(response.token){
+
+          sessionStorage.setItem('authToken', JSON.stringify(response.token));
+        }
+
+        // Backend is sending user role in response
+        const userRole = response.user?.role || 'user';
+        this.router.navigateByUrl('/dashboard');
+=======
         // Store user and role in sessionStorage
         sessionStorage.setItem('user', JSON.stringify(response.user));
         sessionStorage.setItem('role', String(response.user.role));
@@ -70,6 +86,7 @@ export class LoginComponent {
         setTimeout(() => {
           this.router.navigateByUrl('/dashboard');
         }, 1200);
+>>>>>>> 7c1d7ed1a535e8f43bfe96ec95a1f870038eb06e
       },
       error: (error) => {
         if (error.status === 401 && error.error?.needsVerification) {
