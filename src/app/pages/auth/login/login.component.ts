@@ -21,7 +21,7 @@ export class LoginComponent {
   passwordVisible: boolean = false;
   errorMessage: string = '';
   needsVerification: boolean = false;
-  role: ((arg0: string, role: any) => unknown) | undefined;
+  role: string | undefined;
   successMessage: string | undefined;
 
   constructor(
@@ -54,8 +54,10 @@ export class LoginComponent {
     }
 
     const { email, password } = this.loginForm.value;
+    console.log('Attempting login with:', { email, password });
     this.authService.login(email, password).subscribe({
       next: (response) => {
+        console.log('Login successful:', response);
         // Store user and role in sessionStorage
         sessionStorage.setItem('user', JSON.stringify(response.user));
         sessionStorage.setItem('role', String(response.user.role));
@@ -66,12 +68,17 @@ export class LoginComponent {
         this.successMessage = `${response.user.role} Login successful! `;
         this.toastr.success(this.successMessage, 'Success');
 
-        // Navigate to dashboard after a short delay
+        // Navigate to appropriate dashboard based on user role
         setTimeout(() => {
-          this.router.navigateByUrl('/dashboard');
+          if (response.user.role === 'admin' || response.user.role === 'superadmin') {
+            this.router.navigateByUrl('/admin-dashboard');
+          } else {
+            this.router.navigateByUrl('/dashboard');
+          }
         }, 1200);
       },
       error: (error) => {
+        console.log('Login error:', error);
         if (error.status === 401 && error.error?.needsVerification) {
           this.errorMessage =
             'Your account is not verified. Please verify your email.';
@@ -81,7 +88,7 @@ export class LoginComponent {
           this.router.navigateByUrl('/verify-email');
         } else {
           this.errorMessage =
-            error.error?.errors?.message || 'Login failed. Please try again.';
+            error.error?.message || error.error?.errors?.message || 'Login failed. Please try again.';
           this.toastr.error(this.errorMessage, 'Error');
         }
       },

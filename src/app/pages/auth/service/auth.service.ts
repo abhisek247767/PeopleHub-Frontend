@@ -23,6 +23,15 @@ export class AuthService {
     return !!sessionStorage.getItem('user');
   }
 
+  getCurrentUserRole(): string | null {
+    return sessionStorage.getItem('role');
+  }
+
+  isAdmin(): boolean {
+    const role = this.getCurrentUserRole();
+    return role === 'admin' || role === 'superadmin';
+  }
+
   registration(data: RegistrationData): Observable<IRegisterationResponse> {
     return this.http.post<IRegisterationResponse>(`${this.apiUrl}/signup`, data, {
       withCredentials: true,

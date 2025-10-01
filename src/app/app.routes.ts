@@ -6,6 +6,7 @@ import { ProjectEmployeeComponent } from './pages/project-employee/project-emplo
 import { LayoutComponent } from './pages/layout/layout.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { authGuard } from './pages/auth/guard/auth.guard';
+import { adminGuard } from './pages/auth/guard/admin.guard';
 import { RegistrationComponent } from './pages/auth/registration/registration.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.component';
@@ -21,6 +22,7 @@ export const routes: Routes = [
    {
         path: 'admin-dashboard',
         component: AdminLayoutComponent,
+        canActivate: [adminGuard],
         children: [
             { path: '', component: AdminDashboardComponent }
         ]
@@ -40,6 +42,7 @@ export const routes: Routes = [
     {
         path:'',
         component:LayoutComponent,
+        canActivate: [authGuard],
         children:[
             {path:'dashboard',component:DashboardComponent},
             {path:'employee',component:EmployeeComponent},
