@@ -1,10 +1,10 @@
 export interface ILoginResponse {
   token: string;
   user: {
-    role(arg0: string, role: any): unknown;
     id: string;
     email: string;
     username: string;
+    role: string;
   };
 }
 
